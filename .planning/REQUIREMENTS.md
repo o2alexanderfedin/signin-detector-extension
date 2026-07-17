@@ -72,4 +72,32 @@
 
 ## Traceability
 
-*(Filled by the roadmapper — maps each REQ-ID to the phase that delivers it.)*
+Maps each v1 REQ-ID to the phase that delivers it. See `.planning/ROADMAP.md` for full phase details.
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| ENG-01 | Phase 1 — Detection Core | Pending |
+| ENG-02 | Phase 1 — Detection Core | Pending |
+| ENG-03 | Phase 1 — Detection Core | Pending |
+| ENG-04 | Phase 1 — Detection Core | Pending |
+| ENG-05 | Phase 1 — Detection Core | Pending |
+| SEN-01 | Phase 1 — Detection Core | Pending |
+| SEN-02 | Phase 1 — Detection Core | Pending |
+| SEN-03 | Phase 1 — Detection Core | Pending |
+| SEN-04 | Phase 1 — Detection Core | Pending |
+| SEN-05 | Phase 1 — Detection Core | Pending |
+| IDN-01 | Phase 1 — Detection Core | Pending |
+| IDN-02 | Phase 1 — Detection Core | Pending |
+| PLT-01 | Phase 2 — State & Persistence | Pending |
+| PLT-02 | Phase 3 — Chrome Glue | Pending |
+| BDR-01 | Phase 3 — Chrome Glue | Pending |
+| BDR-02 | Phase 3 — Chrome Glue | Pending |
+| BDR-03 | Phase 3 — Chrome Glue | Pending |
+| BDR-04 | Phase 3 — Chrome Glue | Pending |
+| RCT-01 | Phase 4 — Wiring & E2E Flow | Pending |
+| PLT-03 | Phase 4 — Wiring & E2E Flow | Pending |
+| PRV-01 | Phase 4 — Wiring & E2E Flow | Pending |
+| PRV-02 | Phase 4 — Wiring & E2E Flow | Pending |
+| *(all above)* | Phase 5 — Validation & Hardening | Re-validated end-to-end, no new REQ-IDs |
+
+**Coverage:** 22/22 v1 requirements mapped. No orphans, no duplicates.
