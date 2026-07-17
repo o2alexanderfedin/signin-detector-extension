@@ -1,0 +1,1497 @@
+- generic [ref=f3e1]:
+  - generic:
+    - generic:
+      - link "Skip to main content" [ref=f3e2] [cursor=pointer]
+      - link "Accessibility help" [ref=f3e3] [cursor=pointer]:
+        - /url: https://support.google.com/websearch/answer/181196?hl=en
+  - banner [ref=f3e4]:
+    - banner [ref=f3e5]:
+      - link "Go to Google home" [ref=f3e7] [cursor=pointer]:
+        - /url: https://www.google.com/webhp?hl=en&ictx=0&sa=X&ved=0ahUKEwifw7716tqVAxUgCjQIHQ0kGIcQPAgH
+  - generic [ref=f3e14]:
+    - generic [ref=f3e15]:
+      - generic [ref=f3e16]:
+        - navigation [ref=f3e20]:
+          - list [ref=f3e22]:
+            - listitem [ref=f3e23]:
+              - link "AI Mode" [disabled] [ref=f3e27] [cursor=pointer]
+            - listitem [ref=f3e30]:
+              - link "All" [ref=f3e31] [cursor=pointer]:
+                - /url: /search?q=What+are+the+possible+ways+a+browser+extension+could+detect+whether+a+user+is+signed+into+an+arbitrary+web+application,+without+per-site+configuration+and+without+relying+on+page+navigations?+What+are+the+trade-offs+of+each+approach?&sca_esv=bcbe1a3c17fe5261&aep=107&cs=0&prmd=ivns&source=lnms&sa=X&ved=2ahUKEwifw7716tqVAxUgCjQIHQ0kGIcQ0pQJegQIBhAF
+            - listitem [ref=f3e34]:
+              - link "Images" [ref=f3e35] [cursor=pointer]:
+                - /url: /search?q=What+are+the+possible+ways+a+browser+extension+could+detect+whether+a+user+is+signed+into+an+arbitrary+web+application,+without+per-site+configuration+and+without+relying+on+page+navigations?+What+are+the+trade-offs+of+each+approach?&sca_esv=bcbe1a3c17fe5261&aep=107&cs=0&udm=2&prmd=ivns&source=lnms&sa=X&ved=2ahUKEwifw7716tqVAxUgCjQIHQ0kGIcQ0pQJegQIBhAH
+            - listitem [ref=f3e38]:
+              - link "Videos" [ref=f3e39] [cursor=pointer]:
+                - /url: /search?q=What+are+the+possible+ways+a+browser+extension+could+detect+whether+a+user+is+signed+into+an+arbitrary+web+application,+without+per-site+configuration+and+without+relying+on+page+navigations?+What+are+the+trade-offs+of+each+approach?&sca_esv=bcbe1a3c17fe5261&aep=107&cs=0&udm=vids&prmd=ivns&source=lnms&sa=X&ved=2ahUKEwifw7716tqVAxUgCjQIHQ0kGIcQ0pQJegQIBhAJ
+            - listitem [ref=f3e42]:
+              - link "News" [ref=f3e43] [cursor=pointer]:
+                - /url: /search?q=What+are+the+possible+ways+a+browser+extension+could+detect+whether+a+user+is+signed+into+an+arbitrary+web+application,+without+per-site+configuration+and+without+relying+on+page+navigations?+What+are+the+trade-offs+of+each+approach?&sca_esv=bcbe1a3c17fe5261&aep=107&cs=0&tbm=nws&prmd=ivns&source=lnms&sa=X&ved=2ahUKEwifw7716tqVAxUgCjQIHQ0kGIcQ0pQJegQIBhAL
+            - listitem [ref=f3e46]:
+              - button [ref=f3e47] [cursor=pointer]:
+                - generic "More filters" [ref=f3e48]: More
+        - generic [ref=f3e53]:
+          - button "Settings" [ref=f3e55] [cursor=pointer]
+          - generic [ref=f3e61]:
+            - button "Google apps" [ref=f3e63] [cursor=pointer]
+            - link "Sign in" [ref=f3e68] [cursor=pointer]:
+              - /url: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com/search%3Fq%3DWhat%2Bare%2Bthe%2Bpossible%2Bways%2Ba%2Bbrowser%2Bextension%2Bcould%2Bdetect%2Bwhether%2Ba%2Buser%2Bis%2Bsigned%2Binto%2Ban%2Barbitrary%2Bweb%2Bapplication%252C%2Bwithout%2Bper-site%2Bconfiguration%2Band%2Bwithout%2Brelying%2Bon%2Bpage%2Bnavigations%253F%2BWhat%2Bare%2Bthe%2Btrade-offs%2Bof%2Beach%2Bapproach%253F%26sca_esv%3Dbcbe1a3c17fe5261%26source%3Dhp%26ei%3Dp7ZaatzwJ4n50PEPquyV0Ak%26iflsig%3DABILxe8AAAAAalrEtyRkYWjI86I65y__TMrUJhpvhJ-Q%26udm%3D50%26ved%3D0ahUKEwic4N7s6tqVAxWJPDQIHSp2BZoQ4dUDCCA%26uact%3D5%26oq%3DWhat%2Bare%2Bthe%2Bpossible%2Bways%2Ba%2Bbrowser%2Bextension%2Bcould%2Bdetect%2Bwhether%2Ba%2Buser%2Bis%2Bsigned%2Binto%2Ban%2Barbitrary%2Bweb%2Bapplication%252C%2Bwithout%2Bper-site%2Bconfiguration%2Band%2Bwithout%2Brelying%2Bon%2Bpage%2Bnavigations%253F%2BWhat%2Bare%2Bthe%2Btrade-offs%2Bof%2Beach%2Bapproach%253F%26gs_lp%3DEgdnd3Mtd2l6IukBV2hhdCBhcmUgdGhlIHBvc3NpYmxlIHdheXMgYSBicm93c2VyIGV4dGVuc2lvbiBjb3VsZCBkZXRlY3Qgd2hldGhlciBhIHVzZXIgaXMgc2lnbmVkIGludG8gYW4gYXJiaXRyYXJ5IHdlYiBhcHBsaWNhdGlvbiwgd2l0aG91dCBwZXItc2l0ZSBjb25maWd1cmF0aW9uIGFuZCB3aXRob3V0IHJlbHlpbmcgb24gcGFnZSBuYXZpZ2F0aW9ucz8gV2hhdCBhcmUgdGhlIHRyYWRlLW9mZnMgb2YgZWFjaCBhcHByb2FjaD8yERAAGMoGGJ4GGPAFGOoCGLQCMhEQABjKBhieBhjwBRjqAhi0AjIREAAYygYYngYY8AUY6gIYtAJI5lZQ1VZY1VZwAHgAkAEAmAFcoAFcqgEBMbgBA8gBAPgBAZgCAaACYKgCA5gDYJIHATGgB_sBsgcBMbgHYMIHAzAuMcgHAoAIAQ%26sclient%3Dgws-wiz%26aep%3D107%26cs%3D0%26sei%3DubZaauO5NcL20PEPlu_PqAM&ec=futura_srp_og_si_72236_p
+      - separator [ref=f3e69]
+    - generic [ref=f3e77]:
+      - generic [ref=f3e79]:
+        - button "AI Mode history" [ref=f3e80]
+        - generic [ref=f3e81]:
+          - button [ref=f3e83] [cursor=pointer]
+          - button "New thread" [ref=f3e88] [cursor=pointer]
+      - 'heading "AI Mode Conversation: What are the possible ways a browser extension could detect whether a user is signed into an arbitrary web application, without per-site configuration and without relying on page navigations? What are the trade-offs of each approach?" [level=1] [ref=f3e92]'
+      - generic [ref=f3e94]:
+        - generic [ref=f3e96]:
+          - generic [ref=f3e99]:
+            - generic [ref=f3e100]:
+              - button "Copy What are the possible ways a browser extension could detect whether a user is signed into an arbitrary web application, without per-site configuration and without relying on page navigations? What are the trade-offs of each approach?" [ref=f3e105] [cursor=pointer]
+              - button "Edit What are the possible ways a browser extension could detect whether a user is signed into an arbitrary web application, without per-site configuration and without relying on page navigations? What are the trade-offs of each approach?" [ref=f3e113] [cursor=pointer]
+            - generic [ref=f3e120]:
+              - 'heading "You said: What are the possible ways a browser extension could detect whether a user is signed into an arbitrary web application, without per-site configuration and without relying on page navigations? What are the trade-offs of each approach?" [level=2] [ref=f3e121]':
+                - generic [ref=f3e122]: "You said:"
+                - text: What are the possible ways a browser extension could detect whether a user is signed into an arbitrary web application, without per-site configuration and without relying on page navigations? What are the trade-offs of each approach?
+              - button "Collapse query preview" [expanded] [ref=f3e502]
+          - generic [ref=f3e189]:
+            - generic [ref=f3e192]:
+              - generic [ref=f3e193]: Detecting authentication status across arbitrary websites without site-specific configurations or page navigations requires analyzing universal browser mechanisms. Because you cannot rely on specific DOM elements or page loads, you must monitor the browser's data layer and network activity.
+              - generic [ref=f3e194]: Here are the primary technical approaches a browser extension can use, along with their trade-offs.
+              - heading "1. Monitoring Cookie Change Events" [level=3] [ref=f3e195]
+              - generic [ref=f3e196]:
+                - text: The extension uses the
+                - code [ref=f3e197]: chrome.cookies.onChanged
+                - text: API to listen for creation, modification, or deletion of cookies across all domains.
+              - list [ref=f3e198]:
+                - listitem [ref=f3e199]:
+                  - generic [ref=f3e200]:
+                    - strong [ref=f3e201]: Mechanism
+                    - text: ": When a user signs in, websites set session or tracking cookies. A sudden influx of newly set cookies on a domain (especially those with"
+                    - code [ref=f3e202]: HttpOnly
+                    - text: or secure flags) strongly implies a state change.
+                - listitem [ref=f3e203]:
+                  - generic [ref=f3e204]:
+                    - strong [ref=f3e205]: Pros
+                    - text: ": Highly efficient; operates entirely in the background without injecting code."
+                  - button "View related links" [ref=f3e208] [cursor=pointer]
+                - listitem [ref=f3e213]:
+                  - generic [ref=f3e214]:
+                    - strong [ref=f3e215]: Cons
+                    - text: ": High false-positive rate. It is difficult to distinguish a generic tracking cookie from an authentication token without site-specific knowledge."
+                  - button "View related links" [ref=f3e218] [cursor=pointer]
+              - heading "2. Intercepting Background Network Requests" [level=3] [ref=f3e223]
+              - generic [ref=f3e224]:
+                - text: The extension uses the
+                - code [ref=f3e225]: chrome.webRequest
+                - text: or
+                - code [ref=f3e226]: declarativeNetRequest
+                - text: APIs to inspect background asynchronous traffic (Fetch/XHR).
+              - list [ref=f3e227]:
+                - listitem [ref=f3e228]:
+                  - generic [ref=f3e229]:
+                    - strong [ref=f3e230]: Mechanism
+                    - text: ": The extension looks for common API patterns. It scans headers for authentication tokens (e.g.,"
+                    - code [ref=f3e231]: "Authorization: Bearer ..."
+                    - text: ) or analyzes response status codes. A transition from
+                    - code [ref=f3e232]: 401 Unauthorized
+                    - text: or
+                    - code [ref=f3e233]: 403 Forbidden
+                    - text: to
+                    - code [ref=f3e234]: 200 OK
+                    - text: on API endpoints indicates a successful login.
+                - listitem [ref=f3e235]:
+                  - generic [ref=f3e236]:
+                    - strong [ref=f3e237]: Pros
+                    - text: ": Highly accurate; captures actual authentication events and active sessions in real time."
+                - listitem [ref=f3e238]:
+                  - generic [ref=f3e239]:
+                    - strong [ref=f3e240]: Cons
+                    - text: ": Heavy privacy implications; requires broad host permissions ("
+                    - code [ref=f3e241]: <all_urls>
+                    - text: ), which triggers strict Web Store reviews. It also increases CPU overhead to parse headers.
+                  - button "View related links" [ref=f3e244] [cursor=pointer]
+              - heading "3. Broad Heuristic DOM Inspection via MutationObserver" [level=3] [ref=f3e249]
+              - generic [ref=f3e250]:
+                - text: A lightweight content script is injected into all tabs. It uses a
+                - code [ref=f3e251]: MutationObserver
+                - text: to watch for visual changes without relying on full page navigations.
+              - list [ref=f3e252]:
+                - listitem [ref=f3e253]:
+                  - generic [ref=f3e254]:
+                    - strong [ref=f3e255]: Mechanism
+                    - text: ": The script scans the DOM dynamically for universal text strings, button attributes, or class names associated with logged-in states (e.g., \"Sign out\", \"Log out\", \"My Account\", \"Profile\", or elements containing"
+                    - code [ref=f3e256]: logout
+                    - text: ).
+                - listitem [ref=f3e257]:
+                  - generic [ref=f3e258]:
+                    - strong [ref=f3e259]: Pros
+                    - text: ": Catches single-page application (SPA) state changes that happen strictly in the DOM without standard page refreshes."
+                - listitem [ref=f3e260]:
+                  - generic [ref=f3e261]:
+                    - strong [ref=f3e262]: Cons
+                    - text: ": Highly fragile; websites change their UI frequently. Internationalization (non-English text) easily breaks string-matching heuristics."
+              - heading "4. Analyzing Credential Management API Triggers" [level=3] [ref=f3e263]
+              - generic [ref=f3e264]:
+                - text: The extension wraps or monitors the native browser
+                - code [ref=f3e265]: Navigator.credentials
+                - text: API via an injected script.
+              - list [ref=f3e266]:
+                - listitem [ref=f3e267]:
+                  - generic [ref=f3e268]:
+                    - strong [ref=f3e269]: Mechanism
+                    - text: ": It intercepts calls to"
+                    - code [ref=f3e270]: navigator.credentials.get()
+                    - text: or
+                    - code [ref=f3e271]: navigator.credentials.store()
+                    - text: ", which web apps use to programmatically log users in via passwords or WebAuthn/Passkeys."
+                - listitem [ref=f3e272]:
+                  - generic [ref=f3e273]:
+                    - strong [ref=f3e274]: Pros
+                    - text: ": Zero-configuration hook that captures the exact moment of credential exchange."
+                - listitem [ref=f3e275]:
+                  - generic [ref=f3e276]:
+                    - strong [ref=f3e277]: Cons
+                    - text: ": Very low coverage; the vast majority of web applications still use standard HTML form submissions or custom OAuth flows instead of this native API."
+                  - button "View related links" [ref=f3e280] [cursor=pointer]
+              - separator [ref=f3e285]
+              - heading "Trade-Off Summary Matrix" [level=3] [ref=f3e286]
+              - table [ref=f3e288]:
+                - rowgroup [ref=f3e289]:
+                  - row [ref=f3e290]:
+                    - columnheader "Approach" [ref=f3e291]
+                    - columnheader "Detection Accuracy" [ref=f3e292]
+                    - columnheader "Performance Impact" [ref=f3e293]
+                    - columnheader "Privacy/Permission Risks" [ref=f3e294]
+                    - columnheader "Maintenance Overhead" [ref=f3e295]
+                  - row [ref=f3e296]:
+                    - cell [ref=f3e297]:
+                      - strong [ref=f3e298]: Cookie Monitoring
+                    - cell "Low (High False Positives)" [ref=f3e299]
+                    - cell "Very Low" [ref=f3e300]
+                    - cell [ref=f3e301]:
+                      - text: Medium (
+                      - code [ref=f3e302]: cookies
+                      - text: permission)
+                    - cell "Low" [ref=f3e303]
+                  - row [ref=f3e304]:
+                    - cell [ref=f3e305]:
+                      - strong [ref=f3e306]: Network Interception
+                    - cell "High" [ref=f3e307]
+                    - cell "High" [ref=f3e308]
+                    - cell [ref=f3e309]:
+                      - text: High (
+                      - code [ref=f3e310]: webRequest
+                      - text: ","
+                      - code [ref=f3e311]: <all_urls>
+                      - text: )
+                    - cell "Medium" [ref=f3e312]
+                  - row [ref=f3e313]:
+                    - cell [ref=f3e314]:
+                      - strong [ref=f3e315]: DOM Mutation Heuristics
+                    - cell "Medium" [ref=f3e316]
+                    - cell "Medium to High" [ref=f3e317]
+                    - cell "Medium (Content script injection)" [ref=f3e318]
+                    - cell "High (UI changes break it)" [ref=f3e319]
+                  - row [ref=f3e320]:
+                    - cell [ref=f3e321]:
+                      - strong [ref=f3e322]: Credential API Hook
+                    - cell "Very High" [ref=f3e323]
+                    - cell "Negligible" [ref=f3e324]
+                    - cell "Medium (Script injection)" [ref=f3e325]
+                    - cell "Low" [ref=f3e326]
+              - separator [ref=f3e327]
+              - generic [ref=f3e328]: To help narrow down the best architecture for your project, could you share a bit more context?
+              - list [ref=f3e329]:
+                - listitem [ref=f3e330]:
+                  - generic [ref=f3e331]:
+                    - text: What is the
+                    - strong [ref=f3e332]: primary goal
+                    - text: of the extension once it detects the login state?
+                - listitem [ref=f3e333]:
+                  - generic [ref=f3e334]:
+                    - text: What
+                    - strong [ref=f3e335]: security or privacy constraints
+                    - text: do your target users care about most?
+                - listitem [ref=f3e336]:
+                  - generic [ref=f3e337]:
+                    - text: Are you aiming for compatibility with
+                    - strong [ref=f3e338]: Manifest V3
+                    - text: "?"
+              - generic [ref=f3e339]: Knowing these details will help determine which specific combination of heuristics will work best for your use case.
+              - generic [ref=f3e341]:
+                - generic [ref=f3e342]: AI can make mistakes, so double-check responses
+                - generic [ref=f3e344]:
+                  - button "Copy text" [ref=f3e347] [cursor=pointer]
+                  - button "Share" [ref=f3e357] [cursor=pointer]
+                  - generic [ref=f3e363]:
+                    - button "Good response" [ref=f3e365] [cursor=pointer]
+                    - button "Bad response" [ref=f3e370] [cursor=pointer]
+            - generic [ref=f3e380]:
+              - generic [ref=f3e382]:
+                - button "7 sites" [ref=f3e383] [cursor=pointer]
+                - button "About this result" [ref=f3e397] [cursor=pointer]
+              - list [ref=f3e402]:
+                - listitem [ref=f3e403]:
+                  - generic [ref=f3e404]:
+                    - link "Sneaky Browser Extensions Are Hijacking ChatGPT Sessions. Opens in new tab." [ref=f3e405] [cursor=pointer]:
+                      - /url: https://cyberhoot.com/blog/sneaky-browser-extensions-are-hijacking-chatgpt-sessions/
+                    - generic [ref=f3e406]:
+                      - generic [ref=f3e407]:
+                        - generic [ref=f3e408]:
+                          - generic [ref=f3e409]: Sneaky Browser Extensions Are Hijacking ChatGPT Sessions
+                          - generic [ref=f3e410]: Feb 10, 2026 — Once installed, extensions run in the background. They do not log out. They can monitor everything you're doing, where you're goin...
+                        - button [ref=f3e415] [cursor=pointer]
+                      - generic [ref=f3e420]:
+                        - generic [ref=f3e423]: CyberHoot
+                        - button "About this result" [ref=f3e429] [cursor=pointer]
+                - listitem [ref=f3e435]:
+                  - generic [ref=f3e436]:
+                    - link "Complete Guide to Out-of-band Application Security Testing (OAST). Opens in new tab." [ref=f3e437] [cursor=pointer]:
+                      - /url: https://www.xenonstack.com/insights/out-of-band-application-security-testing
+                    - generic [ref=f3e438]:
+                      - generic [ref=f3e439]:
+                        - generic [ref=f3e440]:
+                          - generic [ref=f3e441]: Complete Guide to Out-of-band Application Security Testing (OAST)
+                          - generic [ref=f3e442]: Nov 26, 2024 — - High rate of false positives. - Doesn't consider real-world runtime behavior.
+                        - button [ref=f3e447] [cursor=pointer]
+                      - generic [ref=f3e452]:
+                        - generic [ref=f3e455]: XenonStack
+                        - button "About this result" [ref=f3e461] [cursor=pointer]
+                - listitem [ref=f3e467]:
+                  - generic [ref=f3e468]:
+                    - 'link "Extension Solution Overview: Pros/Cons, Technology & Use Cases. Opens in new tab." [ref=f3e469] [cursor=pointer]':
+                      - /url: https://seraphicsecurity.com/learn/enterprise-browser/extension-solution-overview-pros-cons-technology-and-use-cases/
+                    - generic [ref=f3e470]:
+                      - generic [ref=f3e471]:
+                        - generic [ref=f3e472]:
+                          - generic [ref=f3e473]: "Extension Solution Overview: Pros/Cons, Technology & Use Cases"
+                          - generic [ref=f3e474]: "Apr 13, 2025 — Browser Extension Limitations False positives in threat detection: Users have reported frequent false positives, especially in DLP..."
+                        - button [ref=f3e479] [cursor=pointer]
+                      - generic [ref=f3e484]:
+                        - generic [ref=f3e487]: Seraphic Security
+                        - button "About this result" [ref=f3e493] [cursor=pointer]
+              - button "Show all related links" [ref=f3e499] [cursor=pointer]:
+                - generic [ref=f3e500]: Show all
+        - generic [ref=f3e504]:
+          - generic [ref=f3e507]:
+            - generic [ref=f3e508]:
+              - button "Copy What are the most reliable universal signals that indicate an authenticated session in a modern web app, and what are their failure modes / false positives?" [ref=f3e513] [cursor=pointer]
+              - button "Edit What are the most reliable universal signals that indicate an authenticated session in a modern web app, and what are their failure modes / false positives?" [ref=f3e521] [cursor=pointer]
+            - generic [ref=f3e528]:
+              - 'heading "You said: What are the most reliable universal signals that indicate an authenticated session in a modern web app, and what are their failure modes / false positives?" [level=2] [ref=f3e529]':
+                - generic [ref=f3e530]: "You said:"
+                - generic [ref=f3e531]: What are the most reliable universal signals that indicate an authenticated session in a modern web app, and what are their failure modes / false positives?
+              - button "Expand query preview" [ref=f3e532]
+          - generic [ref=f3e540]:
+            - generic [ref=f3e543]:
+              - generic [ref=f3e544]: In modern web applications—especially Single Page Applications (SPAs) and federated systems—predictable network behaviors and standard browser storage patterns provide the most reliable universal authentication signals.
+              - generic [ref=f3e545]: The most reliable universal signals, ranked by accuracy, along with their distinct failure modes and false positives, are detailed below.
+              - heading [level=3] [ref=f3e546]:
+                - text: 1. The Presence of the
+                - code [ref=f3e547]: Authorization
+                - text: HTTP Header
+              - generic [ref=f3e548]: Modern web apps pass a JSON Web Token (JWT) or OAuth bearer token in the headers of background Fetch or XHR requests.
+              - list [ref=f3e549]:
+                - listitem [ref=f3e550]:
+                  - generic [ref=f3e551]:
+                    - strong [ref=f3e552]: "The Signal:"
+                    - text: The extension detects an outgoing HTTP request containing an
+                    - code [ref=f3e553]: "Authorization: Bearer <token>"
+                    - text: or
+                    - code [ref=f3e554]: "Authorization: Token <token>"
+                    - text: header [^1].
+                - listitem [ref=f3e555]:
+                  - strong [ref=f3e557]: "False Positives:"
+                  - list [ref=f3e558]:
+                    - listitem [ref=f3e559]:
+                      - generic [ref=f3e560]:
+                        - strong [ref=f3e561]: "Guest/Anonymous Tokens:"
+                        - text: Many modern apps (e.g., e-commerce sites) issue a "guest JWT" to unauthenticated users to track shopping carts or allow public API access before login.
+                      - button "View related links" [ref=f3e564] [cursor=pointer]
+                - listitem [ref=f3e569]:
+                  - strong [ref=f3e571]: "Failure Modes:"
+                  - list [ref=f3e572]:
+                    - listitem [ref=f3e573]:
+                      - generic [ref=f3e574]:
+                        - strong [ref=f3e575]: "Cookie-Based SPAs:"
+                        - text: If the web app uses traditional
+                        - code [ref=f3e576]: HttpOnly
+                        - text: session cookies instead of local tokens for API authentication, this header will be completely absent.
+              - heading "2. Standardized Token Keys in Local/Session Storage" [level=3] [ref=f3e577]
+              - generic [ref=f3e578]:
+                - text: SPAs frequently cache access tokens or user profile metadata directly in the browser's client-side storage to persist sessions across page reloads.
+                - button "View related links" [ref=f3e581] [cursor=pointer]
+              - list [ref=f3e586]:
+                - listitem [ref=f3e587]:
+                  - generic [ref=f3e588]:
+                    - strong [ref=f3e589]: "The Signal:"
+                    - text: The extension scans
+                    - code [ref=f3e590]: localStorage
+                    - text: or
+                    - code [ref=f3e591]: sessionStorage
+                    - text: for universal key naming patterns such as
+                    - code [ref=f3e592]: id_token
+                    - text: ","
+                    - code [ref=f3e593]: access_token
+                    - text: ","
+                    - code [ref=f3e594]: auth_token
+                    - text: ","
+                    - code [ref=f3e595]: jwt
+                    - text: ","
+                    - code [ref=f3e596]: user_session
+                    - text: ", or keys matching specific vendor patterns (e.g.,"
+                    - code [ref=f3e597]: firebase:authUser
+                    - text: ","
+                    - code [ref=f3e598]: supabase.auth.token
+                    - text: ).
+                - listitem [ref=f3e599]:
+                  - strong [ref=f3e601]: "False Positives:"
+                  - list [ref=f3e602]:
+                    - listitem [ref=f3e603]:
+                      - generic [ref=f3e604]:
+                        - strong [ref=f3e605]: "Stale Tokens:"
+                        - text: Applications often fail to clear
+                        - code [ref=f3e606]: localStorage
+                        - text: when a token expires or when a user closes a tab without explicitly clicking "Log Out." The data remains, but the session is dead.
+                      - button "View related links" [ref=f3e609] [cursor=pointer]
+                - listitem [ref=f3e614]:
+                  - strong [ref=f3e616]: "Failure Modes:"
+                  - list [ref=f3e617]:
+                    - listitem [ref=f3e618]:
+                      - generic [ref=f3e619]:
+                        - strong [ref=f3e620]: "Strict Cookie Security:"
+                        - text: Security-focused applications avoid client-side storage entirely to prevent Cross-Site Scripting (XSS) token theft, storing data exclusively in secure cookies inaccessible to JavaScript.
+                      - button "View related links" [ref=f3e623] [cursor=pointer]
+              - heading "3. Asymmetric API Responses (401/403 to 200 Transitions)" [level=3] [ref=f3e628]
+              - generic [ref=f3e629]:
+                - text: Monitoring the HTTP status codes of background API traffic targeting
+                - code [ref=f3e630]: /api/*
+                - text: ","
+                - code [ref=f3e631]: /graphql
+                - text: ", or"
+                - code [ref=f3e632]: /v1/*
+                - text: endpoints.
+              - list [ref=f3e633]:
+                - listitem [ref=f3e634]:
+                  - generic [ref=f3e635]:
+                    - strong [ref=f3e636]: "The Signal:"
+                    - text: A specific endpoint that previously returned a
+                    - code [ref=f3e637]: 401 Unauthorized
+                    - text: or
+                    - code [ref=f3e638]: 403 Forbidden
+                    - text: status code suddenly begins returning a
+                    - code [ref=f3e639]: 200 OK
+                    - text: status code.
+                - listitem [ref=f3e640]:
+                  - strong [ref=f3e642]: "False Positives:"
+                  - list [ref=f3e643]:
+                    - listitem [ref=f3e644]:
+                      - generic [ref=f3e645]:
+                        - strong [ref=f3e646]: "Endpoint Variation:"
+                        - text: The user might have navigated to a completely different, public section of the API that natively allows
+                        - code [ref=f3e647]: 200 OK
+                        - text: responses without credentials.
+                      - button "View related links" [ref=f3e650] [cursor=pointer]
+                - listitem [ref=f3e655]:
+                  - strong [ref=f3e657]: "Failure Modes:"
+                  - list [ref=f3e658]:
+                    - listitem [ref=f3e659]:
+                      - generic [ref=f3e660]:
+                        - strong [ref=f3e661]: "Soft Errors (200 OK GraphQL):"
+                        - text: Many modern GraphQL APIs and some REST APIs return a
+                        - code [ref=f3e662]: 200 OK
+                        - text: status code for
+                        - emphasis [ref=f3e663]: all
+                        - text: requests, wrapping the actual auth error inside a JSON payload (e.g.,
+                        - code [ref=f3e664]: "{\"errors\": [{\"message\": \"Unauthorized\"}]}"
+                        - text: ).
+                      - button "View related links" [ref=f3e667] [cursor=pointer]
+              - heading "4. Background OpenID Connect (OIDC) / OAuth Callback URL Formats" [level=3] [ref=f3e672]
+              - generic [ref=f3e673]: Even if you do not track page navigation, you can track the network requests initiated by authentication redirects.
+              - list [ref=f3e674]:
+                - listitem [ref=f3e675]:
+                  - generic [ref=f3e676]:
+                    - strong [ref=f3e677]: "The Signal:"
+                    - text: The network layer intercepts background traffic or history state changes containing URL query parameters like
+                    - code [ref=f3e678]: "?code="
+                    - text: ","
+                    - code [ref=f3e679]: "&id_token="
+                    - text: ", or"
+                    - code [ref=f3e680]: "&state="
+                    - text: . This indicates an OAuth2 or OIDC handshake is finalizing.
+                - listitem [ref=f3e681]:
+                  - strong [ref=f3e683]: "False Positives:"
+                  - list [ref=f3e684]:
+                    - listitem [ref=f3e685]:
+                      - generic [ref=f3e686]:
+                        - strong [ref=f3e687]: "Failed Handshakes:"
+                        - text: The presence of the login URL structure does not guarantee success. The server might evaluate the code, reject it, and return the user to a login screen.
+                - listitem [ref=f3e688]:
+                  - strong [ref=f3e690]: "Failure Modes:"
+                  - list [ref=f3e691]:
+                    - listitem [ref=f3e692]:
+                      - generic [ref=f3e693]:
+                        - strong [ref=f3e694]: "Custom Auth Protocols:"
+                        - text: Legacy enterprise applications or highly custom proprietary platforms may not use standard OAuth specifications, relying on custom internal redirect structures instead.
+              - separator [ref=f3e695]
+              - heading "Comparison of Technical Trade-Offs" [level=3] [ref=f3e696]
+              - table [ref=f3e698]:
+                - rowgroup [ref=f3e699]:
+                  - row [ref=f3e700]:
+                    - columnheader "Signal" [ref=f3e701]
+                    - columnheader "Reliability" [ref=f3e702]
+                    - columnheader "False Positive Trigger" [ref=f3e703]
+                    - columnheader "Detection Complexity" [ref=f3e704]
+                  - row [ref=f3e705]:
+                    - cell [ref=f3e706]:
+                      - strong [ref=f3e707]:
+                        - code [ref=f3e708]: Authorization
+                        - text: Header
+                    - cell "High" [ref=f3e709]
+                    - cell "Anonymous/Guest JWTs" [ref=f3e710]
+                    - cell "Medium (Requires network inspection)" [ref=f3e711]
+                  - row [ref=f3e712]:
+                    - cell [ref=f3e713]:
+                      - strong [ref=f3e714]: Storage Keys
+                    - cell "Medium" [ref=f3e715]
+                    - cell "Expired/Stale data" [ref=f3e716]
+                    - cell "Low (Read storage object)" [ref=f3e717]
+                  - row [ref=f3e718]:
+                    - cell [ref=f3e719]:
+                      - strong [ref=f3e720]:
+                        - text: "401"
+                        - generic [ref=f3e723]:
+                          - math [ref=f3e725]:
+                            - generic [ref=f3e726]: →
+                          - img [ref=f3e728]:
+                            - generic [ref=f3e729]: →
+                        - text: 200 Transition
+                    - cell "High" [ref=f3e730]
+                    - cell "Switching to public APIs" [ref=f3e731]
+                    - cell "High (Requires state tracking)" [ref=f3e732]
+                  - row [ref=f3e733]:
+                    - cell [ref=f3e734]:
+                      - strong [ref=f3e735]: OAuth Parameters
+                    - cell "Medium" [ref=f3e736]
+                    - cell "Aborted/Failed logins" [ref=f3e737]
+                    - cell "Low (Regex on request URLs)" [ref=f3e738]
+              - separator [ref=f3e739]
+              - generic [ref=f3e740]:
+                - text: If you are currently prototyping this, I can help you write a
+                - strong [ref=f3e741]: Manifest V3-compliant snippet
+                - text: using the
+                - code [ref=f3e742]: chrome.declarativeNetRequest
+                - text: or
+                - code [ref=f3e743]: chrome.storage
+                - text: APIs to catch these signals efficiently. Let me know if you would like a code sample or if you want to focus on a
+                - strong [ref=f3e744]: specific authentication standard
+                - text: like OAuth.
+              - generic [ref=f3e747]:
+                - button "Copy text" [ref=f3e761] [cursor=pointer]
+                - button "Share" [ref=f3e766] [cursor=pointer]
+                - generic [ref=f3e756]:
+                  - button "Good response" [ref=f3e771] [cursor=pointer]
+                  - button "Bad response" [ref=f3e775] [cursor=pointer]
+            - generic [ref=f3e783]:
+              - generic [ref=f3e785]:
+                - button "11 sites" [ref=f3e786] [cursor=pointer]
+                - button "About this result" [ref=f3e800] [cursor=pointer]
+              - list [ref=f3e805]:
+                - listitem [ref=f3e806]:
+                  - generic [ref=f3e807]:
+                    - link "Finding jwt tokens that lead to PII data leakage.. Opens in new tab." [ref=f3e808] [cursor=pointer]:
+                      - /url: https://medium.com/@jhansi12.cs/finding-jwt-tokens-that-lead-to-pii-data-leakage-247829f27610
+                    - generic [ref=f3e809]:
+                      - generic [ref=f3e811]:
+                        - generic [ref=f3e812]: Finding jwt tokens that lead to PII data leakage.
+                        - generic [ref=f3e813]: Mar 5, 2025 — Some applications mistakenly include JWTs in error responses, logs, or debugging messages, making them accessible to unauthorized ...
+                      - generic [ref=f3e815]:
+                        - generic [ref=f3e818]: Medium
+                        - button "About this result" [ref=f3e824] [cursor=pointer]
+                - listitem [ref=f3e830]:
+                  - generic [ref=f3e831]:
+                    - 'link "Session vs JWT Token: Key Differences and Which One to Choose for Web Authentication. Opens in new tab." [ref=f3e832] [cursor=pointer]':
+                      - /url: https://medium.com/@DevBox_rohitrawat/session-vs-jwt-token-key-differences-and-which-one-to-choose-for-web-authentication-4f43f0feeeb1
+                    - generic [ref=f3e833]:
+                      - generic [ref=f3e834]:
+                        - generic [ref=f3e835]:
+                          - generic [ref=f3e836]: "Session vs JWT Token: Key Differences and Which One to Choose for Web Authentication"
+                          - generic [ref=f3e837]: "Dec 20, 2024 — Example: In an e-commerce system where you have separate services for user authentication, product inventory, and order processing..."
+                        - button [ref=f3e842] [cursor=pointer]
+                      - generic [ref=f3e847]:
+                        - generic [ref=f3e850]: Medium
+                        - button "About this result" [ref=f3e856] [cursor=pointer]
+                - listitem [ref=f3e862]:
+                  - generic [ref=f3e863]:
+                    - link "Session Forensics. Opens in new tab." [ref=f3e864] [cursor=pointer]:
+                      - /url: https://tryhackme.com/room/sessionforensics
+                    - generic [ref=f3e865]:
+                      - generic [ref=f3e866]:
+                        - generic [ref=f3e867]:
+                          - generic [ref=f3e868]: Session Forensics
+                          - generic [ref=f3e869]: "Single-page applications (SPAs): You might have encountered SPAs (opens in new tab) multiple times (Reddit, email app, etc.). As t..."
+                        - button [ref=f3e874] [cursor=pointer]
+                      - generic [ref=f3e879]:
+                        - generic [ref=f3e882]: TryHackMe
+                        - button "About this result" [ref=f3e888] [cursor=pointer]
+              - button "Show all related links" [ref=f3e894] [cursor=pointer]:
+                - generic [ref=f3e895]: Show all
+        - generic [ref=f3e897]:
+          - generic [ref=f3e900]:
+            - generic [ref=f3e901]:
+              - button "Copy What are the known hard problems and gotchas with Chrome Manifest V3 for reading cookies, observing network requests, and running persistent logic in the service worker?" [ref=f3e906] [cursor=pointer]
+              - button "Edit What are the known hard problems and gotchas with Chrome Manifest V3 for reading cookies, observing network requests, and running persistent logic in the service worker?" [ref=f3e914] [cursor=pointer]
+            - generic [ref=f3e921]:
+              - 'heading "You said: What are the known hard problems and gotchas with Chrome Manifest V3 for reading cookies, observing network requests, and running persistent logic in the service worker?" [level=2] [ref=f3e922]':
+                - generic [ref=f3e923]: "You said:"
+                - generic [ref=f3e924]: What are the known hard problems and gotchas with Chrome Manifest V3 for reading cookies, observing network requests, and running persistent logic in the service worker?
+              - button "Expand query preview" [ref=f3e925]
+          - generic [ref=f3e933]:
+            - generic [ref=f3e936]:
+              - generic [ref=f3e937]:
+                - text: Migrating to or building a zero-configuration authentication tracker in Manifest V3 (MV3) introduces severe architectural hurdles. Because MV3 enforces a non-persistent environment and restricts dynamic observation, several "hard problems" will directly impact your ability to track cookies, network states, and persistent logic.
+                - button "View related links" [ref=f3e1055] [cursor=pointer]
+              - generic [ref=f3e938]: Here are the known gotchas and engineering limitations you will encounter.
+              - separator [ref=f3e939]
+              - heading "1. Service Worker Ephemerality & State Loss" [level=3] [ref=f3e940]
+              - generic [ref=f3e941]:
+                - text: The biggest architectural shift in MV3 is that the background page is replaced by an ephemeral Service Worker (SW). Chrome terminates the SW after 30 seconds of inactivity, or up to 5 minutes of continuous execution.
+                - button "View related links" [ref=f3e1062] [cursor=pointer]
+              - list [ref=f3e942]:
+                - listitem [ref=f3e943]:
+                  - generic [ref=f3e944]:
+                    - strong [ref=f3e945]: "The Gotcha:"
+                    - text: You cannot keep global variables in memory. If your extension relies on an in-memory map to track a domain's transition from an unauthenticated (
+                    - code [ref=f3e946]: "401"
+                    - text: ) to an authenticated (
+                    - code [ref=f3e947]: "200"
+                    - text: ) state, that state will be wiped out when the worker sleeps.
+                - listitem [ref=f3e948]:
+                  - generic [ref=f3e949]:
+                    - strong [ref=f3e950]: "The Fix:"
+                    - text: You must serialize all state variables to
+                    - code [ref=f3e951]: chrome.storage.local
+                    - text: or
+                    - code [ref=f3e952]: chrome.storage.session
+                    - text: (which lives in memory but survives SW restarts). Every event listener must read the current state from storage before executing logic.
+                  - button "View related links" [ref=f3e1069] [cursor=pointer]
+                - listitem [ref=f3e953]:
+                  - generic [ref=f3e954]:
+                    - strong [ref=f3e955]: "The \"Keep-Alive\" Battle:"
+                    - text: While methods exist to extend SW life (like opening a message port to a content script or resetting an alarm), Chrome aggressively patches these loopholes to save system resources.
+                  - button "View related links" [ref=f3e1076] [cursor=pointer]
+              - separator [ref=f3e956]
+              - heading [level=3] [ref=f3e957]:
+                - text: "2. Network Observation:"
+                - code [ref=f3e958]: declarativeNetRequest
+                - text: vs.
+                - code [ref=f3e959]: webRequest
+              - generic [ref=f3e960]:
+                - text: In MV2, you could use
+                - code [ref=f3e961]: chrome.webRequest
+                - text: to intercept, block, or read headers for every network call. In MV3,
+                - code [ref=f3e962]: chrome.webRequest
+                - text: is strictly read-only (
+                - code [ref=f3e963]: webRequestAuthProvider
+                - text: is an exception) and heavily restricted.
+                - button "View related links" [ref=f3e1083] [cursor=pointer]
+              - list [ref=f3e964]:
+                - listitem [ref=f3e965]:
+                  - generic [ref=f3e966]:
+                    - strong [ref=f3e967]: "The Hard Problem:"
+                    - text: To read HTTP headers (like checking for an
+                    - code [ref=f3e968]: "Authorization: Bearer"
+                    - text: token or a
+                    - code [ref=f3e969]: Set-Cookie
+                    - text: header), you must request the dangerous
+                    - code [ref=f3e970]: webRequest
+                    - text: and
+                    - code [ref=f3e971]: webRequestAllModifyHeaders
+                    - text: permissions alongside broad host permissions (e.g.,
+                    - code [ref=f3e972]: <all_urls>
+                    - text: ).
+                  - button "View related links" [ref=f3e1090] [cursor=pointer]
+                - listitem [ref=f3e973]:
+                  - generic [ref=f3e974]:
+                    - strong [ref=f3e975]: "The Review Gotcha:"
+                    - text: Requesting broad host permissions removes your extension from the "automatically approved" tier in the Chrome Web Store. It subjects your extension to
+                    - strong [ref=f3e976]: High-Risk/Deep Review
+                    - text: ", which can delay updates by weeks."
+                - listitem [ref=f3e977]:
+                  - generic [ref=f3e978]:
+                    - strong [ref=f3e979]:
+                      - text: The
+                      - code [ref=f3e980]: declarativeNetRequest
+                      - text: "(DNR) Trap:"
+                    - text: Google prefers developers use
+                    - code [ref=f3e981]: declarativeNetRequest
+                    - text: ", where the browser handles the network logic based on declarative rules you provide. However, DNR"
+                    - strong [ref=f3e982]: cannot read or pass header values back to your background script
+                    - text: for privacy reasons. You can use it to modify headers, but you cannot use it to
+                    - emphasis [ref=f3e983]: inspect
+                    - text: tokens.
+                  - button "View related links" [ref=f3e1097] [cursor=pointer]
+              - separator [ref=f3e984]
+              - heading "3. Cookie Monitoring and the Service Worker Wake-up Lag" [level=3] [ref=f3e985]
+              - generic [ref=f3e986]:
+                - text: Using
+                - code [ref=f3e987]: chrome.cookies.onChanged
+                - text: allows you to listen to cookie mutations globally, but the ephemerality of MV3 introduces a race condition.
+              - list [ref=f3e988]:
+                - listitem [ref=f3e989]:
+                  - generic [ref=f3e990]:
+                    - strong [ref=f3e991]: "The Gotcha:"
+                    - text: If a user logs into a website while your extension's Service Worker is asleep, the browser must spin up the worker to deliver the
+                    - code [ref=f3e992]: onChanged
+                    - text: event. This spin-up time can take anywhere from 50ms to over 1000ms depending on system load.
+                - listitem [ref=f3e993]:
+                  - generic [ref=f3e994]:
+                    - strong [ref=f3e995]: "The Race Condition:"
+                    - text: If your extension attempts to immediately query
+                    - code [ref=f3e996]: chrome.cookies.get()
+                    - text: or message a content script upon waking up, the network requests or page mutations that
+                    - emphasis [ref=f3e997]: triggered
+                    - text: the cookie change may have already finished executing before your background logic finishes loading.
+                - listitem [ref=f3e998]:
+                  - generic [ref=f3e999]:
+                    - strong [ref=f3e1000]: "Partitioned Cookies (CHIPS):"
+                    - text: Modern browsers partition cookies by top-level site to prevent cross-site tracking. While the
+                    - code [ref=f3e1001]: chrome.cookies
+                    - text: API bypasses this for reading, it complicates state synchronization if you attempt to share auth states across different origins.
+                  - button "View related links" [ref=f3e1104] [cursor=pointer]
+              - separator [ref=f3e1002]
+              - heading "4. Asynchronous Storage Bottlenecks" [level=3] [ref=f3e1003]
+              - generic [ref=f3e1004]:
+                - text: Because the Service Worker restarts constantly, your extension will experience a massive increase in read/write operations to
+                - code [ref=f3e1005]: chrome.storage
+                - text: .
+                - button "View related links" [ref=f3e1111] [cursor=pointer]
+              - list [ref=f3e1006]:
+                - listitem [ref=f3e1007]:
+                  - generic [ref=f3e1008]:
+                    - strong [ref=f3e1009]: "The Gotcha:"
+                    - code [ref=f3e1010]: chrome.storage.local
+                    - text: is asynchronous. In MV2, you could check an authentication flag synchronously via a global variable before processing a network request. In MV3, you must wait for a Promise to resolve (
+                    - code [ref=f3e1011]: await chrome.storage.local.get()
+                    - text: ).
+                - listitem [ref=f3e1012]:
+                  - generic [ref=f3e1013]:
+                    - strong [ref=f3e1014]: "Performance Impact:"
+                    - text: If you are checking an authentication state on
+                    - emphasis [ref=f3e1015]: every
+                    - text: outgoing network request across the entire internet, the overhead of querying asynchronous storage inside a
+                    - code [ref=f3e1016]: webRequest
+                    - text: listener can noticeably degrade the user's browsing performance and trigger Chrome's internal performance throttles, which will silently drop your extension's listeners.
+                  - button "View related links" [ref=f3e1118] [cursor=pointer]
+              - separator [ref=f3e1017]
+              - heading "Summary Matrix of MV3 Implementation Gotchas" [level=3] [ref=f3e1018]
+              - table [ref=f3e1020]:
+                - rowgroup [ref=f3e1021]:
+                  - row [ref=f3e1022]:
+                    - columnheader "Feature" [ref=f3e1023]
+                    - columnheader "Manifest V2 Capability" [ref=f3e1024]
+                    - columnheader "Manifest V3 Limitation / Gotcha" [ref=f3e1025]
+                  - row [ref=f3e1026]:
+                    - cell [ref=f3e1027]:
+                      - strong [ref=f3e1028]: State Retention
+                    - cell "Persistent background page (Variables stay in memory forever)." [ref=f3e1029]
+                    - cell "Ephemeral Service Worker (Wiped every 30s; requires constant storage serialization)." [ref=f3e1030]
+                  - row [ref=f3e1031]:
+                    - cell [ref=f3e1032]:
+                      - strong [ref=f3e1033]: Network Inspection
+                    - cell [ref=f3e1034]:
+                      - text: Readily inspects all headers via
+                      - code [ref=f3e1035]: webRequest
+                      - text: .
+                    - cell "Requires high-risk permissions; declarative alternative (DNR) hides header data." [ref=f3e1036]
+                  - row [ref=f3e1037]:
+                    - cell [ref=f3e1038]:
+                      - strong [ref=f3e1039]: Event Execution
+                    - cell "Instantaneous event handling." [ref=f3e1040]
+                    - cell "Cold-start latency (Waking up the SW introduces a delay, causing race conditions)." [ref=f3e1041]
+                  - row [ref=f3e1042]:
+                    - cell [ref=f3e1043]:
+                      - strong [ref=f3e1044]: Web Store Review
+                    - cell "Fast automated track for most extensions." [ref=f3e1045]
+                    - cell [ref=f3e1046]:
+                      - text: Manual, deep security review if using
+                      - code [ref=f3e1047]: <all_urls>
+                      - text: +
+                      - code [ref=f3e1048]: webRequest
+                      - text: .
+              - separator [ref=f3e1049]
+              - generic [ref=f3e1050]:
+                - text: If you are mapping out your extension architecture, I can provide a
+                - strong [ref=f3e1051]: robust boilerplate pattern
+                - text: showing how to handle state hydration via
+                - code [ref=f3e1052]: chrome.storage.session
+                - text: upon Service Worker wakeup. Would you like to see how to structure the listeners to prevent memory loss, or should we look closer at the
+                - code [ref=f3e1123]: declarativeNetRequest
+                - text: rule limitations?
+              - generic [ref=f3e1126]:
+                - button "Copy text" [ref=f3e1129] [cursor=pointer]
+                - button "Share" [ref=f3e1139] [cursor=pointer]
+                - generic [ref=f3e1145]:
+                  - button "Good response" [ref=f3e1147] [cursor=pointer]
+                  - button "Bad response" [ref=f3e1152] [cursor=pointer]
+            - generic [ref=f3e1162]:
+              - generic [ref=f3e1164]:
+                - button "22 sites" [ref=f3e1165] [cursor=pointer]
+                - button "About this result" [ref=f3e1179] [cursor=pointer]
+              - list [ref=f3e1184]:
+                - listitem [ref=f3e1185]:
+                  - generic [ref=f3e1186]:
+                    - link "Security at Helperbird | How We Protect Your Data. Opens in new tab." [ref=f3e1187] [cursor=pointer]:
+                      - /url: https://www.helperbird.com/security/
+                    - generic [ref=f3e1188]:
+                      - generic [ref=f3e1189]:
+                        - generic [ref=f3e1190]:
+                          - generic [ref=f3e1191]: Security at Helperbird | How We Protect Your Data
+                          - generic [ref=f3e1192]: May 15, 2026 — MV3 eliminates remote code execution, enforces a strict content security policy, and replaces persistent background pages with sho...
+                        - button [ref=f3e1197] [cursor=pointer]
+                      - generic [ref=f3e1202]:
+                        - generic [ref=f3e1205]: Helperbird
+                        - button "About this result" [ref=f3e1211] [cursor=pointer]
+                - listitem [ref=f3e1217]:
+                  - generic [ref=f3e1218]:
+                    - 'link "Chrome Users Beware: Manifest V3 Is Deceitful and Threatening (2021). Opens in new tab." [ref=f3e1219] [cursor=pointer]':
+                      - /url: https://news.ycombinator.com/item?id=38301801
+                    - generic [ref=f3e1220]:
+                      - generic [ref=f3e1222]:
+                        - generic [ref=f3e1223]: "Chrome Users Beware: Manifest V3 Is Deceitful and Threatening (2021)"
+                        - generic [ref=f3e1224]: "Nov 17, 2023 — MV3 is basically MV2 with one tectonic change: replacing persistent background pages with ephemeral service workers. So a large pa..."
+                      - generic [ref=f3e1226]:
+                        - generic [ref=f3e1229]: Hacker News
+                        - button "About this result" [ref=f3e1235] [cursor=pointer]
+                - listitem [ref=f3e1241]:
+                  - generic [ref=f3e1242]:
+                    - link "What are the execution time limits for the service worker in Manifest V3?. Opens in new tab." [ref=f3e1243] [cursor=pointer]:
+                      - /url: https://groups.google.com/a/chromium.org/g/chromium-extensions/c/L3EbiNMjIGI
+                    - generic [ref=f3e1244]:
+                      - generic [ref=f3e1246]:
+                        - generic [ref=f3e1247]: What are the execution time limits for the service worker in Manifest V3?
+                        - generic [ref=f3e1248]: Aug 30, 2020 — This isn't quite right. Per the Service Worker Security FAQ, Chrome will terminate a service worker after it "has been idle for 30...
+                      - generic [ref=f3e1250]:
+                        - generic [ref=f3e1253]: Google Groups
+                        - button "About this result" [ref=f3e1259] [cursor=pointer]
+              - button "Show all related links" [ref=f3e1265] [cursor=pointer]:
+                - generic [ref=f3e1266]: Show all
+        - generic [ref=f3e1268]:
+          - generic [ref=f3e1271]:
+            - generic [ref=f3e1272]:
+              - button "Copy How can a browser extension reliably draw a persistent border overlay on arbitrary web pages, including SPAs and pages with aggressive CSS? What techniques survive re-renders and avoid breakage?" [ref=f3e1277] [cursor=pointer]
+              - button "Edit How can a browser extension reliably draw a persistent border overlay on arbitrary web pages, including SPAs and pages with aggressive CSS? What techniques survive re-renders and avoid breakage?" [ref=f3e1285] [cursor=pointer]
+            - generic [ref=f3e1292]:
+              - 'heading "You said: How can a browser extension reliably draw a persistent border overlay on arbitrary web pages, including SPAs and pages with aggressive CSS? What techniques survive re-renders and avoid breakage?" [level=2] [ref=f3e1293]':
+                - generic [ref=f3e1294]: "You said:"
+                - generic [ref=f3e1295]: How can a browser extension reliably draw a persistent border overlay on arbitrary web pages, including SPAs and pages with aggressive CSS? What techniques survive re-renders and avoid breakage?
+              - button "Expand query preview" [ref=f3e1296]
+          - generic [ref=f3e1304]:
+            - generic [ref=f3e1307]:
+              - generic [ref=f3e1308]:
+                - text: Drawing a reliable, persistent border overlay around the viewport of arbitrary web pages is notoriously difficult. Aggressive CSS resets, Single Page Applications (SPAs) rewriting the DOM, shadow DOM encapsulation, and layout recalculations will easily break standard
+                - code [ref=f3e1309]: <div>
+                - text: overlays.
+                - button "View related links" [ref=f3e1453] [cursor=pointer]
+              - generic [ref=f3e1310]: To survive re-renders and avoid breaking the underlying page layout, you must bypass the standard page DOM entirely or use highly isolated rendering containers. The most reliable techniques, ranked from most robust to least invasive, are detailed below.
+              - separator [ref=f3e1311]
+              - heading "1. The Shadow DOM inside an Isolated Container (Most Reliable)" [level=3] [ref=f3e1312]
+              - generic [ref=f3e1313]:
+                - text: Instead of injecting a raw
+                - code [ref=f3e1314]: <div>
+                - text: into the
+                - code [ref=f3e1315]: <body>
+                - text: ", create a custom element, attach a closed Shadow DOM, and absolute-position it inside the viewport."
+                - button "View related links" [ref=f3e1460] [cursor=pointer]
+              - list [ref=f3e1316]:
+                - listitem [ref=f3e1317]:
+                  - generic [ref=f3e1318]:
+                    - strong [ref=f3e1319]: "The Technique:"
+                    - text: Append a single container element to the
+                    - code [ref=f3e1320]: <html>
+                    - text: root node (not
+                    - code [ref=f3e1321]: <body>
+                    - text: ", as SPAs frequently wipe out or re-render the body). Inside this container, host a"
+                    - code [ref=f3e1322]: "#shadow-root (closed)"
+                    - text: .
+                  - button "View related links" [ref=f3e1467] [cursor=pointer]
+                - listitem [ref=f3e1323]:
+                  - generic [ref=f3e1324]:
+                    - strong [ref=f3e1325]: "Why it survives:"
+                    - text: The
+                    - code [ref=f3e1326]: closed
+                    - text: shadow root prevents the host page's JavaScript from easily querying or modifying your internal elements.
+                  - button "View related links" [ref=f3e1474] [cursor=pointer]
+                - listitem [ref=f3e1327]:
+                  - generic [ref=f3e1328]:
+                    - strong [ref=f3e1329]: "Avoiding Aggressive CSS Breakage:"
+                    - text: Use explicit CSS resets inside your shadow root (e.g.,
+                    - code [ref=f3e1330]: "all: initial;"
+                    - text: ). Use
+                    - code [ref=f3e1331]: "box-sizing: border-box;"
+                    - text: and explicit
+                    - code [ref=f3e1332]: important!
+                    - text: declarations on your border styles so host site CSS cannot override them.
+                  - button "View related links" [ref=f3e1481] [cursor=pointer]
+                - listitem [ref=f3e1333]:
+                  - generic [ref=f3e1334]:
+                    - strong [ref=f3e1335]: "Handling SPAs:"
+                    - text: Attach a
+                    - code [ref=f3e1336]: MutationObserver
+                    - text: to the
+                    - code [ref=f3e1337]: <html>
+                    - text: node. If a framework (like React or Vue) wipes out your container or replaces the document structure, the observer detects the removal and instantly re-appends the container.
+              - heading [level=3] [ref=f3e1338]:
+                - text: 2. Viewport-Based
+                - code [ref=f3e1339]: Fixed
+                - text: Positioning via Visual Viewport API
+              - generic [ref=f3e1340]:
+                - text: Traditional
+                - code [ref=f3e1341]: "position: fixed"
+                - text: overlays fail on modern web apps that utilize inner-scroll containers, custom touch-scrolling libraries, or mobile-responsive scaling.
+              - list [ref=f3e1342]:
+                - listitem [ref=f3e1343]:
+                  - generic [ref=f3e1344]:
+                    - strong [ref=f3e1345]: "The Technique:"
+                    - text: Calculate the border dimensions dynamically using the
+                    - code [ref=f3e1346]: window.visualViewport
+                    - text: API rather than
+                    - code [ref=f3e1347]: window.innerWidth/innerHeight
+                    - text: .
+                - listitem [ref=f3e1348]:
+                  - generic [ref=f3e1349]:
+                    - strong [ref=f3e1350]: "Why it survives:"
+                    - text: The Visual Viewport track changes related to pinch-zooming, on-screen keyboards, and dynamic address bars.
+                - listitem [ref=f3e1351]:
+                  - generic [ref=f3e1352]:
+                    - strong [ref=f3e1353]: "Implementation:"
+                    - text: Listen to
+                    - code [ref=f3e1354]: window.visualViewport.addEventListener('resize')
+                    - text: and
+                    - code [ref=f3e1355]: scroll
+                    - text: events to dynamically adjust the width, height, and offsets of your overlay via CSS custom variables (
+                    - code [ref=f3e1356]: "--overlay-width"
+                    - text: ", etc.). This ensures the border is pinned perfectly to the true screen edges regardless of how the page scrolls or scales."
+              - heading [level=3] [ref=f3e1357]:
+                - text: 3. Modifying the
+                - code [ref=f3e1358]: <html>
+                - text: Element via CSS
+                - code [ref=f3e1359]: box-shadow
+                - text: (Zero DOM Footprint)
+              - generic [ref=f3e1360]: Instead of adding elements to the page that frameworks can delete, inject a global stylesheet that applies a persistent frame directly to the root element.
+              - list [ref=f3e1361]:
+                - listitem [ref=f3e1362]:
+                  - generic [ref=f3e1363]:
+                    - strong [ref=f3e1364]: "The Technique:"
+                    - text: Inject a CSS rule targeting the
+                    - code [ref=f3e1365]: html
+                    - text: selector using
+                    - code [ref=f3e1366]: box-shadow
+                    - text: with the
+                    - code [ref=f3e1367]: inset
+                    - text: property.
+                  - generic [ref=f3e1369]:
+                    - generic [ref=f3e1370]:
+                      - generic [ref=f3e1371]: css
+                      - code [ref=f3e1375]: "html { box-shadow: inset 0 0 0 10px #ff0000 !important; box-sizing: border-box !important; }"
+                    - generic [ref=f3e1376]:
+                      - generic [ref=f3e1377]: Use code with caution.
+                      - button "Copy code text to clipboard." [ref=f3e1380] [cursor=pointer]
+                  - button "View related links" [ref=f3e1488] [cursor=pointer]
+                - listitem [ref=f3e1385]:
+                  - generic [ref=f3e1386]:
+                    - strong [ref=f3e1387]: "Why it survives:"
+                    - text: There is no extra DOM element for SPAs to delete or clean up during state transitions. It is rendered natively by the browser on top of or under the page canvas.
+                - listitem [ref=f3e1388]:
+                  - generic [ref=f3e1389]:
+                    - strong [ref=f3e1390]: "Gotchas / Failure Modes:"
+                    - text: If the website has its own
+                    - code [ref=f3e1391]: "html { box-shadow: ... }"
+                    - text: rule without
+                    - code [ref=f3e1392]: "!important"
+                    - text: ", your rule wins. However, if the site uses an outer wrapper layout with"
+                    - code [ref=f3e1393]: "overflow: hidden"
+                    - text: ", the inset shadow might be masked out or clipped."
+              - heading [level=3] [ref=f3e1394]:
+                - text: 4. Injecting an
+                - code [ref=f3e1395]: <iframe>
+                - text: (Maximum Isolation)
+              - generic [ref=f3e1396]: Create a thin, transparent pointer-events-passthrough iframe stretched across the screen, containing your border graphics.
+              - list [ref=f3e1397]:
+                - listitem [ref=f3e1398]:
+                  - generic [ref=f3e1399]:
+                    - strong [ref=f3e1400]: "The Technique:"
+                    - text: Inject a 100vw/100vh
+                    - code [ref=f3e1401]: <iframe>
+                    - text: with
+                    - code [ref=f3e1402]: "pointer-events: none"
+                    - text: so users can click right through it to interact with the underlying page. Inside the iframe document, render your border.
+                - listitem [ref=f3e1403]:
+                  - generic [ref=f3e1404]:
+                    - strong [ref=f3e1405]: "Why it survives:"
+                    - text: Complete style and script isolation. No CSS or JS from the host page can touch the inside of that iframe.
+                - listitem [ref=f3e1406]:
+                  - generic [ref=f3e1407]:
+                    - strong [ref=f3e1408]: "Gotchas / Failure Modes:"
+                    - text: If a page enforces a strict Content Security Policy (CSP) that blocks
+                    - code [ref=f3e1409]: frame-src
+                    - text: or script injection into frames, the iframe may fail to load unless your Manifest V3 network rules (
+                    - code [ref=f3e1410]: declarativeNetRequest
+                    - text: ) strip the CSP headers out of the response.
+                  - button "View related links" [ref=f3e1495] [cursor=pointer]
+              - separator [ref=f3e1411]
+              - heading "Comparison of Robustness and Breakage Risks" [level=3] [ref=f3e1412]
+              - table [ref=f3e1414]:
+                - rowgroup [ref=f3e1415]:
+                  - row [ref=f3e1416]:
+                    - columnheader "Method" [ref=f3e1417]
+                    - columnheader "SPA Survival Rate" [ref=f3e1418]
+                    - columnheader "Resistance to Aggressive CSS" [ref=f3e1419]
+                    - columnheader "Layout Distortion Risk" [ref=f3e1420]
+                  - row [ref=f3e1421]:
+                    - cell [ref=f3e1422]:
+                      - strong [ref=f3e1423]:
+                        - text: Shadow DOM in
+                        - code [ref=f3e1424]: <html>
+                    - cell "High (with Observer)" [ref=f3e1425]
+                    - cell "Very High" [ref=f3e1426]
+                    - cell "Low" [ref=f3e1427]
+                  - row [ref=f3e1428]:
+                    - cell [ref=f3e1429]:
+                      - strong [ref=f3e1430]: Visual Viewport Fixed Div
+                    - cell "Medium" [ref=f3e1431]
+                    - cell [ref=f3e1432]:
+                      - text: Medium (Can be hidden by
+                      - code [ref=f3e1433]: z-index
+                      - text: )
+                    - cell "Low" [ref=f3e1434]
+                  - row [ref=f3e1435]:
+                    - cell [ref=f3e1436]:
+                      - strong [ref=f3e1437]:
+                        - text: Root
+                        - code [ref=f3e1438]: html
+                        - text: Inset Shadow
+                    - cell "High (Zero DOM)" [ref=f3e1439]
+                    - cell "Low (Easily hidden by overflow/clips)" [ref=f3e1440]
+                    - cell "None" [ref=f3e1441]
+                  - row [ref=f3e1442]:
+                    - cell [ref=f3e1443]:
+                      - strong [ref=f3e1444]: Pointer-Events Iframe
+                    - cell "High" [ref=f3e1445]
+                    - cell "Maximum" [ref=f3e1446]
+                    - cell "None" [ref=f3e1447]
+              - separator [ref=f3e1500]
+              - 'heading "Implementation Blueprint: The Resilient Shadow DOM Pattern" [level=3] [ref=f3e1501]'
+              - generic [ref=f3e1448]:
+                - text: The snippet below combines
+                - strong [ref=f3e1449]: Technique 1
+                - text: and
+                - strong [ref=f3e1450]: Technique 2
+                - text: "into a robust content script pattern:"
+              - generic [ref=f3e1503]:
+                - generic [ref=f3e1504]:
+                  - generic [ref=f3e1505]: javascript
+                  - code [ref=f3e1509]: "(function() { const CONTAINER_ID = 'ext-persistent-border-root'; function createBorder() { if (document.getElementById(CONTAINER_ID)) return; const host = document.createElement('div'); host.id = CONTAINER_ID; // Position the host container cleanly outside normal layout flow host.style.cssText = 'position: fixed !important; top:0; left:0; width:100vw; height:100vh; pointer-events: none !important; z-index: 2147483647 !important; display: block !important;'; // Create a closed shadow root to block host JS inspection const shadow = host.attachShadow({ mode: 'closed' }); const borderStyle = document.createElement('style'); borderStyle.textContent = ` :host { all: initial; } .frame { box-sizing: border-box !important; position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; border: 8px solid #3b82f6 !important; /* Your persistent border color */ pointer-events: none !important; } `; const frame = document.createElement('div'); frame.className = 'frame'; shadow.appendChild(borderStyle); shadow.appendChild(frame); // Append strictly to <html> to survive <body> updates document.documentElement.appendChild(host); } // Handle SPA rerenders wiping out the root node const observer = new MutationObserver(() => { if (!document.getElementById(CONTAINER_ID)) { createBorder(); } }); // Watch the root HTML element for structural changes observer.observe(document.documentElement, { childList: true }); // Initial instantiation if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', createBorder); } else { createBorder(); } })();"
+                - generic [ref=f3e1510]:
+                  - generic [ref=f3e1511]: Use code with caution.
+                  - button "Copy code text to clipboard." [ref=f3e1514] [cursor=pointer]
+              - generic [ref=f3e1519]:
+                - text: If you plan to implement this overlay, let me know if you need it to
+                - strong [ref=f3e1520]: interact dynamically
+                - text: with the user's clicks, or if you need help bypassing
+                - strong [ref=f3e1521]: strict Content Security Policies (CSP)
+                - text: using Manifest V3's
+                - code [ref=f3e1522]: declarativeNetRequest
+                - text: .
+              - generic [ref=f3e1525]:
+                - button "Copy text" [ref=f3e1528] [cursor=pointer]
+                - button "Share" [ref=f3e1538] [cursor=pointer]
+                - generic [ref=f3e1544]:
+                  - button "Good response" [ref=f3e1546] [cursor=pointer]
+                  - button "Bad response" [ref=f3e1551] [cursor=pointer]
+            - generic [ref=f3e1561]:
+              - generic [ref=f3e1563]:
+                - button "8 sites" [ref=f3e1564] [cursor=pointer]
+                - button "About this result" [ref=f3e1578] [cursor=pointer]
+              - list [ref=f3e1583]:
+                - listitem [ref=f3e1584]:
+                  - generic [ref=f3e1585]:
+                    - link "The New CSS Reset. CSS has acquired a number of new… | by Elad Shechter | Medium. Opens in new tab." [ref=f3e1586] [cursor=pointer]:
+                      - /url: https://elad.medium.com/the-new-css-reset-53f41f13282e
+                    - generic [ref=f3e1587]:
+                      - generic [ref=f3e1588]:
+                        - generic [ref=f3e1589]:
+                          - generic [ref=f3e1590]: The New CSS Reset. CSS has acquired a number of new… | by Elad Shechter | Medium
+                          - generic [ref=f3e1591]: Oct 25, 2021 — CSS Reset (the aggressive approach) Unlike Normalize CSS, CSS Reset's main idea is very different — it assumes that most of the br...
+                        - button [ref=f3e1596] [cursor=pointer]
+                      - generic [ref=f3e1601]:
+                        - generic [ref=f3e1604]: Medium
+                        - button "About this result" [ref=f3e1610] [cursor=pointer]
+                - listitem [ref=f3e1616]:
+                  - generic [ref=f3e1617]:
+                    - link "Styling Web Components Using A Shared Style Sheet — Smashing Magazine. Opens in new tab." [ref=f3e1618] [cursor=pointer]:
+                      - /url: https://www.smashingmagazine.com/2016/12/styling-web-components-using-a-shared-style-sheet/
+                    - generic [ref=f3e1619]:
+                      - generic [ref=f3e1620]:
+                        - generic [ref=f3e1621]:
+                          - generic [ref=f3e1622]: Styling Web Components Using A Shared Style Sheet — Smashing Magazine
+                          - generic [ref=f3e1623]: Dec 15, 2016 — By using the shadow DOM, you can encapsulate the web component and not have to worry about specificity wars with any other style s...
+                        - button [ref=f3e1628] [cursor=pointer]
+                      - generic [ref=f3e1633]:
+                        - generic [ref=f3e1636]: Smashing Magazine
+                        - button "About this result" [ref=f3e1642] [cursor=pointer]
+                - listitem [ref=f3e1648]:
+                  - generic [ref=f3e1649]:
+                    - link "Making Browser Extension Smart By Supporting SPA websites | by Varun Malhotra. Opens in new tab." [ref=f3e1650] [cursor=pointer]:
+                      - /url: https://medium.com/@softvar/making-chrome-extension-smart-by-supporting-spa-websites-1f76593637e8
+                    - generic [ref=f3e1651]:
+                      - generic [ref=f3e1652]:
+                        - generic [ref=f3e1653]:
+                          - generic [ref=f3e1654]: Making Browser Extension Smart By Supporting SPA websites | by Varun Malhotra
+                          - generic [ref=f3e1655]: Jan 3, 2020 — What is a Single Page Application (SPA)? As the name suggests, there's one single page for a particular website, and the same page...
+                        - button [ref=f3e1660] [cursor=pointer]
+                      - generic [ref=f3e1665]:
+                        - generic [ref=f3e1668]: Medium
+                        - button "About this result" [ref=f3e1674] [cursor=pointer]
+              - button "Show all related links" [ref=f3e1680] [cursor=pointer]:
+                - generic [ref=f3e1681]: Show all
+        - generic [ref=f3e1683]:
+          - generic [ref=f3e1686]:
+            - generic [ref=f3e1687]:
+              - button "Copy Are there approaches we might be missing for grouping multiple domains into one logical \"web application\" for the purpose of tracking auth state, when a webapp legitimately spans many different domains (e.g. app.example.com, api.example.com, cdn used, auth.example.net, related-brand.com)?" [ref=f3e1692] [cursor=pointer]
+              - button "Edit Are there approaches we might be missing for grouping multiple domains into one logical \"web application\" for the purpose of tracking auth state, when a webapp legitimately spans many different domains (e.g. app.example.com, api.example.com, cdn used, auth.example.net, related-brand.com)?" [ref=f3e1700] [cursor=pointer]
+            - generic [ref=f3e1707]:
+              - 'heading "You said: Are there approaches we might be missing for grouping multiple domains into one logical \"web application\" for the purpose of tracking auth state, when a webapp legitimately spans many different domains (e.g. app.example.com, api.example.com, cdn used, auth.example.net, related-brand.com)?" [level=2] [ref=f3e1708]':
+                - generic [ref=f3e1709]: "You said:"
+                - generic [ref=f3e1710]: Are there approaches we might be missing for grouping multiple domains into one logical "web application" for the purpose of tracking auth state, when a webapp legitimately spans many different domains (e.g. app.example.com, api.example.com, cdn used, auth.example.net, related-brand.com)?
+              - button "Expand query preview" [ref=f3e1711]
+          - generic [ref=f3e1719]:
+            - generic [ref=f3e1722]:
+              - generic [ref=f3e1723]: To group disjointed domains into a single logical "web application" completely dynamically—without maintaining a hardcoded site list—your extension must observe how these domains interact behind the scenes.
+              - generic [ref=f3e1724]:
+                - text: When a web app spans top-level subdomains (
+                - code [ref=f3e1725]: app.example.com
+                - text: ), dedicated auth providers (
+                - code [ref=f3e1726]: auth.example.net
+                - text: ), and distinct brand properties (
+                - code [ref=f3e1727]: related-brand.com
+                - text: ), you can use four advanced behavioral approaches to cluster them automatically.
+              - heading "1. The Cross-Origin Referrer and Redirect Chain Mapping" [level=3] [ref=f3e1728]
+              - generic [ref=f3e1729]: When a user authenticates, they are frequently bounced across multiple origins before landing back on the primary application.
+              - list [ref=f3e1730]:
+                - listitem [ref=f3e1731]:
+                  - generic [ref=f3e1732]:
+                    - strong [ref=f3e1733]: "The Approach:"
+                    - text: Monitor the
+                    - code [ref=f3e1734]: chrome.webNavigation.onBeforeRedirect
+                    - text: and
+                    - code [ref=f3e1735]: onCommitted
+                    - text: events. When a user initiates a login sequence, track the sequence of domains. If
+                    - code [ref=f3e1736]: app.example.com
+                    - text: redirects to
+                    - code [ref=f3e1737]: auth.example.net
+                    - text: ", which then redirects to"
+                    - code [ref=f3e1738]: ://related-brand.com
+                    - text: ", these three domains are mathematically linked."
+                - listitem [ref=f3e1739]:
+                  - generic [ref=f3e1740]:
+                    - strong [ref=f3e1741]: "Logical Clustering:"
+                    - text: Build a dynamic
+                    - strong [ref=f3e1742]: directed graph
+                    - text: in
+                    - code [ref=f3e1743]: chrome.storage.session
+                    - text: . If Domain A frequently hands off traffic to Domain B via OAuth/OIDC state parameters, group them into the same App ID cluster.
+                - listitem [ref=f3e1744]:
+                  - generic [ref=f3e1745]:
+                    - strong [ref=f3e1746]: "Edge Case & Gotcha:"
+                    - text: False positives from analytics trackers. If a user clicks an ad on
+                    - code [ref=f3e1747]: google.com
+                    - text: which redirects through a tracker to
+                    - code [ref=f3e1748]: example.com
+                    - text: ", you must filter out known tracking patterns so you don't accidentally cluster"
+                    - code [ref=f3e1749]: google.com
+                    - text: into your app group.
+              - heading "2. XHR/Fetch CORS Header Introspection" [level=3] [ref=f3e1750]
+              - generic [ref=f3e1751]: A frontend application running on one domain must explicitly trust its API and CDN backends to exchange credentials or read data.
+              - list [ref=f3e1752]:
+                - listitem [ref=f3e1753]:
+                  - generic [ref=f3e1754]:
+                    - strong [ref=f3e1755]: "The Approach:"
+                    - text: Use
+                    - code [ref=f3e1756]: chrome.webRequest.onHeadersReceived
+                    - text: to read the network headers of background API requests. Look specifically for the
+                    - code [ref=f3e1757]: Access-Control-Allow-Origin
+                    - text: and
+                    - code [ref=f3e1758]: "Access-Control-Allow-Credentials: true"
+                    - text: headers.
+                - listitem [ref=f3e1759]:
+                  - generic [ref=f3e1760]:
+                    - strong [ref=f3e1761]: "Logical Clustering:"
+                    - text: If a page living on
+                    - code [ref=f3e1762]: related-brand.com
+                    - text: makes background fetch requests to
+                    - code [ref=f3e1763]: api.example.com
+                    - text: ", and the server responds allowing cross-origin requests with credentials, the browser has explicitly proven a trust relationship. You can instantly map"
+                    - code [ref=f3e1764]: api.example.com
+                    - text: and
+                    - code [ref=f3e1765]: related-brand.com
+                    - text: into the same logical app sandbox.
+                - listitem [ref=f3e1766]:
+                  - generic [ref=f3e1767]:
+                    - strong [ref=f3e1768]: "Edge Case & Gotcha:"
+                    - text: Wildcard CORS (
+                    - code [ref=f3e1769]: "Access-Control-Allow-Origin: *"
+                    - text: ) must be ignored. Only map connections where a specific, explicit origin is returned by the server.
+                  - button "View related links" [ref=f3e1774] [cursor=pointer]
+              - heading "3. Cross-Tab Message Channel Sniffing" [level=3] [ref=f3e1779]
+              - generic [ref=f3e1770]: Multi-domain suites (like Google Docs or Microsoft 365) often open hidden iframes or background worker scripts to sync authentication states silently across different tabs using HTML5 PostMessage or BroadcastChannels.
+              - list [ref=f3e1771]:
+                - listitem [ref=f3e1780]:
+                  - generic [ref=f3e1781]:
+                    - strong [ref=f3e1782]: "The Approach:"
+                    - text: Inject a lightweight content script into all origins that hooks the
+                    - code [ref=f3e1783]: window.addEventListener('message')
+                    - text: and
+                    - code [ref=f3e1784]: new BroadcastChannel()
+                    - text: constructors.
+                  - button "View related links" [ref=f3e1787] [cursor=pointer]
+                - listitem [ref=f3e1792]:
+                  - generic [ref=f3e1793]:
+                    - strong [ref=f3e1794]: "Logical Clustering:"
+                    - text: Listen for structural messages where tokens, user profiles, or login states are broadcasted. If a script executing on
+                    - code [ref=f3e1795]: app.example.com
+                    - text: sends a payload containing structural data to an iframe pointing to
+                    - code [ref=f3e1796]: auth.example.net
+                    - text: ", your content script intercepts the origin properties of the sender and receiver, grouping them together."
+                - listitem [ref=f3e1797]:
+                  - generic [ref=f3e1798]:
+                    - strong [ref=f3e1799]: "Edge Case & Gotcha:"
+                    - text: Modern browsers enforce strict site isolation. If the message payload is entirely obscured or encrypted via WebCrypto, you will only see the origin handshake, not the data itself. However, the origin handshake alone is still a strong grouping signal.
+              - heading "4. Public Suffix List (PSL) & First-Party Sets (Related Website Sets)" [level=3] [ref=f3e1800]
+              - generic [ref=f3e1801]:
+                - text: Browsers have native, structured systems built precisely to define what constitutes a single organizational boundary across different domains.
+                - button "View related links" [ref=f3e1804] [cursor=pointer]
+              - list [ref=f3e1809]:
+                - listitem [ref=f3e1810]:
+                  - generic [ref=f3e1811]:
+                    - strong [ref=f3e1812]: "The Approach:"
+                    - text: Leverage Google's native privacy framework called
+                    - strong [ref=f3e1813]: Related Website Sets
+                    - text: (formerly First-Party Sets) [^2]. Organizations explicitly declare their associated domains (e.g.,
+                    - code [ref=f3e1814]: google.com
+                    - text: ","
+                    - code [ref=f3e1815]: youtube.com
+                    - text: ","
+                    - code [ref=f3e1816]: gstatic.com
+                    - text: ) to the browser ecosystem so they can share cookies across contexts without being blocked by third-party cookie restrictions [^2].
+                  - button "View related links" [ref=f3e1819] [cursor=pointer]
+                - listitem [ref=f3e1824]:
+                  - generic [ref=f3e1825]:
+                    - strong [ref=f3e1826]: "Logical Clustering:"
+                    - text: While Manifest V3 extensions cannot query the raw Related Website Sets registry natively via a simple JS call yet, you can bundle a compressed mapping of the open-source registry or infer it when the browser permits cross-site partitioned cookie access (CHIPS) seamlessly between two domains.
+                - listitem [ref=f3e1827]:
+                  - generic [ref=f3e1828]:
+                    - strong [ref=f3e1829]: "Edge Case & Gotcha:"
+                    - text: This only works for massive, established brands that have submitted their domains to the official Chromium/W3C ledger. Small-scale or custom enterprise applications will not be present in these sets.
+              - separator [ref=f3e1830]
+              - heading "Suggested Hybrid Architecture for Manifest V3" [level=3] [ref=f3e1831]
+              - generic [ref=f3e1832]:
+                - text: To build this without an offline dictionary, implement a
+                - strong [ref=f3e1833]: Union-Find (Disjoint-Set) data structure
+                - text: inside
+                - code [ref=f3e1834]: chrome.storage.session
+                - text: .
+              - generic [ref=f3e1836]:
+                - generic [ref=f3e1837]:
+                  - generic [ref=f3e1838]: javascript
+                  - code [ref=f3e1842]: "// Conceptual logic inside your service worker class AppClusterMap { async linkDomains(domainA, domainB) { let clusters = await chrome.storage.session.get('clusters') || {}; // If domainA and domainB interact via CORS or Redirects, // union their sets into a single App ID cluster. // ... union-find logic ... await chrome.storage.session.set({ clusters }); } }"
+                - generic [ref=f3e1843]:
+                  - generic [ref=f3e1844]: Use code with caution.
+                  - button "Copy code text to clipboard." [ref=f3e1847] [cursor=pointer]
+              - generic [ref=f3e1852]:
+                - text: By combining
+                - strong [ref=f3e1853]: Redirect Mapping (Approach 1)
+                - text: to catch the user-facing login handshake and
+                - strong [ref=f3e1854]: CORS Header Sniffing (Approach 2)
+                - text: to catch the background API framework, your extension will dynamically construct a map of the web application's infrastructure entirely on the fly.
+              - generic [ref=f3e1855]:
+                - text: Would you like to explore an implementation script for
+                - strong [ref=f3e1856]: intercepting the CORS headers
+                - text: to catch these backend API relationships, or do you want to look at how to cleanly isolate
+                - strong [ref=f3e1857]: OAuth redirect chains
+                - text: using the
+                - code [ref=f3e1858]: webNavigation
+                - text: API?
+              - generic [ref=f3e1861]:
+                - button "Copy text" [ref=f3e1864] [cursor=pointer]
+                - button "Share" [ref=f3e1874] [cursor=pointer]
+                - generic [ref=f3e1880]:
+                  - button "Good response" [ref=f3e1882] [cursor=pointer]
+                  - button "Bad response" [ref=f3e1887] [cursor=pointer]
+            - generic [ref=f3e1897]:
+              - generic [ref=f3e1899]:
+                - button "8 sites" [ref=f3e1900] [cursor=pointer]
+                - button "About this result" [ref=f3e1914] [cursor=pointer]
+              - list [ref=f3e1919]:
+                - listitem [ref=f3e1920]:
+                  - generic [ref=f3e1921]:
+                    - link "Link cross-origin XHR user actions and their distributed traces in RUM Classic. Opens in new tab." [ref=f3e1922] [cursor=pointer]:
+                      - /url: https://docs.dynatrace.com/docs/observe/digital-experience/rum-classic/web-applications/initial-setup/link-cross-origin-xhrs
+                    - generic [ref=f3e1923]:
+                      - generic [ref=f3e1925]:
+                        - generic [ref=f3e1926]: Link cross-origin XHR user actions and their distributed traces in RUM Classic
+                        - generic [ref=f3e1927]: "Oct 1, 2025 — Configure the server that handles the web request to respond with an Access-Control-Allow-Credentials: true header and an Access-C..."
+                      - generic [ref=f3e1929]:
+                        - generic [ref=f3e1932]: Dynatrace Docs
+                        - button "About this result" [ref=f3e1938] [cursor=pointer]
+                - listitem [ref=f3e1944]:
+                  - generic [ref=f3e1945]:
+                    - link "User authentication using cookies in a web app using API on different domains. Opens in new tab." [ref=f3e1946] [cursor=pointer]:
+                      - /url: https://softwareengineering.stackexchange.com/questions/446331/user-authentication-using-cookies-in-a-web-app-using-api-on-different-domains
+                    - generic [ref=f3e1947]:
+                      - generic [ref=f3e1948]:
+                        - generic [ref=f3e1949]:
+                          - generic [ref=f3e1950]: User authentication using cookies in a web app using API on different domains
+                          - generic [ref=f3e1951]: "Jul 3, 2023 — CORS Approach: On the backend (server) side, you need to set the following HTTP headers: Access-Control-Allow-Credentials - Set th..."
+                        - button [ref=f3e1956] [cursor=pointer]
+                      - generic [ref=f3e1961]:
+                        - generic [ref=f3e1964]: Software Engineering Stack Exchange
+                        - button "About this result" [ref=f3e1970] [cursor=pointer]
+                - listitem [ref=f3e1976]:
+                  - generic [ref=f3e1977]:
+                    - 'link "CORS Misconfigurations & Path Traversal Explained: Real-World Exploitation on Vuln-Bank App. Opens in new tab." [ref=f3e1978] [cursor=pointer]':
+                      - /url: https://medium.com/@kivutingatha/cors-misconfigurations-path-traversal-explained-real-world-exploitation-on-vuln-bank-app-397c3b4a8d52
+                    - generic [ref=f3e1979]:
+                      - generic [ref=f3e1980]:
+                        - generic [ref=f3e1981]:
+                          - generic [ref=f3e1982]: "CORS Misconfigurations & Path Traversal Explained: Real-World Exploitation on Vuln-Bank App"
+                          - generic [ref=f3e1983]: Aug 11, 2025 — The server included the Access-Control-Allow-Origin header reflecting the origin or allowing *, thereby permitting from untrusted ...
+                        - button [ref=f3e1988] [cursor=pointer]
+                      - generic [ref=f3e1993]:
+                        - generic [ref=f3e1996]: Medium
+                        - button "About this result" [ref=f3e2002] [cursor=pointer]
+              - button "Show all related links" [ref=f3e2008] [cursor=pointer]:
+                - generic [ref=f3e2009]: Show all
+        - generic [ref=f3e2011]:
+          - generic [ref=f3e2014]:
+            - generic [ref=f3e2015]:
+              - button "Copy When no single signal (cookies, network status codes, storage tokens, DOM markers) is 100% reliable on its own, what are recommended patterns for combining multiple imperfect signals into one overall confidence decision about auth state, and how do you avoid the UI flickering or flapping rapidly between states as individual signals change?" [ref=f3e2020] [cursor=pointer]
+              - button "Edit When no single signal (cookies, network status codes, storage tokens, DOM markers) is 100% reliable on its own, what are recommended patterns for combining multiple imperfect signals into one overall confidence decision about auth state, and how do you avoid the UI flickering or flapping rapidly between states as individual signals change?" [ref=f3e2028] [cursor=pointer]
+            - generic [ref=f3e2035]:
+              - 'heading "You said: When no single signal (cookies, network status codes, storage tokens, DOM markers) is 100% reliable on its own, what are recommended patterns for combining multiple imperfect signals into one overall confidence decision about auth state, and how do you avoid the UI flickering or flapping rapidly between states as individual signals change?" [level=2] [ref=f3e2036]':
+                - generic [ref=f3e2037]: "You said:"
+                - generic [ref=f3e2038]: When no single signal (cookies, network status codes, storage tokens, DOM markers) is 100% reliable on its own, what are recommended patterns for combining multiple imperfect signals into one overall confidence decision about auth state, and how do you avoid the UI flickering or flapping rapidly between states as individual signals change?
+              - button "Expand query preview" [ref=f3e2039]
+          - generic [ref=f3e2047]:
+            - generic [ref=f3e2050]:
+              - generic [ref=f3e2051]:
+                - text: To combine multiple imperfect authentication signals without causing your overlay UI to flicker or "flap" between states, you must treat authentication as a
+                - strong [ref=f3e2052]: continuous probability
+                - text: rather than a simple binary (True/False) switch.
+              - generic [ref=f3e2053]: Because individual signals change at different speeds—for instance, an API request happens in milliseconds, while a cookie might linger for weeks—you need a system that coordinates them smoothly. The recommended architectural patterns to achieve this in a Manifest V3 extension are outlined below.
+              - separator [ref=f3e2054]
+              - heading "1. The Weighted Score Pipeline (The Decision Engine)" [level=3] [ref=f3e2055]
+              - generic [ref=f3e2056]: Instead of letting a single event trigger a UI change, channel all signals into a centralized scoring system. Assign each signal a positive or negative weight based on its inherent reliability.
+              - list [ref=f3e2057]:
+                - listitem [ref=f3e2058]:
+                  - generic [ref=f3e2059]:
+                    - strong [ref=f3e2060]: "The Mechanism:"
+                    - text: Maintain a real-time numerical score between
+                    - code [ref=f3e2061]: "0"
+                    - text: and
+                    - code [ref=f3e2062]: "100"
+                    - text: for each domain cluster inside
+                    - code [ref=f3e2063]: chrome.storage.session
+                    - text: .
+                - listitem [ref=f3e2064]:
+                  - strong [ref=f3e2066]: "Example Weight Allocations:"
+                  - list [ref=f3e2067]:
+                    - listitem [ref=f3e2068]:
+                      - generic [ref=f3e2069]:
+                        - code [ref=f3e2070]: "+60"
+                        - text: ": Active"
+                        - code [ref=f3e2071]: "Authorization: Bearer"
+                        - text: header detected in the last 60 seconds (High confidence).
+                    - listitem [ref=f3e2072]:
+                      - generic [ref=f3e2073]:
+                        - code [ref=f3e2074]: "+30"
+                        - text: ": Expected auth keys exist in"
+                        - code [ref=f3e2075]: localStorage
+                        - text: (Medium confidence).
+                    - listitem [ref=f3e2076]:
+                      - generic [ref=f3e2077]:
+                        - code [ref=f3e2078]: "+20"
+                        - text: ": Global"
+                        - code [ref=f3e2079]: MutationObserver
+                        - text: detects a visible "Log Out" string.
+                    - listitem [ref=f3e2080]:
+                      - generic [ref=f3e2081]:
+                        - code [ref=f3e2082]: "-50"
+                        - text: ": Any background API endpoint returns a hard"
+                        - code [ref=f3e2083]: 401 Unauthorized
+                        - text: or
+                        - code [ref=f3e2084]: 403 Forbidden
+                        - text: .
+                - listitem [ref=f3e2085]:
+                  - generic [ref=f3e2086]:
+                    - strong [ref=f3e2087]: "The Evaluation:"
+                    - text: If the total score crosses a designated threshold (e.g.,
+                    - code [ref=f3e2088]: "> 70"
+                    - text: ), the application state is evaluated as
+                    - strong [ref=f3e2089]: Logged In
+                    - text: .
+              - separator [ref=f3e2090]
+              - heading "2. Dual-Threshold Hysteresis (Anti-Flapping)" [level=3] [ref=f3e2091]
+              - generic [ref=f3e2092]:
+                - text: If you use a single threshold (e.g., Logged In if score ≥ 50, Logged Out if < 50), a user whose score hovers around 50 due to background polling errors will experience rapid UI flickering. To solve this, implement
+                - strong [ref=f3e2093]: hysteresis
+                - text: using two distinct operational thresholds.
+              - code [ref=f3e2099]: "[SCORE: 0] ---------> (Passes 70) ---------> [SCORE: 100] UNAUTHENTICATED AUTHENTICATED [SCORE: 0] <--------- (Drops Below 30) <--- [SCORE: 100]"
+              - list [ref=f3e2100]:
+                - listitem [ref=f3e2101]:
+                  - strong [ref=f3e2103]: "The Rule:"
+                  - list [ref=f3e2104]:
+                    - listitem [ref=f3e2105]:
+                      - generic [ref=f3e2106]:
+                        - text: To transition from Logged Out →
+                        - strong [ref=f3e2107]: Logged In
+                        - text: ", the score must climb and cross"
+                        - strong [ref=f3e2108]:
+                          - code [ref=f3e2109]: "70"
+                        - text: .
+                    - listitem [ref=f3e2110]:
+                      - generic [ref=f3e2111]:
+                        - text: To transition from Logged In →
+                        - strong [ref=f3e2112]: Logged Out
+                        - text: ", the score must drop completely below"
+                        - strong [ref=f3e2113]:
+                          - code [ref=f3e2114]: "30"
+                        - text: .
+                - listitem [ref=f3e2115]:
+                  - generic [ref=f3e2116]:
+                    - strong [ref=f3e2117]: "Why it works:"
+                    - text: If the score fluctuates between 40 and 60 due to noisy background signals, the UI state remains locked in its current position, absorbing the noise completely.
+              - separator [ref=f3e2118]
+              - heading "3. Time-Debounced and Cooldown State Transitions" [level=3] [ref=f3e2119]
+              - generic [ref=f3e2120]: Auth signals drop out momentarily during normal app operation. For example, an app might briefly clear an access token from memory while refreshing it via a hidden iframe, or a network request might briefly fail due to a spotty Wi-Fi connection.
+              - list [ref=f3e2121]:
+                - listitem [ref=f3e2122]:
+                  - generic [ref=f3e2123]:
+                    - strong [ref=f3e2124]: "The Pattern:"
+                    - text: Treat logins as
+                    - strong [ref=f3e2125]: instantaneous
+                    - text: but logouts as
+                    - strong [ref=f3e2126]: lazy
+                    - text: .
+                  - list [ref=f3e2127]:
+                    - listitem [ref=f3e2128]:
+                      - generic [ref=f3e2129]:
+                        - strong [ref=f3e2130]: "Login (Assertive):"
+                        - text: As soon as a high-confidence login signal arrives, update the UI immediately so the app feels responsive.
+                    - listitem [ref=f3e2131]:
+                      - generic [ref=f3e2132]:
+                        - strong [ref=f3e2133]: "Logout (Delayed/Debounced):"
+                        - text: When a logout signal or a
+                        - code [ref=f3e2134]: 401 Error
+                        - text: is received, do not drop the border overlay immediately. Start a
+                        - strong [ref=f3e2135]: 3 to 5-second grace period timer
+                        - text: . If a valid authentication signal occurs before the timer expires, abort the logout and keep the border active.
+                      - button "View related links" [ref=f3e2162] [cursor=pointer]
+              - separator [ref=f3e2136]
+              - heading "4. Manifest V3 Multi-Signal Architecture Blueprint" [level=3] [ref=f3e2137]
+              - generic [ref=f3e2138]:
+                - text: Because Manifest V3 background workers are ephemeral, your background script cannot run a standard
+                - code [ref=f3e2139]: setTimeout
+                - text: loop reliably to handle these timers. Instead, orchestrate this by using
+                - code [ref=f3e2140]: chrome.storage
+                - text: events as a unified reactive bus between the background service worker and the content script overlay.
+              - heading [level=4] [ref=f3e2141]:
+                - text: Background Service Worker (
+                - code [ref=f3e2142]: background.js
+                - text: )
+              - generic [ref=f3e2144]:
+                - generic [ref=f3e2145]:
+                  - generic [ref=f3e2146]: javascript
+                  - code [ref=f3e2150]: "// Centralized state updater running in the service worker async function updateAuthSignal(domain, signalType, confidenceDelta) { const data = await chrome.storage.session.get(domain) || {}; let currentScore = data[domain]?.score || 0; // Calculate new score bounded between 0 and 100 currentScore = Math.max(0, Math.min(100, currentScore + confidenceDelta)); let currentUIState = data[domain]?.uiState || 'LOGGED_OUT'; // Implement Hysteresis Logic if (currentUIState === 'LOGGED_OUT' && currentScore >= 70) { currentUIState = 'LOGGED_IN'; } else if (currentUIState === 'LOGGED_IN' && currentScore <= 30) { currentUIState = 'LOGGED_OUT'; } // Save back to in-memory session storage await chrome.storage.session.set({ [domain]: { score: currentScore, uiState: currentUIState, lastUpdated: Date.now() } }); } // Hook 1: High confidence network signal chrome.webRequest.onBeforeSendHeaders.addListener((details) => { if (details.requestHeaders.some(h => h.name.toLowerCase() === 'authorization')) { const domain = new URL(details.url).hostname; updateAuthSignal(domain, 'HEADER_TOKEN', 40); // Boost score } }, { urls: [\"<all_urls>\"] }, [\"requestHeaders\"]); // Hook 2: Hard failure network signal chrome.webRequest.onHeadersReceived.addListener((details) => { if (details.statusCode === 401 || details.statusCode === 403) { const domain = new URL(details.url).hostname; updateAuthSignal(domain, 'AUTH_FAILURE', -50); // Heavily penalize score } }, { urls: [\"<all_urls>\"] });"
+                - generic [ref=f3e2151]:
+                  - generic [ref=f3e2152]: Use code with caution.
+                  - button "Copy code text to clipboard." [ref=f3e2155] [cursor=pointer]
+              - heading [level=4] [ref=f3e2167]:
+                - text: Content Script Overlay (
+                - code [ref=f3e2168]: content.js
+                - text: )
+              - generic [ref=f3e2170]:
+                - generic [ref=f3e2171]:
+                  - generic [ref=f3e2172]: javascript
+                  - code [ref=f3e2176]: "// The UI listens strictly to the calculated state, ignoring individual noisy events chrome.storage.onChanged.addListener((changes, areaName) => { if (areaName !== 'session') return; const currentDomain = window.location.hostname; if (changes[currentDomain]) { const { uiState } = changes[currentDomain].newValue; if (uiState === 'LOGGED_IN') { showPersistentBorder(); } else if (uiState === 'LOGGED_OUT') { // Debounce the removal to prevent flapping during token refreshes debounceLogoutRemoval(); } } }); let logoutTimeout = null; function debounceLogoutRemoval() { if (logoutTimeout) clearTimeout(logoutTimeout); logoutTimeout = setTimeout(async () => { // Double check storage one last time before tearing down the UI const currentDomain = window.location.hostname; const data = await chrome.storage.session.get(currentDomain); if (!data[currentDomain] || data[currentDomain].uiState === 'LOGGED_OUT') { hidePersistentBorder(); } }, 4000); // 4-second grace period buffer }"
+                - generic [ref=f3e2177]:
+                  - generic [ref=f3e2178]: Use code with caution.
+                  - button "Copy code text to clipboard." [ref=f3e2181] [cursor=pointer]
+              - separator [ref=f3e2186]
+              - heading "Summary of Anti-Flapping Safeguards" [level=3] [ref=f3e2187]
+              - table [ref=f3e2189]:
+                - rowgroup [ref=f3e2190]:
+                  - row [ref=f3e2191]:
+                    - columnheader "Failure Scenario" [ref=f3e2192]
+                    - columnheader "Raw Signal Consequence" [ref=f3e2193]
+                    - columnheader "Multi-Signal Framework Mitigation" [ref=f3e2194]
+                  - row [ref=f3e2195]:
+                    - cell [ref=f3e2196]:
+                      - strong [ref=f3e2197]: Token Refresh Window
+                    - cell "Local keys are temporarily wiped; headers temporarily vanish." [ref=f3e2198]
+                    - cell [ref=f3e2199]:
+                      - strong [ref=f3e2200]: Logout Debounce Loop
+                      - text: holds the border intact for 4 seconds until the new token registers.
+                  - row [ref=f3e2201]:
+                    - cell [ref=f3e2202]:
+                      - strong [ref=f3e2203]: Noisy REST Polling
+                    - cell "Background requests alternate between unauthenticated and authenticated public endpoints." [ref=f3e2204]
+                    - cell [ref=f3e2205]:
+                      - strong [ref=f3e2206]: Dual-Threshold Hysteresis
+                      - text: locks the UI state until a major, definitive score swing occurs.
+                  - row [ref=f3e2207]:
+                    - cell [ref=f3e2208]:
+                      - strong [ref=f3e2209]: Stale Storage Keys
+                    - cell "Old tokens remain in storage indefinitely after a session expires." [ref=f3e2210]
+                    - cell [ref=f3e2211]:
+                      - strong [ref=f3e2212]: Negative Scoring Rules
+                      - text: from active network
+                      - code [ref=f3e2213]: "401"
+                      - text: errors immediately drag down old storage data scores.
+              - generic [ref=f3e2214]:
+                - text: If you want to fine-tune this scoring engine for specific platforms, let me know if you are dealing primarily with
+                - strong [ref=f3e2215]: OAuth/OIDC-heavy apps
+                - text: or if you need to catch trickier
+                - strong [ref=f3e2216]: GraphQL architectures
+                - text: where standard status codes are suppressed.
+              - generic [ref=f3e2219]:
+                - button "Copy text" [ref=f3e2222] [cursor=pointer]
+                - button "Share" [ref=f3e2232] [cursor=pointer]
+                - generic [ref=f3e2238]:
+                  - button "Good response" [ref=f3e2240] [cursor=pointer]
+                  - button "Bad response" [ref=f3e2245] [cursor=pointer]
+            - generic [ref=f3e2255]:
+              - generic [ref=f3e2257]:
+                - button [ref=f3e2258]:
+                  - generic [ref=f3e2262]: 1 site
+                - button "About this result" [ref=f3e2268] [cursor=pointer]
+              - list [ref=f3e2273]:
+                - listitem [ref=f3e2274]:
+                  - generic [ref=f3e2275]:
+                    - 'link "Testing the limits of SPDM: Authentication of intermittently connected devices. Opens in new tab." [ref=f3e2276] [cursor=pointer]':
+                      - /url: https://www.sciencedirect.com/science/article/abs/pii/S0167404824004474
+                    - generic [ref=f3e2277]:
+                      - generic [ref=f3e2279]:
+                        - generic [ref=f3e2280]: "Testing the limits of SPDM: Authentication of intermittently connected devices"
+                        - generic [ref=f3e2281]: In both cases, though, the endpoints must keep an active session for the authentication credential to remain valid. Consequently, ...
+                      - generic [ref=f3e2283]:
+                        - generic [ref=f3e2286]: ScienceDirect.com
+                        - button "About this result" [ref=f3e2292] [cursor=pointer]
+      - generic [ref=f3e150]:
+        - textbox "Ask anything" [active] [ref=f3e152]
+        - button "Add files and tools" [ref=f3e155] [cursor=pointer]
+        - button "Microphone" [ref=f3e174] [cursor=pointer]
+    - contentinfo
+  - generic [ref=f3e501]: AI Mode response is ready
