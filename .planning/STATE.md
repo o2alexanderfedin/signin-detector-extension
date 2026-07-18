@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-07-17)
 
 **Core value:** Correctly distinguish "signed in" from "not signed in" for any webapp — without per-app rules and without depending on navigations — and reflect that state as a visible border.
-**Current focus:** Phase 1: Detection Core — Engine, Sensors & Identity
+**Current focus:** Phase 2: State & Persistence
 
 ## Current Position
 
-Phase: 1 of 5 (Detection Core — Engine, Sensors & Identity)
+Phase: 2 of 5 (State & Persistence)
 Plan: 0 of TBD in current phase
-Status: Ready to plan
-Last activity: 2026-07-17 — ROADMAP.md and STATE.md created; 22/22 v1 requirements mapped across 5 phases
+Status: Phase 1 complete (merged to develop); ready to plan Phase 2
+Last activity: 2026-07-17 — Phase 1 (Detection Core) built TDD in worktree, 72 tests passing, merged --no-ff into develop, pushed
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [██░░░░░░░░] 20% (1/5 phases)
 
 ## Performance Metrics
 
