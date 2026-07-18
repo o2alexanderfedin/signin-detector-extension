@@ -139,3 +139,29 @@ export const GUEST_CLAIM_VALUE_PATTERN = /guest|anonymous|^anon$/i;
 
 export const DOM_POSITIVE_VALUE = 0.6;
 export const DOM_AMBIGUOUS_VALUE = 0.2;
+
+// ---------------------------------------------------------------------------
+// Border overlay (BDR-01..04)
+// Viewport-edge border shown only while VerdictState === 'signed-in', built
+// via createElement + CSSOM inside a closed Shadow DOM host attached to
+// document.documentElement (top frame only).
+// ---------------------------------------------------------------------------
+
+/** `id` attribute of the shadow host, used both to mount it and to detect removal/reordering. */
+export const BORDER_OVERLAY_HOST_ID = 'sign-in-detector-border-host';
+
+export const BORDER_OVERLAY_WIDTH_PX = 4;
+export const BORDER_OVERLAY_COLOR = '#16a34a';
+
+/** DOM stacking-context maximum (does not defeat the CSS Top Layer -- see PITFALLS.md Pitfall 11, accepted MVP limitation). */
+export const BORDER_OVERLAY_Z_INDEX = 2147483647;
+
+/**
+ * Self-healing re-assertion debounce (BDR-03). Deliberately separate from
+ * (and scoped narrower than) the DOM sensor's own debounced observer --
+ * PITFALLS.md Pitfall 12 calls for a *direct-childList-only* observer on
+ * `documentElement` here, not a `subtree: true` watch, to avoid this
+ * self-healing check firing on every unrelated deep DOM mutation on
+ * high-churn pages (chat, live dashboards).
+ */
+export const BORDER_OVERLAY_REASSERT_DEBOUNCE_MS = 200;
