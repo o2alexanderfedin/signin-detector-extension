@@ -31,7 +31,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Given a sequence of confidence scores crossing 0.7 then falling toward 0.3, the hysteresis state machine transitions Unknown → SignedIn → SignedOut only at the correct dual thresholds with no flicker inside the hold band, and SignedOut is entered only after an asymmetric grace delay while SignedIn is entered promptly.
   4. Given a guest/anonymous JWT, a stale storage token left after tab close, or a GraphQL soft-200 error shape, the relevant classifier down-weights it instead of counting it as a positive signed-in signal.
   5. Given raw cookie objects, storage entries, a DOM snapshot, and a URL as fixture input, each of the four `*.classify.ts` functions returns the correct shape-only classification (never reading values for meaning) and `appIdentity` returns a stable branded `WebAppKey` (registrable domain) that is unchanged across subdomains and SPA route changes on the same eTLD+1.
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Scaffold WXT + TypeScript 6.0.3 toolchain and write the frozen shared contracts (types.ts, constants.ts)
+- [ ] 01-02-PLAN.md — Identity resolver (eTLD+1 via tldts) + four pure signal classifiers (cookie, network, storage, DOM), test-first
+- [ ] 01-03-PLAN.md — ConfidenceEngine: weighted fusion, dual-threshold hysteresis, asymmetric debounce with injected clock, test-first
 
 ### Phase 2: State & Persistence
 **Goal**: Verdict and hysteresis state survives service-worker suspension and restart without loss or requiring recomputation from scratch.
@@ -89,7 +94,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Detection Core — Engine, Sensors & Identity | 0/TBD | Not started | - |
+| 1. Detection Core — Engine, Sensors & Identity | 0/3 | Planned | - |
 | 2. State & Persistence | 0/TBD | Not started | - |
 | 3. Chrome Glue — Sensors, Messaging & Border Overlay | 0/TBD | Not started | - |
 | 4. Wiring & End-to-End Flow | 0/TBD | Not started | - |
