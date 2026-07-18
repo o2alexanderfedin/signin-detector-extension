@@ -192,3 +192,83 @@ describe('createConfidenceEngine (ENG-04)', () => {
     expect(typeof result.confidence).toBe('number');
   });
 });
+
+// ---------------------------------------------------------------------------
+// Task 3 (Phase 2, PLT-01): a pure serialize/restore seam so a store adapter
+// (chrome.storage.session, in src/background/state/verdictStore.ts) can
+// persist and rehydrate engine state across a service-worker restart without
+// this module ever knowing storage exists.
+// ---------------------------------------------------------------------------
+
+describe('ConfidenceEngine serialize/restore seam (PLT-01)', () => {
+  const highConfidenceVector: SignalVector = {
+    cookie: { signal: 'cookie', observed: true, value: 1 },
+  };
+  const lowConfidenceVector: SignalVector = {
+    cookie: { signal: 'cookie', observed: true, value: 0 },
+  };
+
+  it('serialize() on a freshly constructed engine (no updates yet) returns the unknown/zero/null default', () => {
+    const engine = createConfidenceEngine(() => 0);
+    expect(engine.serialize()).toEqual({
+      state: 'unknown',
+      confidence: 0,
+      pendingSignedOutSince: null,
+    });
+  });
+
+  it('serialize() reflects committed state, last confidence, and a pending signed-out timer after update()', () => {
+    let t = 0;
+    const engine = createConfidenceEngine(() => t);
+
+    t = 0;
+    engine.update(highConfidenceVector);
+    expect(engine.serialize()).toEqual({
+      state: 'signed-in',
+      confidence: 1,
+      pendingSignedOutSince: null,
+    });
+
+    t = 1000;
+    engine.update(lowConfidenceVector); // pending signed-out timer starts, still signed-in
+    expect(engine.serialize()).toEqual({
+      state: 'signed-in',
+      confidence: 0,
+      pendingSignedOutSince: 1000,
+    });
+  });
+
+  it('a fresh engine restored from a prior snapshot resumes the pending signed-out debounce deterministically -- identical trajectory to the never-restarted engine at the same wall-clock time', () => {
+    let t = 0;
+    const original = createConfidenceEngine(() => t);
+    t = 0;
+    original.update(highConfidenceVector);
+    t = 1000;
+    original.update(lowConfidenceVector); // pending started at 1000, still signed-in
+    const snapshot = original.serialize();
+
+    // Simulate a service-worker restart: a brand-new engine instance,
+    // constructed only from the persisted snapshot (no shared JS closure).
+    let t2 = 1000;
+    const restored = createConfidenceEngine(() => t2, snapshot);
+
+    t2 = 3999;
+    // 2999ms since the pending timer started at 1000 -- still under the
+    // 3000ms DEBOUNCE_SIGNED_OUT_MS grace window.
+    expect(restored.update(lowConfidenceVector).state).toBe('signed-in');
+
+    t2 = 4000;
+    // 3000ms elapsed since 1000 -- crosses the grace window, exactly as the
+    // non-restarted engine would at this same wall-clock time (see the
+    // "SignedOut only commits after..." test above).
+    expect(restored.update(lowConfidenceVector).state).toBe('signed-out');
+  });
+
+  it('restoring from a signed-out snapshot with no pending timer starts clean -- a later low-confidence update begins a brand-new debounce window', () => {
+    const snapshot = { state: 'signed-out' as const, confidence: 0, pendingSignedOutSince: null };
+    const t = 10_000;
+    const restored = createConfidenceEngine(() => t, snapshot);
+
+    expect(restored.update(lowConfidenceVector).state).toBe('signed-out');
+  });
+});
