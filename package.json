@@ -1,0 +1,40 @@
+{
+  "name": "sign-in-detector",
+  "description": "Chrome MV3 (Firefox-compatible) extension that fuses cookie/network/storage/DOM signals into a sign-in confidence verdict, rendered as a border overlay",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox",
+    "compile": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test --config tests/e2e/playwright/playwright.config.ts",
+    "audit:privacy": "node scripts/audit-privacy.mjs",
+    "lint": "eslint .",
+    "postinstall": "wxt prepare"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "@playwright/test": "1.61.1",
+    "@types/chrome": "0.2.2",
+    "@vitest/eslint-plugin": "^1.6.23",
+    "@webext-core/fake-browser": "1.5.2",
+    "eslint": "^9.39.5",
+    "happy-dom": "^20.10.6",
+    "jsdom": "^27.0.1",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.64.0",
+    "vitest": "4.1.10",
+    "wxt": "0.20.27"
+  },
+  "dependencies": {
+    "@webext-core/messaging": "3.0.2",
+    "tldts": "7.4.9"
+  }
+}

@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-07-17)
 
 **Core value:** Correctly distinguish "signed in" from "not signed in" for any webapp — without per-app rules and without depending on navigations — and reflect that state as a visible border.
-**Current focus:** Phase 1: Detection Core — Engine, Sensors & Identity
+**Current focus:** Milestone v1.0 COMPLETE — all 5 phases done. Human validation (docs/MANUAL-TESTING.md) + calibration are v1.x.
 
 ## Current Position
 
-Phase: 1 of 5 (Detection Core — Engine, Sensors & Identity)
-Plan: 0 of TBD in current phase
-Status: Ready to plan
-Last activity: 2026-07-17 — ROADMAP.md and STATE.md created; 22/22 v1 requirements mapped across 5 phases
+Phase: 5 of 5 COMPLETE — milestone v1.0 feature-complete
+Plan: all phases delivered
+Status: All 5 phases merged to develop; released to main; 186 unit tests + Playwright e2e green
+Last activity: 2026-07-17 — Phase 5 (Validation & Hardening) built in worktree, Playwright e2e 5/5 real-browser green, merged into develop, milestone released to main
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [██████████] 100% (5/5 phases)
 
 ## Performance Metrics
 

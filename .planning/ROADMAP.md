@@ -12,11 +12,11 @@ The build follows a strict dependency chain forced by MV3's process split and by
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Detection Core — Engine, Sensors & Identity** - Pure, Chrome-API-free fusion engine, four signal classifiers, and eTLD+1 identity, fully unit-tested
-- [ ] **Phase 2: State & Persistence** - Verdict/hysteresis state survives service-worker suspension via `chrome.storage.session`
-- [ ] **Phase 3: Chrome Glue — Sensors, Messaging & Border Overlay** - Real cookies/network/storage/DOM sensors, one-shot messaging, and a tamper-resistant border render
-- [ ] **Phase 4: Wiring & End-to-End Flow** - Live extension: event-driven recompute, restart-safe listeners, privacy-enforced messaging
-- [ ] **Phase 5: Validation & Hardening** - Proven correct under idle-SW, CSP-strict, tracking-cookie, and real-OAuth conditions
+- [x] **Phase 1: Detection Core — Engine, Sensors & Identity** - Pure, Chrome-API-free fusion engine, four signal classifiers, and eTLD+1 identity, fully unit-tested ✅ (72 tests)
+- [x] **Phase 2: State & Persistence** - Verdict/hysteresis state survives service-worker suspension via `chrome.storage.session` ✅ (86 tests)
+- [x] **Phase 3: Chrome Glue — Sensors, Messaging & Border Overlay** - Real cookies/network/storage/DOM sensors, one-shot messaging, and a tamper-resistant border render ✅ (166 tests)
+- [x] **Phase 4: Wiring & End-to-End Flow** - Live extension: event-driven recompute, restart-safe listeners, privacy-enforced messaging ✅ (186 tests)
+- [x] **Phase 5: Validation & Hardening** - Proven correct under idle-SW, CSP-strict, tracking-cookie, and real-OAuth conditions ✅ (Playwright e2e 5/5; manual matrix documented)
 
 ## Phase Details
 
@@ -31,7 +31,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Given a sequence of confidence scores crossing 0.7 then falling toward 0.3, the hysteresis state machine transitions Unknown → SignedIn → SignedOut only at the correct dual thresholds with no flicker inside the hold band, and SignedOut is entered only after an asymmetric grace delay while SignedIn is entered promptly.
   4. Given a guest/anonymous JWT, a stale storage token left after tab close, or a GraphQL soft-200 error shape, the relevant classifier down-weights it instead of counting it as a positive signed-in signal.
   5. Given raw cookie objects, storage entries, a DOM snapshot, and a URL as fixture input, each of the four `*.classify.ts` functions returns the correct shape-only classification (never reading values for meaning) and `appIdentity` returns a stable branded `WebAppKey` (registrable domain) that is unchanged across subdomains and SPA route changes on the same eTLD+1.
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Scaffold WXT + TypeScript 6.0.3 toolchain and write the frozen shared contracts (types.ts, constants.ts)
+- [ ] 01-02-PLAN.md — Identity resolver (eTLD+1 via tldts) + four pure signal classifiers (cookie, network, storage, DOM), test-first
+- [ ] 01-03-PLAN.md — ConfidenceEngine: weighted fusion, dual-threshold hysteresis, asymmetric debounce with injected clock, test-first
 
 ### Phase 2: State & Persistence
 **Goal**: Verdict and hysteresis state survives service-worker suspension and restart without loss or requiring recomputation from scratch.
@@ -89,8 +94,8 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Detection Core — Engine, Sensors & Identity | 0/TBD | Not started | - |
-| 2. State & Persistence | 0/TBD | Not started | - |
-| 3. Chrome Glue — Sensors, Messaging & Border Overlay | 0/TBD | Not started | - |
-| 4. Wiring & End-to-End Flow | 0/TBD | Not started | - |
-| 5. Validation & Hardening | 0/TBD | Not started | - |
+| 1. Detection Core — Engine, Sensors & Identity | 3/3 | Complete ✅ | 2026-07-17 |
+| 2. State & Persistence | 1/1 | Complete ✅ | 2026-07-17 |
+| 3. Chrome Glue — Sensors, Messaging & Border Overlay | 3/3 | Complete ✅ | 2026-07-17 |
+| 4. Wiring & End-to-End Flow | 1/1 | Complete ✅ | 2026-07-17 |
+| 5. Validation & Hardening | 1/1 | Complete ✅ | 2026-07-17 |
