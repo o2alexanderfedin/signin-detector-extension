@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: State & Persistence** - Verdict/hysteresis state survives service-worker suspension via `chrome.storage.session` ✅ (86 tests)
 - [x] **Phase 3: Chrome Glue — Sensors, Messaging & Border Overlay** - Real cookies/network/storage/DOM sensors, one-shot messaging, and a tamper-resistant border render ✅ (166 tests)
 - [x] **Phase 4: Wiring & End-to-End Flow** - Live extension: event-driven recompute, restart-safe listeners, privacy-enforced messaging ✅ (186 tests)
-- [ ] **Phase 5: Validation & Hardening** - Proven correct under idle-SW, CSP-strict, tracking-cookie, and real-OAuth conditions
+- [x] **Phase 5: Validation & Hardening** - Proven correct under idle-SW, CSP-strict, tracking-cookie, and real-OAuth conditions ✅ (Playwright e2e 5/5; manual matrix documented)
 
 ## Phase Details
 
@@ -98,4 +98,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 2. State & Persistence | 1/1 | Complete ✅ | 2026-07-17 |
 | 3. Chrome Glue — Sensors, Messaging & Border Overlay | 3/3 | Complete ✅ | 2026-07-17 |
 | 4. Wiring & End-to-End Flow | 1/1 | Complete ✅ | 2026-07-17 |
-| 5. Validation & Hardening | 0/TBD | Not started | - |
+| 5. Validation & Hardening | 1/1 | Complete ✅ | 2026-07-17 |
