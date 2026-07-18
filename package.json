@@ -1,6 +1,13 @@
 {
   "name": "sign-in-detector",
   "description": "Chrome MV3 (Firefox-compatible) extension that fuses cookie/network/storage/DOM signals into a sign-in confidence verdict, rendered as a border overlay",
+  "author": "Alexander Fedin <alex_fedin@hotmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/o2alexanderfedin/signin-detector-extension",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/o2alexanderfedin/signin-detector-extension.git"
+  },
   "private": true,
   "version": "0.1.0",
   "type": "module",
