@@ -65,9 +65,26 @@ export function nextVerdictState(confidence: number, previousState: VerdictState
   return previousState;
 }
 
+/**
+ * Pure, serializable snapshot of a {@link ConfidenceEngine}'s internal
+ * hysteresis + asymmetric-debounce bookkeeping (PLT-01 seam). Contains
+ * ONLY derived numbers/enums -- never raw cookie/token/session material --
+ * so it is safe for a storage adapter (see
+ * `src/background/state/verdictStore.ts`) to persist verbatim in
+ * `chrome.storage.session`. This module has no knowledge that storage
+ * exists; it only produces/consumes plain data.
+ */
+export interface ConfidenceEngineSnapshot {
+  readonly state: VerdictState;
+  readonly confidence: number;
+  readonly pendingSignedOutSince: number | null;
+}
+
 /** Stateful engine wrapper returned by {@link createConfidenceEngine}. */
 export interface ConfidenceEngine {
   update(vector: SignalVector): VerdictResult;
+  /** Pure: returns a plain-object snapshot of the engine's current state. */
+  serialize(): ConfidenceEngineSnapshot;
 }
 
 /**
@@ -86,15 +103,27 @@ export interface ConfidenceEngine {
  * only; the `update()` body never invokes the system clock directly,
  * always going through the injected `clock` variable so debounce timing
  * is deterministically unit-testable.
+ *
+ * `restore`, if given, seeds the engine's internal state from a prior
+ * {@link ConfidenceEngineSnapshot} instead of the 'unknown' default -- the
+ * other half of the PLT-01 serialize/restore seam, letting a caller
+ * (e.g. a `chrome.storage.session`-backed store on service-worker wake)
+ * rehydrate a deterministic engine instance with zero knowledge of storage
+ * living inside this pure module.
  */
-export function createConfidenceEngine(clock: ClockFn = Date.now): ConfidenceEngine {
-  let committedState: VerdictState = 'unknown';
-  let pendingSignedOutSince: number | null = null;
+export function createConfidenceEngine(
+  clock: ClockFn = Date.now,
+  restore?: ConfidenceEngineSnapshot,
+): ConfidenceEngine {
+  let committedState: VerdictState = restore?.state ?? 'unknown';
+  let lastConfidence: number = restore?.confidence ?? 0;
+  let pendingSignedOutSince: number | null = restore?.pendingSignedOutSince ?? null;
 
   return {
     update(vector: SignalVector): VerdictResult {
       const now = clock();
       const confidence = fuseConfidence(vector);
+      lastConfidence = confidence;
       const rawState = nextVerdictState(confidence, committedState);
 
       if (rawState === committedState) {
@@ -117,6 +146,9 @@ export function createConfidenceEngine(clock: ClockFn = Date.now): ConfidenceEng
         pendingSignedOutSince = null;
       }
       return { state: committedState, confidence };
+    },
+    serialize(): ConfidenceEngineSnapshot {
+      return { state: committedState, confidence: lastConfidence, pendingSignedOutSince };
     },
   };
 }
