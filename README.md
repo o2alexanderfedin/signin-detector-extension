@@ -58,6 +58,8 @@ npm run dev         # WXT dev build with HMR
 
 **Load unpacked (Chrome/Edge):** `npm run build`, then open `chrome://extensions` (or `edge://extensions`), enable **Developer mode**, **Load unpacked**, and select `.output/chrome-mv3`. Sign in to any site and a green border appears; sign out and it clears.
 
+**Prebuilt install package:** each tagged release ships packaged zips on the [Releases](https://github.com/o2alexanderfedin/signin-detector-extension/releases) page (built & published by CI). Download `sign-in-detector-<version>-chrome-mv3.zip` (or the Firefox zip), extract, and **Load unpacked** the extracted folder — or upload the zip to the Chrome/Edge Web Store / Firefox AMO.
+
 ## Status
 
 **MVP feature-complete (v0.1.0).** All 5 phases built test-first: Detection Core → State & Persistence → Chrome Glue → Wiring & E2E → Validation. **186 unit/integration tests + real-browser Playwright e2e (5/5) green**; `tsc` strict + `eslint` clean; Chrome **and** Firefox builds succeed.
