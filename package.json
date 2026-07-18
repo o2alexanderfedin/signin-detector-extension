@@ -14,6 +14,8 @@
     "compile": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:e2e": "playwright test --config tests/e2e/playwright/playwright.config.ts",
+    "audit:privacy": "node scripts/audit-privacy.mjs",
     "lint": "eslint .",
     "postinstall": "wxt prepare"
   },
