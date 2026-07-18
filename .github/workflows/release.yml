@@ -1,0 +1,59 @@
+name: Release
+
+# Triggered by pushing a version tag (e.g. v0.1.1). Builds the extension for
+# Chrome and Firefox, packages installable zips, and publishes a GitHub Release
+# with those packages attached + auto-generated notes.
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build & publish installation packages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify (typecheck · lint · tests)
+        run: |
+          npm run compile
+          npm run lint
+          npm test
+          npm run audit:privacy
+
+      - name: Build extensions
+        run: |
+          npm run build          # -> .output/chrome-mv3
+          npm run build:firefox  # -> .output/firefox-*
+
+      - name: Package installable zips
+        run: |
+          mkdir -p artifacts
+          TAG="${GITHUB_REF_NAME}"
+          for d in .output/*/; do
+            [ -f "${d}manifest.json" ] || continue
+            name="$(basename "$d")"
+            (cd "$d" && zip -qr "${GITHUB_WORKSPACE}/artifacts/sign-in-detector-${TAG}-${name}.zip" .)
+          done
+          echo "Packaged:"; ls -la artifacts
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            artifacts/*.zip \
+            --title "Sign-In Detector ${GITHUB_REF_NAME}" \
+            --generate-notes
