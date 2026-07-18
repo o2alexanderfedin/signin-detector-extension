@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-07-17)
 
 **Core value:** Correctly distinguish "signed in" from "not signed in" for any webapp — without per-app rules and without depending on navigations — and reflect that state as a visible border.
-**Current focus:** Phase 3: Chrome Glue — Sensors, Messaging & Border Overlay
+**Current focus:** Phase 4: Wiring & End-to-End Flow
 
 ## Current Position
 
-Phase: 3 of 5 (Chrome Glue — Sensors, Messaging & Border Overlay)
+Phase: 4 of 5 (Wiring & End-to-End Flow)
 Plan: 0 of TBD in current phase
-Status: Phases 1-2 complete (merged to develop); ready to plan Phase 3
-Last activity: 2026-07-17 — Phase 2 (State & Persistence) built TDD in worktree, 86 tests passing (14 new), merged --no-ff into develop, pushed
+Status: Phases 1-3 complete (merged to develop); ready to plan Phase 4
+Last activity: 2026-07-17 — Phase 3 (Chrome Glue) built TDD in worktree (3 parallel streams), 166 tests passing, merged --no-ff into develop, pushed
 
-Progress: [████░░░░░░] 40% (2/5 phases)
+Progress: [██████░░░░] 60% (3/5 phases)
 
 ## Performance Metrics
 

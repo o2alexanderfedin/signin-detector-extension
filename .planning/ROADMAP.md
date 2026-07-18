@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Detection Core — Engine, Sensors & Identity** - Pure, Chrome-API-free fusion engine, four signal classifiers, and eTLD+1 identity, fully unit-tested ✅ (72 tests)
 - [x] **Phase 2: State & Persistence** - Verdict/hysteresis state survives service-worker suspension via `chrome.storage.session` ✅ (86 tests)
-- [ ] **Phase 3: Chrome Glue — Sensors, Messaging & Border Overlay** - Real cookies/network/storage/DOM sensors, one-shot messaging, and a tamper-resistant border render
+- [x] **Phase 3: Chrome Glue — Sensors, Messaging & Border Overlay** - Real cookies/network/storage/DOM sensors, one-shot messaging, and a tamper-resistant border render ✅ (166 tests)
 - [ ] **Phase 4: Wiring & End-to-End Flow** - Live extension: event-driven recompute, restart-safe listeners, privacy-enforced messaging
 - [ ] **Phase 5: Validation & Hardening** - Proven correct under idle-SW, CSP-strict, tracking-cookie, and real-OAuth conditions
 
@@ -96,6 +96,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Detection Core — Engine, Sensors & Identity | 3/3 | Complete ✅ | 2026-07-17 |
 | 2. State & Persistence | 1/1 | Complete ✅ | 2026-07-17 |
-| 3. Chrome Glue — Sensors, Messaging & Border Overlay | 0/TBD | Not started | - |
+| 3. Chrome Glue — Sensors, Messaging & Border Overlay | 3/3 | Complete ✅ | 2026-07-17 |
 | 4. Wiring & End-to-End Flow | 0/TBD | Not started | - |
 | 5. Validation & Hardening | 0/TBD | Not started | - |
