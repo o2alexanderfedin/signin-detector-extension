@@ -35,6 +35,8 @@ export default tseslint.config(
     },
   },
   {
-    ignores: ['.output/**', '.wxt/**', 'node_modules/**'],
+    // .remember/ is local session tooling, hidden from git by its own
+    // .gitignore, which ESLint does not read.
+    ignores: ['.output/**', '.wxt/**', 'node_modules/**', '.remember/**'],
   },
 );
