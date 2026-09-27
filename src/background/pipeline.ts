@@ -113,8 +113,12 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
 
   const cookieSensor = createCookieSensor(cookiesApi);
 
-  /** Live per-tab state, lost on service-worker suspension by design -- rebuilt lazily via {@link getTabState}. */
-  const tabStates = new Map<number, TabRuntimeState>();
+  /**
+   * Live per-tab state, lost on service-worker suspension by design -- rebuilt lazily via {@link getTabState}.
+   * Holds the pending load rather than the loaded state, so events that arrive for a tab while its
+   * snapshot is still being read all share ONE state instead of each building its own.
+   */
+  const tabStates = new Map<number, Promise<TabRuntimeState>>();
 
   /**
    * Get-or-create a tab's runtime state (PLT-01 rehydration): on first
@@ -124,15 +128,22 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
    * `restore` seam (`confidenceEngine.ts`) does the actual state
    * reconstruction; this function only supplies it the right snapshot.
    */
-  async function getTabState(tabId: number): Promise<TabRuntimeState> {
+  function getTabState(tabId: number): Promise<TabRuntimeState> {
     const existing = tabStates.get(tabId);
     if (existing !== undefined) {
       return existing;
     }
-    const snapshot = await store.get(tabId);
-    const state: TabRuntimeState = { engine: createEngine(clock, snapshot), vector: {} };
-    tabStates.set(tabId, state);
-    return state;
+    const loading = store.get(tabId).then(
+      (snapshot): TabRuntimeState => ({ engine: createEngine(clock, snapshot), vector: {} }),
+    );
+    tabStates.set(tabId, loading);
+    // A failed read must not stick: forget it so the tab's next event tries again.
+    loading.catch(() => {
+      if (tabStates.get(tabId) === loading) {
+        tabStates.delete(tabId);
+      }
+    });
+    return loading;
   }
 
   /**
