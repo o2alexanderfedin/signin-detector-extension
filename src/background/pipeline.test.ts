@@ -181,6 +181,70 @@ describe('createPipeline (RCT-01)', () => {
       const expected = (0.6 * STORAGE_POSITIVE_VALUE + 0.3 * DOM_POSITIVE_VALUE) / (0.6 + 0.3);
       expect(secondResult.confidence).toBeCloseTo(expected);
     });
+
+    it('fuses signals that arrive together for a tab the worker has not seen yet (none is dropped while its state loads)', async () => {
+      // chrome.storage.session is asynchronous: while the first event for a
+      // tab waits for its persisted snapshot, a second event for the same tab
+      // can arrive. Hold the store read open until both are in flight.
+      const store = createInMemoryStore();
+      let releaseRead: () => void = () => {};
+      const readGate = new Promise<void>((resolve) => {
+        releaseRead = resolve;
+      });
+      const gatedStore: VerdictStore = {
+        ...store,
+        async get(tabId) {
+          await readGate;
+          return store.get(tabId);
+        },
+      };
+      const sendVerdictUpdate = vi.fn().mockResolvedValue(undefined);
+      const pipeline = createPipeline({ store: gatedStore, cookiesApi: createFakeCookiesApi().api, sendVerdictUpdate });
+
+      const storageEvidence: SignalEvidence = { signal: 'storage', observed: true, value: STORAGE_POSITIVE_VALUE };
+      const domEvidence: SignalEvidence = { signal: 'dom', observed: true, value: DOM_POSITIVE_VALUE, passwordFormVisible: false };
+      const sender: MessageSenderLike = { tab: { id: 12 } };
+
+      const first = pipeline.handleSensorSignal({ type: 'SENSOR_SIGNAL', signal: 'storage', evidence: storageEvidence }, sender);
+      const second = pipeline.handleSensorSignal({ type: 'SENSOR_SIGNAL', signal: 'dom', evidence: domEvidence }, sender);
+      releaseRead();
+      await Promise.all([first, second]);
+
+      expect(sendVerdictUpdate).toHaveBeenCalledTimes(2);
+      const lastResult = (sendVerdictUpdate.mock.calls[1] as [VerdictResult, number])[0];
+      const expected = (0.6 * STORAGE_POSITIVE_VALUE + 0.3 * DOM_POSITIVE_VALUE) / (0.6 + 0.3);
+      expect(lastResult.confidence).toBeCloseTo(expected);
+
+      // The persisted snapshot is the fused one too, so a worker restart resumes from it.
+      await expect(store.get(12)).resolves.toMatchObject({ confidence: expect.closeTo(expected) as number });
+    });
+
+    it('a failed state read for a tab does not break that tab for good: its next event loads again', async () => {
+      const store = createInMemoryStore();
+      let failNextRead = true;
+      const flakyStore: VerdictStore = {
+        ...store,
+        get(tabId) {
+          if (failNextRead) {
+            failNextRead = false;
+            return Promise.reject(new Error('storage unavailable'));
+          }
+          return store.get(tabId);
+        },
+      };
+      const sendVerdictUpdate = vi.fn().mockResolvedValue(undefined);
+      const pipeline = createPipeline({ store: flakyStore, cookiesApi: createFakeCookiesApi().api, sendVerdictUpdate });
+
+      const domEvidence: SignalEvidence = { signal: 'dom', observed: true, value: DOM_POSITIVE_VALUE, passwordFormVisible: false };
+      const message: SensorSignalMessage = { type: 'SENSOR_SIGNAL', signal: 'dom', evidence: domEvidence };
+
+      await expect(pipeline.handleSensorSignal(message, { tab: { id: 13 } })).rejects.toThrow('storage unavailable');
+      await pipeline.handleSensorSignal(message, { tab: { id: 13 } });
+
+      expect(sendVerdictUpdate).toHaveBeenCalledTimes(1);
+      const [result] = sendVerdictUpdate.mock.calls[0] as [VerdictResult, number];
+      expect(result.confidence).toBeCloseTo(DOM_POSITIVE_VALUE);
+    });
   });
 
   describe('handleNetworkCompleted', () => {
