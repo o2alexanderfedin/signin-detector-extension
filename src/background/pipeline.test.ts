@@ -398,6 +398,46 @@ describe('createPipeline (RCT-01)', () => {
       const lastResult = (sendVerdictUpdate.mock.calls[1] as [VerdictResult, number])[0];
       expect(lastResult.confidence).toBeCloseTo(DOM_POSITIVE_VALUE);
     });
+
+    it('a tab closed while its first event is still loading state leaves nothing saved behind, and a reused tab id starts clean', async () => {
+      // Hold the first read of the tab's snapshot open, close the tab, then let the read finish.
+      const store = createInMemoryStore();
+      let releaseRead: () => void = () => {};
+      const readGate = new Promise<void>((resolve) => {
+        releaseRead = resolve;
+      });
+      let gateReads = true;
+      const readsSeen: PersistedVerdictState[] = [];
+      const gatedStore: VerdictStore = {
+        ...store,
+        async get(tabId) {
+          if (gateReads) {
+            gateReads = false;
+            await readGate;
+          }
+          const snapshot = await store.get(tabId);
+          readsSeen.push(snapshot as PersistedVerdictState);
+          return snapshot;
+        },
+      };
+      const sendVerdictUpdate = vi.fn().mockResolvedValue(undefined);
+      const pipeline = createPipeline({ store: gatedStore, cookiesApi: createFakeCookiesApi().api, sendVerdictUpdate });
+
+      const domEvidence: SignalEvidence = { signal: 'dom', observed: true, value: DOM_POSITIVE_VALUE, passwordFormVisible: false };
+      const lateEvent = pipeline.handleSensorSignal({ type: 'SENSOR_SIGNAL', signal: 'dom', evidence: domEvidence }, { tab: { id: 30 } });
+      await pipeline.handleTabRemoved(30);
+      releaseRead();
+      await lateEvent;
+
+      // Nothing saved for the closed tab, and no verdict sent to it.
+      await expect(store.get(30)).resolves.toBe(UNKNOWN_VERDICT_STATE);
+      expect(sendVerdictUpdate).not.toHaveBeenCalled();
+
+      // The same tab id used again loads the empty default, not the closed tab's leftovers.
+      await pipeline.handleSensorSignal({ type: 'SENSOR_SIGNAL', signal: 'dom', evidence: domEvidence }, { tab: { id: 30 } });
+      expect(readsSeen).toHaveLength(2);
+      expect(readsSeen[1]).toBe(UNKNOWN_VERDICT_STATE);
+    });
   });
 
   describe('PLT-01 rehydration: engine snapshot restored from verdictStore', () => {

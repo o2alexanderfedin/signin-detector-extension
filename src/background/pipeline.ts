@@ -153,7 +153,11 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
    * tab's content script (PLT-02).
    */
   async function refreshSignal(tabId: number, evidence: SignalEvidence): Promise<void> {
-    const state = await getTabState(tabId);
+    const loading = getTabState(tabId);
+    const state = await loading;
+    if (tabStates.get(tabId) !== loading) {
+      return; // The tab was closed while its state loaded: saving now would leave a snapshot for a tab that is gone.
+    }
     state.vector = { ...state.vector, [evidence.signal]: evidence };
     const result = state.engine.update(state.vector);
     await store.set(tabId, state.engine.serialize());
