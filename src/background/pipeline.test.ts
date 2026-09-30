@@ -368,6 +368,82 @@ describe('createPipeline (RCT-01)', () => {
 
       expect(sendVerdictUpdate).not.toHaveBeenCalled();
     });
+
+    /**
+     * A cookie change waits twice before it touches a tab's state: for the tab list, then for the
+     * tab's cookies. Closing the tab during either wait must leave nothing behind. `hold` picks
+     * which wait is held open while the tab closes.
+     */
+    async function closeTabDuringCookieChange(hold: 'tab-list' | 'cookie-lookup'): Promise<void> {
+      const tab = await fakeBrowser.tabs.create({ url: 'https://example.com/dashboard' });
+      const tabId = tab.id as number;
+      const fakeCookies = createFakeCookiesApi([fullMatchCookie()]);
+
+      let releaseWait: () => void = () => {};
+      const gate = new Promise<void>((resolve) => {
+        releaseWait = resolve;
+      });
+      let markWaiting: () => void = () => {};
+      const waiting = new Promise<void>((resolve) => {
+        markWaiting = resolve;
+      });
+      const heldCookiesApi: CookiesApi = {
+        ...fakeCookies.api,
+        getAll: async (details: chrome.cookies.GetAllDetails) => {
+          if (hold === 'cookie-lookup') {
+            markWaiting();
+            await gate;
+          }
+          return fakeCookies.api.getAll(details);
+        },
+      };
+      const heldTabsApi = {
+        async query(): Promise<chrome.tabs.Tab[]> {
+          const tabs = (await fakeBrowser.tabs.query({})) as chrome.tabs.Tab[];
+          if (hold === 'tab-list') {
+            markWaiting();
+            await gate;
+          }
+          return tabs;
+        },
+      };
+
+      const store = createInMemoryStore();
+      const sendVerdictUpdate = vi.fn().mockResolvedValue(undefined);
+      const pipeline = createPipeline({
+        store,
+        cookiesApi: heldCookiesApi,
+        tabsApi: heldTabsApi,
+        sendVerdictUpdate,
+        clock: () => NOW,
+      });
+
+      const lateEvent = pipeline.handleCookieChanged({ removed: false, cause: 'explicit', cookie: fullMatchCookie() });
+      await waiting;
+      await pipeline.handleTabRemoved(tabId);
+      releaseWait();
+      await lateEvent;
+
+      // Nothing saved for the closed tab, and no verdict sent to it.
+      await expect(store.get(tabId)).resolves.toBe(UNKNOWN_VERDICT_STATE);
+      expect(sendVerdictUpdate).not.toHaveBeenCalled();
+
+      // The same tab id used again starts clean: its verdict is the new signal alone, with no
+      // cookie evidence carried over from the closed tab.
+      const domEvidence: SignalEvidence = { signal: 'dom', observed: true, value: DOM_POSITIVE_VALUE, passwordFormVisible: false };
+      await pipeline.handleSensorSignal({ type: 'SENSOR_SIGNAL', signal: 'dom', evidence: domEvidence }, { tab: { id: tabId } });
+      expect(sendVerdictUpdate).toHaveBeenCalledTimes(1);
+      const [reusedResult] = sendVerdictUpdate.mock.calls[0] as [VerdictResult, number];
+      expect(reusedResult.confidence).toBeCloseTo(DOM_POSITIVE_VALUE);
+    }
+
+    it('a tab closed while the cookie lookup for it is still pending leaves nothing saved behind, and a reused tab id starts clean', async () => {
+      await closeTabDuringCookieChange('cookie-lookup');
+    });
+
+    it('a tab closed while the tab list for a cookie change is still pending leaves nothing saved behind, and a reused tab id starts clean', async () => {
+      await closeTabDuringCookieChange('tab-list');
+    });
   });
 
   describe('handleTabRemoved (PLT-01 cleanup)', () => {

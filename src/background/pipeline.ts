@@ -121,6 +121,17 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
   const tabStates = new Map<number, Promise<TabRuntimeState>>();
 
   /**
+   * Counts tab removals, and remembers the count at which each tab was last removed. A handler that
+   * waits before it reaches a tab notes the count first, so it can tell afterwards that the tab was
+   * closed while it waited.
+   */
+  let removalCount = 0;
+  const removedAt = new Map<number, number>();
+  function removedSince(tabId: number, count: number): boolean {
+    return (removedAt.get(tabId) ?? 0) > count;
+  }
+
+  /**
    * Get-or-create a tab's runtime state (PLT-01 rehydration): on first
    * touch after a (real or simulated) service-worker restart, seeds a
    * fresh `ConfidenceEngine` from the tab's persisted snapshot in
@@ -170,6 +181,7 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
       return;
     }
 
+    const startedAt = removalCount;
     const tabs = await tabsApi.query({});
     for (const tab of tabs) {
       if (tab.id === undefined || tab.url === undefined) {
@@ -180,6 +192,9 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
         continue;
       }
       const evidence = await cookieSensor.getEvidence(webAppKey, clock);
+      if (removedSince(tab.id, startedAt)) {
+        continue; // Closed while this event waited: saving now would leave a snapshot for a tab that is gone.
+      }
       await refreshSignal(tab.id, evidence);
     }
   }
@@ -201,6 +216,7 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
   }
 
   async function handleTabRemoved(tabId: number): Promise<void> {
+    removedAt.set(tabId, ++removalCount);
     tabStates.delete(tabId);
     await store.clear(tabId);
   }
