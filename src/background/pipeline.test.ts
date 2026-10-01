@@ -183,6 +183,29 @@ describe('createPipeline (RCT-01)', () => {
       expect(secondResult.confidence).toBeCloseTo(expected);
     });
 
+    it.each([
+      { signal: 'storage' as const, seen: { signal: 'storage', observed: true, value: STORAGE_POSITIVE_VALUE } as SignalEvidence },
+      {
+        signal: 'dom' as const,
+        seen: { signal: 'dom', observed: true, value: DOM_POSITIVE_VALUE, passwordFormVisible: false } as SignalEvidence,
+      },
+    ])('a later "nothing seen" from the $signal sensor replaces what it saw before (the token or avatar is gone after sign-out)', async ({ signal, seen }) => {
+      const sendVerdictUpdate = vi.fn().mockResolvedValue(undefined);
+      const pipeline = createPipeline({
+        store: createInMemoryStore(),
+        cookiesApi: createFakeCookiesApi().api,
+        sendVerdictUpdate,
+        clock: () => NOW,
+      });
+      const sender: MessageSenderLike = { tab: { id: 9, url: 'https://example.com/app' } };
+
+      await pipeline.handleSensorSignal({ type: 'SENSOR_SIGNAL', signal, evidence: seen }, sender);
+      await pipeline.handleSensorSignal({ type: 'SENSOR_SIGNAL', signal, evidence: { signal, observed: false } }, sender);
+
+      const [result] = sendVerdictUpdate.mock.calls[1] as [VerdictResult, number];
+      expect(result.confidence).toBe(0);
+    });
+
     it('fuses signals that arrive together for a tab the worker has not seen yet (none is dropped while its state loads)', async () => {
       // chrome.storage.session is asynchronous: while the first event for a
       // tab waits for its persisted snapshot, a second event for the same tab
