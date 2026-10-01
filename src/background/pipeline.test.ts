@@ -644,6 +644,36 @@ describe('createPipeline (RCT-01)', () => {
   });
 
   describe('PLT-01 rehydration: engine snapshot restored from verdictStore', () => {
+    async function signedInOnExampleThenRestart() {
+      const store = createVerdictStore();
+      const before = createPipeline({ store, cookiesApi: createFakeCookiesApi().api, sendVerdictUpdate: vi.fn().mockResolvedValue(undefined), clock: () => NOW });
+      await before.handleNetworkCompleted(networkCompletedDetails({ tabId: 30, url: 'https://example.com/api/me' }));
+      await expect(store.get(30)).resolves.toMatchObject({ state: 'signed-in' });
+
+      // Simulated service-worker restart: a new pipeline over the same saved state.
+      const sendVerdictUpdate = vi.fn().mockResolvedValue(undefined);
+      const after = createPipeline({ store, cookiesApi: createFakeCookiesApi().api, sendVerdictUpdate, clock: () => NOW });
+      return { after, sendVerdictUpdate };
+    }
+
+    const domNotObserved: SensorSignalMessage = { type: 'SENSOR_SIGNAL', signal: 'dom', evidence: { signal: 'dom', observed: false } };
+
+    it("a tab that moved to another site while the worker slept does not get the old site's saved verdict back", async () => {
+      const { after, sendVerdictUpdate } = await signedInOnExampleThenRestart();
+
+      await after.handleSensorSignal(domNotObserved, { tab: { id: 30, url: 'https://other.org/' } });
+
+      expect(sendVerdictUpdate.mock.calls[0]).toEqual([{ state: 'unknown', confidence: 0 }, 30]);
+    });
+
+    it('a tab still on the same site after the worker slept gets its saved verdict back', async () => {
+      const { after, sendVerdictUpdate } = await signedInOnExampleThenRestart();
+
+      await after.handleSensorSignal(domNotObserved, { tab: { id: 30, url: 'https://www.example.com/settings' } });
+
+      expect(sendVerdictUpdate.mock.calls[0]).toEqual([{ state: 'signed-in', confidence: 0 }, 30]);
+    });
+
     it('a fresh pipeline instance over the same persisted store resumes hysteresis (signed-in stays signed-in even with 0 confidence this tick, pending debounce)', async () => {
       const store = createVerdictStore();
       await store.set(30, { state: 'signed-in', confidence: 0.9, pendingSignedOutSince: null });
