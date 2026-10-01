@@ -730,14 +730,42 @@ describe('createPipeline (RCT-01)', () => {
       expect(lastResult(sendVerdictUpdate)).toEqual({ state: 'unknown', confidence: 0 });
     });
 
-    it("a request made by a page on another site does not inherit the previous site's verdict either", async () => {
+    it("a request made by a page on another site neither moves the tab nor counts (only the page's own script message moves it)", async () => {
       const { tabId, pipeline, sendVerdictUpdate } = await signedInOnExample();
 
       await pipeline.handleNetworkCompleted(
         networkCompletedDetails({ tabId, type: 'script', url: 'https://cdn.other.org/app.js', initiator: 'https://other.org' }),
       );
 
-      expect(lastResult(sendVerdictUpdate)).toEqual({ state: 'unknown', confidence: 0 });
+      expect(lastResult(sendVerdictUpdate)).toEqual({ state: 'signed-in', confidence: 1 });
+    });
+
+    const avatarShown: SensorSignalMessage = {
+      type: 'SENSOR_SIGNAL',
+      signal: 'dom',
+      evidence: { signal: 'dom', observed: true, value: DOM_POSITIVE_VALUE, passwordFormVisible: false },
+    };
+
+    it("a late cookie change for the old site, handled after the tab moved, does not throw away the new site's evidence", async () => {
+      const { tabId, pipeline, sendVerdictUpdate } = await signedInOnExample();
+      await pipeline.handleSensorSignal(avatarShown, { tab: { id: tabId, url: 'https://other.org/' } });
+      expect(lastResult(sendVerdictUpdate)).toEqual({ state: 'unknown', confidence: DOM_POSITIVE_VALUE });
+
+      // The tab list read for this cookie change still shows the old address (the move raced it).
+      await pipeline.handleCookieChanged({ removed: false, cause: 'explicit', cookie: fullMatchCookie() });
+
+      expect(lastResult(sendVerdictUpdate)).toEqual({ state: 'unknown', confidence: DOM_POSITIVE_VALUE });
+    });
+
+    it("a late request from the old page, handled after the tab moved, does not throw away the new site's evidence", async () => {
+      const { tabId, pipeline, sendVerdictUpdate } = await signedInOnExample();
+      await pipeline.handleSensorSignal(avatarShown, { tab: { id: tabId, url: 'https://other.org/' } });
+
+      await pipeline.handleNetworkCompleted(
+        networkCompletedDetails({ tabId, url: 'https://example.com/api/me', initiator: 'https://example.com' }),
+      );
+
+      expect(lastResult(sendVerdictUpdate)).toEqual({ state: 'unknown', confidence: DOM_POSITIVE_VALUE });
     });
 
     it('a top-level load of another domain does not reset the tab by itself (it may be a download that leaves the page in place)', async () => {

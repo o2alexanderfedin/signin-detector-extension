@@ -183,18 +183,22 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
    * feed the engine, persist its new snapshot (PLT-01), and notify that
    * tab's content script (PLT-02).
    *
-   * `pageKey` is the web application the tab shows when the event happened, if the event says. When
-   * it differs from the one the tab's evidence was gathered on, the tab has moved to another site:
-   * that evidence and verdict describe the old site, so the tab starts over from 'unknown'.
+   * `pageKey` is the web application the tab showed when the event happened, if the event says.
+   * Only an event from the page now in the tab (`identifiesPage`, a content-script message) may
+   * move the tab to another site: that evidence and verdict describe the old site, so the tab starts
+   * over from 'unknown'. Any other event may only name the site while it is still unknown -- a cookie
+   * change or a request from the old page can be handled just after the tab moved, and must not
+   * move it back and throw away the new site's evidence.
    *
-   * `requestKey`, given for network evidence only, is the web application the request went to. Such
-   * evidence is kept only when that is the tab's own site: another site's `/me` answers for that
-   * site's user, not for whether the user is signed in to the page in the tab.
+   * `requestKey`, given for cookie and network evidence, is the web application that evidence is
+   * about. It is kept only when that is the tab's own site: another site's `/me` or cookie answers
+   * for that site, not for whether the user is signed in to the page in the tab.
    */
   async function refreshSignal(
     tabId: number,
     evidence: SignalEvidence,
     pageKey: WebAppKey | null,
+    identifiesPage: boolean,
     requestKey?: WebAppKey | null,
   ): Promise<void> {
     const loading = getTabState(tabId);
@@ -202,7 +206,7 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
     if (tabStates.get(tabId) !== loading) {
       return; // The tab was closed while its state loaded: saving now would leave a snapshot for a tab that is gone.
     }
-    if (pageKey !== null) {
+    if (pageKey !== null && (state.webAppKey === null || identifiesPage)) {
       if (state.webAppKey !== null && state.webAppKey !== pageKey) {
         state.engine = createEngine(clock);
         state.vector = {};
@@ -242,7 +246,7 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
       if (removedSince(tab.id, startedAt)) {
         continue; // Closed while this event waited: saving now would leave a snapshot for a tab that is gone.
       }
-      await refreshSignal(tab.id, evidence, webAppKey);
+      await refreshSignal(tab.id, evidence, webAppKey, false, webAppKey);
     }
   }
 
@@ -251,7 +255,7 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
       return; // Not associated with a real tab (e.g. the SW's own requests) -- nothing to route to.
     }
     const evidence = classifyNetwork(toNetworkRequestInput(details));
-    await refreshSignal(details.tabId, evidence, requestPageKey(details), resolveWebAppKey(details.url));
+    await refreshSignal(details.tabId, evidence, requestPageKey(details), false, resolveWebAppKey(details.url));
   }
 
   async function handleSensorSignal(message: SensorSignalMessage, sender: MessageSenderLike): Promise<void> {
@@ -260,7 +264,7 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
       return;
     }
     const pageUrl = sender.tab?.url;
-    await refreshSignal(tabId, message.evidence, pageUrl === undefined ? null : resolveWebAppKey(pageUrl));
+    await refreshSignal(tabId, message.evidence, pageUrl === undefined ? null : resolveWebAppKey(pageUrl), true);
   }
 
   async function handleTabRemoved(tabId: number): Promise<void> {
