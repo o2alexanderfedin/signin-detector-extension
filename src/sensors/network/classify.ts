@@ -17,12 +17,25 @@ export interface NetworkRequestInput {
   readonly hasAuthorizationHeader: boolean;
 }
 
-function isIdentityShaped(url: string): boolean {
-  return IDENTITY_ENDPOINT_PATH_PATTERNS.some((pattern) => pattern.test(url));
+/**
+ * The path of `url`, without host, query string or fragment -- the endpoint patterns describe paths,
+ * and a host name (`user.example.com`) or a query value (`/login?next=/account`) must not match them.
+ * An unparseable URL has no path to match.
+ */
+function pathOf(url: string): string {
+  try {
+    return new URL(url).pathname;
+  } catch {
+    return '';
+  }
 }
 
-function isGraphqlShaped(url: string): boolean {
-  return GRAPHQL_ENDPOINT_PATH_PATTERN.test(url);
+function isIdentityShaped(path: string): boolean {
+  return IDENTITY_ENDPOINT_PATH_PATTERNS.some((pattern) => pattern.test(path));
+}
+
+function isGraphqlShaped(path: string): boolean {
+  return GRAPHQL_ENDPOINT_PATH_PATTERN.test(path);
 }
 
 /**
@@ -37,8 +50,9 @@ function isGraphqlShaped(url: string): boolean {
 export function classifyNetwork(request: NetworkRequestInput): SignalEvidence {
   const { url, statusCode } = request;
 
-  const identityShaped = isIdentityShaped(url);
-  const graphqlShaped = isGraphqlShaped(url);
+  const path = pathOf(url);
+  const identityShaped = isIdentityShaped(path);
+  const graphqlShaped = isGraphqlShaped(path);
 
   if (!identityShaped && !graphqlShaped) {
     return { signal: 'network', observed: false };
