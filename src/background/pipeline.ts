@@ -182,8 +182,17 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
    * `pageKey` is the web application the tab shows when the event happened, if the event says. When
    * it differs from the one the tab's evidence was gathered on, the tab has moved to another site:
    * that evidence and verdict describe the old site, so the tab starts over from 'unknown'.
+   *
+   * `requestKey`, given for network evidence only, is the web application the request went to. Such
+   * evidence is kept only when that is the tab's own site: another site's `/me` answers for that
+   * site's user, not for whether the user is signed in to the page in the tab.
    */
-  async function refreshSignal(tabId: number, evidence: SignalEvidence, pageKey: WebAppKey | null): Promise<void> {
+  async function refreshSignal(
+    tabId: number,
+    evidence: SignalEvidence,
+    pageKey: WebAppKey | null,
+    requestKey?: WebAppKey | null,
+  ): Promise<void> {
     const loading = getTabState(tabId);
     const state = await loading;
     if (tabStates.get(tabId) !== loading) {
@@ -196,7 +205,10 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
       }
       state.webAppKey = pageKey;
     }
-    state.vector = { ...state.vector, [evidence.signal]: evidence };
+    const firstParty = requestKey === undefined || (requestKey !== null && requestKey === state.webAppKey);
+    if (firstParty) {
+      state.vector = { ...state.vector, [evidence.signal]: evidence };
+    }
     const result = state.engine.update(state.vector);
     await store.set(tabId, state.engine.serialize());
     await sendVerdictUpdate(result, tabId);
@@ -231,7 +243,7 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
       return; // Not associated with a real tab (e.g. the SW's own requests) -- nothing to route to.
     }
     const evidence = classifyNetwork(toNetworkRequestInput(details));
-    await refreshSignal(details.tabId, evidence, requestPageKey(details));
+    await refreshSignal(details.tabId, evidence, requestPageKey(details), resolveWebAppKey(details.url));
   }
 
   async function handleSensorSignal(message: SensorSignalMessage, sender: MessageSenderLike): Promise<void> {
