@@ -367,6 +367,46 @@ describe('createPipeline (RCT-01)', () => {
       expect(result).toEqual({ state: 'signed-in', confidence: NETWORK_REST_IDENTITY_200_VALUE });
     });
 
+    it('a session that expires while the page is open turns the border off, even when unrelated requests follow the 401', async () => {
+      let now = NOW;
+      const sendVerdictUpdate = vi.fn().mockResolvedValue(undefined);
+      const pipeline = createPipeline({
+        store: createInMemoryStore(),
+        cookiesApi: createFakeCookiesApi().api,
+        sendVerdictUpdate,
+        clock: () => now,
+      });
+      const avatarStillShown: SignalEvidence = { signal: 'dom', observed: true, value: DOM_POSITIVE_VALUE, passwordFormVisible: false };
+      await pipeline.handleSensorSignal(
+        { type: 'SENSOR_SIGNAL', signal: 'dom', evidence: avatarStillShown },
+        { tab: { id: 3, url: 'https://example.com/app' } },
+      );
+      await pipeline.handleNetworkCompleted(networkCompletedDetails({ tabId: 3, url: 'https://example.com/api/me' }));
+      expect((sendVerdictUpdate.mock.calls.at(-1) as [VerdictResult, number])[0].state).toBe('signed-in');
+
+      await pipeline.handleNetworkCompleted(networkCompletedDetails({ tabId: 3, url: 'https://example.com/api/me', statusCode: 401 }));
+      await pipeline.handleNetworkCompleted(networkCompletedDetails({ tabId: 3, type: 'image', url: 'https://example.com/logo.png' }));
+      now += DEBOUNCE_SIGNED_OUT_MS + 1;
+      await pipeline.handleNetworkCompleted(networkCompletedDetails({ tabId: 3, type: 'image', url: 'https://example.com/banner.png' }));
+
+      expect((sendVerdictUpdate.mock.calls.at(-1) as [VerdictResult, number])[0].state).toBe('signed-out');
+    });
+
+    it('a newer identity response still replaces an older one (signing back in after a 401)', async () => {
+      const sendVerdictUpdate = vi.fn().mockResolvedValue(undefined);
+      const pipeline = createPipeline({
+        store: createInMemoryStore(),
+        cookiesApi: createFakeCookiesApi().api,
+        sendVerdictUpdate,
+        clock: () => NOW,
+      });
+
+      await pipeline.handleNetworkCompleted(networkCompletedDetails({ tabId: 3, url: 'https://example.com/api/me', statusCode: 401 }));
+      await pipeline.handleNetworkCompleted(networkCompletedDetails({ tabId: 3, url: 'https://example.com/api/me', statusCode: 200 }));
+
+      expect(sendVerdictUpdate.mock.calls.at(-1)).toEqual([{ state: 'signed-in', confidence: NETWORK_REST_IDENTITY_200_VALUE }, 3]);
+    });
+
     it('ignores requests with no associated tab (tabId < 0)', async () => {
       const sendVerdictUpdate = vi.fn().mockResolvedValue(undefined);
       const pipeline = createPipeline({

@@ -206,7 +206,11 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
       state.webAppKey = pageKey;
     }
     const firstParty = requestKey === undefined || (requestKey !== null && requestKey === state.webAppKey);
-    if (firstParty) {
+    // Cookie, storage and DOM evidence each describe the page as it is now, so "nothing seen" replaces
+    // what was there. A network event describes one request: one that is not an identity response says
+    // nothing about the session, so it must not erase the last identity response the tab saw.
+    const saysSomething = evidence.signal !== 'network' || evidence.observed;
+    if (firstParty && saysSomething) {
       state.vector = { ...state.vector, [evidence.signal]: evidence };
     }
     const result = state.engine.update(state.vector);
