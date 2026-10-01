@@ -161,7 +161,11 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
       return existing;
     }
     const loading = store.get(tabId).then(
-      (snapshot): TabRuntimeState => ({ engine: createEngine(clock, snapshot), vector: {}, webAppKey: null }),
+      (snapshot): TabRuntimeState => ({
+        engine: createEngine(clock, snapshot),
+        vector: {},
+        webAppKey: snapshot?.webAppKey ?? null,
+      }),
     );
     tabStates.set(tabId, loading);
     // A failed read must not stick: forget it so the tab's next event tries again.
@@ -214,7 +218,7 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
       state.vector = { ...state.vector, [evidence.signal]: evidence };
     }
     const result = state.engine.update(state.vector);
-    await store.set(tabId, state.engine.serialize());
+    await store.set(tabId, { ...state.engine.serialize(), webAppKey: state.webAppKey });
     await sendVerdictUpdate(result, tabId);
   }
 

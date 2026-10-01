@@ -1,20 +1,23 @@
 /// <reference types="chrome" />
 
 import type { ConfidenceEngineSnapshot } from '../../engine/confidenceEngine';
+import type { WebAppKey } from '../../shared/types';
 
 /**
- * Per-tab persisted engine state (PLT-01). Identical in shape to
- * {@link ConfidenceEngineSnapshot} -- this store persists EXACTLY what
- * `createConfidenceEngine`'s serialize()/restore seam needs to resume
+ * Per-tab persisted engine state (PLT-01): the {@link ConfidenceEngineSnapshot}
+ * that `createConfidenceEngine`'s serialize()/restore seam needs to resume
  * hysteresis (ENG-03) and the asymmetric signed-out debounce (ENG-04)
- * deterministically after a service-worker restart.
+ * deterministically after a service-worker restart, plus the web application
+ * (registrable domain) that verdict belongs to, so a tab that moved to another
+ * site while the worker slept does not get the old site's verdict back.
+ * Absent in a snapshot saved before the site was known.
  *
  * Only derived numbers/enums are ever present here -- never a raw cookie,
  * token, or storage value (PRV-01) -- because this type is the engine's
  * OWN snapshot type, and the engine itself is Chrome-API-free and never
  * touches raw session material.
  */
-export type PersistedVerdictState = ConfidenceEngineSnapshot;
+export type PersistedVerdictState = ConfidenceEngineSnapshot & { readonly webAppKey?: WebAppKey | null };
 
 /**
  * The safe default returned by `get()` when a tab has no persisted state
