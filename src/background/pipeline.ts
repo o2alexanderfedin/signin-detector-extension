@@ -4,7 +4,7 @@ import { createConfidenceEngine, type ConfidenceEngine } from '../engine/confide
 import { resolveWebAppKey } from '../identity/appIdentity';
 import { sendVerdictUpdate as sendVerdictUpdateMessage } from '../content/messaging';
 import { classifyNetwork, type NetworkRequestInput } from '../sensors/network/classify';
-import type { ClockFn, SensorSignalMessage, SignalEvidence, SignalName, VerdictResult } from '../shared/types';
+import type { ClockFn, SensorSignalMessage, SignalEvidence, SignalName, VerdictResult, WebAppKey } from '../shared/types';
 import { createCookieSensor, type CookiesApi } from './sensors/cookieSensor';
 import type { VerdictStore } from './state/verdictStore';
 
@@ -29,6 +29,7 @@ export interface TabsApi {
 export interface MessageSenderLike {
   readonly tab?: {
     readonly id?: number;
+    readonly url?: string;
   };
 }
 
@@ -70,8 +71,25 @@ export interface Pipeline {
 
 /** Per-tab in-memory bookkeeping: the live engine instance and the accumulated per-signal evidence. */
 interface TabRuntimeState {
-  readonly engine: ConfidenceEngine;
+  engine: ConfidenceEngine;
   vector: { -readonly [K in SignalName]?: SignalEvidence };
+  /** The web application the evidence above belongs to; `null` until an event names one. */
+  webAppKey: WebAppKey | null;
+}
+
+/**
+ * The web application whose page a completed request belongs to, or `null` when the event does not
+ * say. A page load names the new page itself; a request made by the top-level page names that page's
+ * origin as its initiator. Requests from sub-frames belong to other sites, so they name nothing.
+ */
+function requestPageKey(details: chrome.webRequest.OnCompletedDetails): WebAppKey | null {
+  if (details.type === 'main_frame') {
+    return resolveWebAppKey(details.url);
+  }
+  if (details.frameId === 0 && details.initiator !== undefined) {
+    return resolveWebAppKey(details.initiator);
+  }
+  return null;
 }
 
 /**
@@ -145,7 +163,7 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
       return existing;
     }
     const loading = store.get(tabId).then(
-      (snapshot): TabRuntimeState => ({ engine: createEngine(clock, snapshot), vector: {} }),
+      (snapshot): TabRuntimeState => ({ engine: createEngine(clock, snapshot), vector: {}, webAppKey: null }),
     );
     tabStates.set(tabId, loading);
     // A failed read must not stick: forget it so the tab's next event tries again.
@@ -162,12 +180,23 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
    * merge the fresh evidence into the tab's accumulated `SignalVector`,
    * feed the engine, persist its new snapshot (PLT-01), and notify that
    * tab's content script (PLT-02).
+   *
+   * `pageKey` is the web application the tab shows when the event happened, if the event says. When
+   * it differs from the one the tab's evidence was gathered on, the tab has moved to another site:
+   * that evidence and verdict describe the old site, so the tab starts over from 'unknown'.
    */
-  async function refreshSignal(tabId: number, evidence: SignalEvidence): Promise<void> {
+  async function refreshSignal(tabId: number, evidence: SignalEvidence, pageKey: WebAppKey | null): Promise<void> {
     const loading = getTabState(tabId);
     const state = await loading;
     if (tabStates.get(tabId) !== loading) {
       return; // The tab was closed while its state loaded: saving now would leave a snapshot for a tab that is gone.
+    }
+    if (pageKey !== null) {
+      if (state.webAppKey !== null && state.webAppKey !== pageKey) {
+        state.engine = createEngine(clock);
+        state.vector = {};
+      }
+      state.webAppKey = pageKey;
     }
     state.vector = { ...state.vector, [evidence.signal]: evidence };
     const result = state.engine.update(state.vector);
@@ -195,7 +224,7 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
       if (removedSince(tab.id, startedAt)) {
         continue; // Closed while this event waited: saving now would leave a snapshot for a tab that is gone.
       }
-      await refreshSignal(tab.id, evidence);
+      await refreshSignal(tab.id, evidence, webAppKey);
     }
   }
 
@@ -204,7 +233,7 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
       return; // Not associated with a real tab (e.g. the SW's own requests) -- nothing to route to.
     }
     const evidence = classifyNetwork(toNetworkRequestInput(details));
-    await refreshSignal(details.tabId, evidence);
+    await refreshSignal(details.tabId, evidence, requestPageKey(details));
   }
 
   async function handleSensorSignal(message: SensorSignalMessage, sender: MessageSenderLike): Promise<void> {
@@ -212,7 +241,8 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
     if (tabId === undefined) {
       return;
     }
-    await refreshSignal(tabId, message.evidence);
+    const pageUrl = sender.tab?.url;
+    await refreshSignal(tabId, message.evidence, pageUrl === undefined ? null : resolveWebAppKey(pageUrl));
   }
 
   async function handleTabRemoved(tabId: number): Promise<void> {

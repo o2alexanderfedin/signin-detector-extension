@@ -542,6 +542,56 @@ describe('createPipeline (RCT-01)', () => {
     });
   });
 
+  describe('a tab that moves to a different web application starts over (IDN-01 / IDN-02)', () => {
+    const domNotObserved: SignalEvidence = { signal: 'dom', observed: false };
+    const domMessage: SensorSignalMessage = { type: 'SENSOR_SIGNAL', signal: 'dom', evidence: domNotObserved };
+
+    async function signedInOnExample() {
+      const tab = await fakeBrowser.tabs.create({ url: 'https://example.com/dashboard' });
+      const tabId = tab.id ?? -1;
+      const sendVerdictUpdate = vi.fn().mockResolvedValue(undefined);
+      const pipeline = createPipeline({
+        store: createInMemoryStore(),
+        cookiesApi: createFakeCookiesApi([fullMatchCookie()]).api,
+        sendVerdictUpdate,
+        clock: () => NOW,
+      });
+      await pipeline.handleCookieChanged({ removed: false, cause: 'explicit', cookie: fullMatchCookie() });
+      expect(sendVerdictUpdate.mock.calls[0]).toEqual([{ state: 'signed-in', confidence: 1 }, tabId]);
+      return { tabId, pipeline, sendVerdictUpdate };
+    }
+
+    function lastResult(sendVerdictUpdate: ReturnType<typeof vi.fn>): VerdictResult {
+      return (sendVerdictUpdate.mock.calls.at(-1) as [VerdictResult, number])[0];
+    }
+
+    it("a page on another site does not inherit the previous site's signed-in verdict or its cookie evidence", async () => {
+      const { tabId, pipeline, sendVerdictUpdate } = await signedInOnExample();
+
+      await pipeline.handleSensorSignal(domMessage, { tab: { id: tabId, url: 'https://other.org/' } });
+
+      expect(lastResult(sendVerdictUpdate)).toEqual({ state: 'unknown', confidence: 0 });
+    });
+
+    it("the first page request of another site does not inherit the previous site's verdict either", async () => {
+      const { tabId, pipeline, sendVerdictUpdate } = await signedInOnExample();
+
+      await pipeline.handleNetworkCompleted(
+        networkCompletedDetails({ tabId, type: 'main_frame', url: 'https://other.org/', initiator: 'https://example.com' }),
+      );
+
+      expect(lastResult(sendVerdictUpdate)).toEqual({ state: 'unknown', confidence: 0 });
+    });
+
+    it('a route change within the same registrable domain keeps the evidence (no re-keying on SPA routes)', async () => {
+      const { tabId, pipeline, sendVerdictUpdate } = await signedInOnExample();
+
+      await pipeline.handleSensorSignal(domMessage, { tab: { id: tabId, url: 'https://www.example.com/settings' } });
+
+      expect(lastResult(sendVerdictUpdate)).toEqual({ state: 'signed-in', confidence: 1 });
+    });
+  });
+
   describe('full end-to-end loop (RCT-01): cookie appears -> signed-in -> cookie removed -> signed-out', () => {
     it('drives the verdict from unknown to signed-in on a full-match session cookie, then to signed-out after the cookie disappears and the debounce elapses', async () => {
       const tab = await fakeBrowser.tabs.create({ url: 'https://example.com/dashboard' });
