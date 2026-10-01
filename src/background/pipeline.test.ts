@@ -91,6 +91,7 @@ function networkCompletedDetails(
     timeStamp: NOW,
     type: 'xmlhttprequest',
     url: 'https://example.com/api/me',
+    initiator: 'https://example.com',
     fromCache: false,
     responseHeaders: [],
     statusCode: 200,
@@ -295,6 +296,75 @@ describe('createPipeline (RCT-01)', () => {
 
       const [result] = sendVerdictUpdate.mock.calls[0] as [VerdictResult, number];
       expect(result).toEqual({ state: 'unknown', confidence: 0 });
+    });
+
+    it("a signed-out visitor is not shown as signed in because a widget from another site gets its own user's identity", async () => {
+      const sendVerdictUpdate = vi.fn().mockResolvedValue(undefined);
+      const pipeline = createPipeline({
+        store: createInMemoryStore(),
+        cookiesApi: createFakeCookiesApi().api,
+        sendVerdictUpdate,
+        clock: () => NOW,
+      });
+
+      await pipeline.handleNetworkCompleted(
+        networkCompletedDetails({ tabId: 3, url: 'https://widget.chat.io/api/me', initiator: 'https://example.com' }),
+      );
+
+      const [result] = sendVerdictUpdate.mock.calls[0] as [VerdictResult, number];
+      expect(result).toEqual({ state: 'unknown', confidence: 0 });
+    });
+
+    it("a signed-in user's verdict is not pulled toward signed-out by another site's 401", async () => {
+      const sendVerdictUpdate = vi.fn().mockResolvedValue(undefined);
+      const pipeline = createPipeline({
+        store: createInMemoryStore(),
+        cookiesApi: createFakeCookiesApi().api,
+        sendVerdictUpdate,
+        clock: () => NOW,
+      });
+
+      await pipeline.handleNetworkCompleted(networkCompletedDetails({ tabId: 3, url: 'https://example.com/api/me' }));
+      await pipeline.handleNetworkCompleted(
+        networkCompletedDetails({ tabId: 3, url: 'https://ads.net/user', statusCode: 401, initiator: 'https://example.com' }),
+      );
+
+      const [result] = sendVerdictUpdate.mock.calls[1] as [VerdictResult, number];
+      expect(result).toEqual({ state: 'signed-in', confidence: NETWORK_REST_IDENTITY_200_VALUE });
+    });
+
+    it("a request from an embedded frame is not counted while the tab's own site is not yet known", async () => {
+      const sendVerdictUpdate = vi.fn().mockResolvedValue(undefined);
+      const pipeline = createPipeline({
+        store: createInMemoryStore(),
+        cookiesApi: createFakeCookiesApi().api,
+        sendVerdictUpdate,
+        clock: () => NOW,
+      });
+
+      await pipeline.handleNetworkCompleted(
+        networkCompletedDetails({ tabId: 3, frameId: 4, parentFrameId: 0, url: 'https://widget.chat.io/api/me', initiator: 'https://widget.chat.io' }),
+      );
+
+      const [result] = sendVerdictUpdate.mock.calls[0] as [VerdictResult, number];
+      expect(result).toEqual({ state: 'unknown', confidence: 0 });
+    });
+
+    it('a request to a subdomain of the same site still counts (IDN-01)', async () => {
+      const sendVerdictUpdate = vi.fn().mockResolvedValue(undefined);
+      const pipeline = createPipeline({
+        store: createInMemoryStore(),
+        cookiesApi: createFakeCookiesApi().api,
+        sendVerdictUpdate,
+        clock: () => NOW,
+      });
+
+      await pipeline.handleNetworkCompleted(
+        networkCompletedDetails({ tabId: 3, url: 'https://api.example.com/v1/me', initiator: 'https://www.example.com' }),
+      );
+
+      const [result] = sendVerdictUpdate.mock.calls[0] as [VerdictResult, number];
+      expect(result).toEqual({ state: 'signed-in', confidence: NETWORK_REST_IDENTITY_200_VALUE });
     });
 
     it('ignores requests with no associated tab (tabId < 0)', async () => {
