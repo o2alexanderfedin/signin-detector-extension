@@ -86,6 +86,32 @@ describe('classifyNetwork', () => {
     expect(result).toEqual({ signal: 'network', observed: false });
   });
 
+  it('matches identity and GraphQL shapes against the path only, not the query string', () => {
+    expect(classifyNetwork(req({ url: 'https://example.com/login?next=/account', statusCode: 200 }))).toEqual({
+      signal: 'network',
+      observed: false,
+    });
+    expect(classifyNetwork(req({ url: 'https://example.com/search?from=/graphql', statusCode: 401 }))).toEqual({
+      signal: 'network',
+      observed: false,
+    });
+  });
+
+  it('matches identity shapes against the path only, not the host name', () => {
+    expect(classifyNetwork(req({ url: 'https://user.example.com/logo.png', statusCode: 200 }))).toEqual({
+      signal: 'network',
+      observed: false,
+    });
+  });
+
+  it('still scores an identity path that carries a query string', () => {
+    expect(classifyNetwork(req({ url: 'https://example.com/api/me?fields=id', statusCode: 200 }))).toEqual({
+      signal: 'network',
+      observed: true,
+      value: NETWORK_REST_IDENTITY_200_VALUE,
+    });
+  });
+
   it('does not change the score based on hasAuthorizationHeader presence', () => {
     const withHeader = classifyNetwork(
       req({ url: 'https://example.com/api/me', statusCode: 200, hasAuthorizationHeader: true }),

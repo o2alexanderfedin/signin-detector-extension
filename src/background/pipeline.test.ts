@@ -280,6 +280,23 @@ describe('createPipeline (RCT-01)', () => {
       expect(result.confidence).toBeCloseTo(STRONG_NEGATIVE_VALUE);
     });
 
+    it('a signed-out visitor on a login page that names an account page in its query string is not shown as signed in', async () => {
+      const sendVerdictUpdate = vi.fn().mockResolvedValue(undefined);
+      const pipeline = createPipeline({
+        store: createInMemoryStore(),
+        cookiesApi: createFakeCookiesApi().api,
+        sendVerdictUpdate,
+        clock: () => NOW,
+      });
+
+      await pipeline.handleNetworkCompleted(
+        networkCompletedDetails({ tabId: 3, type: 'main_frame', url: 'https://example.com/login?next=/account', statusCode: 200 }),
+      );
+
+      const [result] = sendVerdictUpdate.mock.calls[0] as [VerdictResult, number];
+      expect(result).toEqual({ state: 'unknown', confidence: 0 });
+    });
+
     it('ignores requests with no associated tab (tabId < 0)', async () => {
       const sendVerdictUpdate = vi.fn().mockResolvedValue(undefined);
       const pipeline = createPipeline({
