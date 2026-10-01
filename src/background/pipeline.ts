@@ -79,13 +79,11 @@ interface TabRuntimeState {
 
 /**
  * The web application whose page a completed request belongs to, or `null` when the event does not
- * say. A page load names the new page itself; a request made by the top-level page names that page's
- * origin as its initiator. Requests from sub-frames belong to other sites, so they name nothing.
+ * say. A request made by the top-level page names that page's origin as its initiator. A top-level
+ * load is not taken at its own URL: it may be a download that never replaces the page. Requests from
+ * sub-frames belong to other sites, so they name nothing.
  */
 function requestPageKey(details: chrome.webRequest.OnCompletedDetails): WebAppKey | null {
-  if (details.type === 'main_frame') {
-    return resolveWebAppKey(details.url);
-  }
   if (details.frameId === 0 && details.initiator !== undefined) {
     return resolveWebAppKey(details.initiator);
   }

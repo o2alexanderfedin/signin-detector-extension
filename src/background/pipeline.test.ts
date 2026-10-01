@@ -573,14 +573,34 @@ describe('createPipeline (RCT-01)', () => {
       expect(lastResult(sendVerdictUpdate)).toEqual({ state: 'unknown', confidence: 0 });
     });
 
-    it("the first page request of another site does not inherit the previous site's verdict either", async () => {
+    it("a request made by a page on another site does not inherit the previous site's verdict either", async () => {
       const { tabId, pipeline, sendVerdictUpdate } = await signedInOnExample();
 
       await pipeline.handleNetworkCompleted(
-        networkCompletedDetails({ tabId, type: 'main_frame', url: 'https://other.org/', initiator: 'https://example.com' }),
+        networkCompletedDetails({ tabId, type: 'script', url: 'https://cdn.other.org/app.js', initiator: 'https://other.org' }),
       );
 
       expect(lastResult(sendVerdictUpdate)).toEqual({ state: 'unknown', confidence: 0 });
+    });
+
+    it('a top-level load of another domain does not reset the tab by itself (it may be a download that leaves the page in place)', async () => {
+      const { tabId, pipeline, sendVerdictUpdate } = await signedInOnExample();
+
+      await pipeline.handleNetworkCompleted(
+        networkCompletedDetails({ tabId, type: 'main_frame', url: 'https://files.cdn.net/report.pdf', initiator: 'https://example.com' }),
+      );
+
+      expect(lastResult(sendVerdictUpdate)).toEqual({ state: 'signed-in', confidence: 1 });
+    });
+
+    it('a request from a sub-frame of another site does not reset the tab', async () => {
+      const { tabId, pipeline, sendVerdictUpdate } = await signedInOnExample();
+
+      await pipeline.handleNetworkCompleted(
+        networkCompletedDetails({ tabId, frameId: 3, parentFrameId: 0, type: 'xmlhttprequest', url: 'https://ads.net/x', initiator: 'https://ads.net' }),
+      );
+
+      expect(lastResult(sendVerdictUpdate)).toEqual({ state: 'signed-in', confidence: 1 });
     });
 
     it('a route change within the same registrable domain keeps the evidence (no re-keying on SPA routes)', async () => {
