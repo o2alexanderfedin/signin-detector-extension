@@ -55,20 +55,37 @@ interface FakeCookiesApi {
   setCookies(cookies: readonly chrome.cookies.Cookie[]): void;
 }
 
-function createFakeCookiesApi(initial: readonly chrome.cookies.Cookie[] = []): FakeCookiesApi {
+/** Every open tab in the regular cookie store '0' -- the store a browser without private windows or containers has. */
+async function allTabsInRegularStore(): Promise<chrome.cookies.CookieStore[]> {
+  const tabs = await fakeBrowser.tabs.query({});
+  return [{ id: '0', tabIds: tabs.flatMap((tab) => (tab.id === undefined ? [] : [tab.id])) }];
+}
+
+/**
+ * A `chrome.cookies` fake with separate cookie stores, as a browser has for private windows and
+ * containers. `getAll` without a `storeId` reads the regular store '0', as the real API does from
+ * the service worker.
+ */
+function createFakeCookiesApi(
+  initial: readonly chrome.cookies.Cookie[] = [],
+  cookieStores: () => Promise<chrome.cookies.CookieStore[]> = allTabsInRegularStore,
+): FakeCookiesApi {
   let cookies = [...initial];
   const getAll = vi.fn((details: chrome.cookies.GetAllDetails) => {
+    const storeId = details.storeId ?? '0';
+    const inStore = cookies.filter((cookie) => cookie.storeId === storeId);
     if (details.domain === undefined) {
-      return Promise.resolve(cookies);
+      return Promise.resolve(inStore);
     }
     return Promise.resolve(
-      cookies.filter((cookie) => cookie.domain === details.domain || cookie.domain.endsWith(`.${details.domain}`)),
+      inStore.filter((cookie) => cookie.domain === details.domain || cookie.domain.endsWith(`.${details.domain}`)),
     );
   }) as unknown as CookiesApi['getAll'];
 
   return {
     api: {
       getAll,
+      getAllCookieStores: cookieStores,
       onChanged: { addListener: () => {}, removeListener: () => {} },
     },
     setCookies(next) {
@@ -517,6 +534,57 @@ describe('createPipeline (RCT-01)', () => {
       });
 
       expect(sendVerdictUpdate).not.toHaveBeenCalled();
+    });
+
+    /**
+     * A private window (or a Firefox container) keeps its own cookies. Two tabs on the same site, one
+     * in the regular store '0' and one in the private store '1', must each be judged by their own
+     * store's cookies, and a change in one store must not touch the other store's tab.
+     */
+    async function regularAndPrivateTabs(): Promise<{ regularId: number; privateId: number }> {
+      const regular = await fakeBrowser.tabs.create({ url: 'https://example.com/dashboard' });
+      const privateTab = await fakeBrowser.tabs.create({ url: 'https://example.com/login' });
+      return { regularId: regular.id as number, privateId: privateTab.id as number };
+    }
+
+    it('a private window where the user is signed out is not shown as signed in because the regular window is signed in', async () => {
+      const { regularId, privateId } = await regularAndPrivateTabs();
+      const weakPrivateCookie = fullMatchCookie({ name: 'prefs', httpOnly: false, storeId: '1' });
+      const fakeCookies = createFakeCookiesApi([fullMatchCookie({ storeId: '0' }), weakPrivateCookie], () =>
+        Promise.resolve([
+          { id: '0', tabIds: [regularId] },
+          { id: '1', tabIds: [privateId] },
+        ]),
+      );
+      const sendVerdictUpdate = vi.fn().mockResolvedValue(undefined);
+      const pipeline = createPipeline({ store: createInMemoryStore(), cookiesApi: fakeCookies.api, sendVerdictUpdate, clock: () => NOW });
+
+      await pipeline.handleCookieChanged({ removed: false, cause: 'explicit', cookie: weakPrivateCookie });
+
+      expect(sendVerdictUpdate).toHaveBeenCalledTimes(1);
+      const [result, tabId] = sendVerdictUpdate.mock.calls[0] as [VerdictResult, number];
+      expect(tabId).toBe(privateId);
+      expect(result.state).not.toBe('signed-in');
+    });
+
+    it('a private window where the user signed in is shown as signed in, and the signed-out regular window is left alone', async () => {
+      const { regularId, privateId } = await regularAndPrivateTabs();
+      const privateSession = fullMatchCookie({ storeId: '1' });
+      const fakeCookies = createFakeCookiesApi([privateSession], () =>
+        Promise.resolve([
+          { id: '0', tabIds: [regularId] },
+          { id: '1', tabIds: [privateId] },
+        ]),
+      );
+      const sendVerdictUpdate = vi.fn().mockResolvedValue(undefined);
+      const pipeline = createPipeline({ store: createInMemoryStore(), cookiesApi: fakeCookies.api, sendVerdictUpdate, clock: () => NOW });
+
+      await pipeline.handleCookieChanged({ removed: false, cause: 'explicit', cookie: privateSession });
+
+      expect(sendVerdictUpdate).toHaveBeenCalledTimes(1);
+      const [result, tabId] = sendVerdictUpdate.mock.calls[0] as [VerdictResult, number];
+      expect(tabId).toBe(privateId);
+      expect(result.state).toBe('signed-in');
     });
 
     /**

@@ -12,6 +12,8 @@ import type { ClockFn, SignalEvidence, WebAppKey } from '../../shared/types';
  */
 export interface CookiesApi {
   getAll: typeof chrome.cookies.getAll;
+  /** Which tabs use which cookie store: private windows and Firefox containers each keep their own cookies. */
+  getAllCookieStores: typeof chrome.cookies.getAllCookieStores;
   onChanged: Pick<typeof chrome.cookies.onChanged, 'addListener' | 'removeListener'>;
 }
 
@@ -23,8 +25,11 @@ export interface CookieSensor {
    * `classifyCookie` classifier. This module never scores a cookie
    * itself -- it only adapts real Chrome data into the classifier's
    * input shape.
+   *
+   * `storeId` names the cookie store to read -- a private window or a Firefox container keeps its
+   * own cookies, so a tab must be judged by its own store. Without it, the regular store is read.
    */
-  getEvidence(webAppKey: WebAppKey, now?: ClockFn): Promise<SignalEvidence>;
+  getEvidence(webAppKey: WebAppKey, now?: ClockFn, storeId?: string): Promise<SignalEvidence>;
   /**
    * Subscribes to `chrome.cookies.onChanged`, re-running `getEvidence`
    * and invoking `onEvidence` whenever a cookie belonging to
@@ -71,8 +76,8 @@ function belongsToWebAppKey(domain: string, webAppKey: WebAppKey): boolean {
  * `chrome.cookies` and is injectable for testing.
  */
 export function createCookieSensor(cookiesApi: CookiesApi = chrome.cookies): CookieSensor {
-  async function getEvidence(webAppKey: WebAppKey, now: ClockFn = Date.now): Promise<SignalEvidence> {
-    const cookies = await cookiesApi.getAll({ domain: webAppKey });
+  async function getEvidence(webAppKey: WebAppKey, now: ClockFn = Date.now, storeId?: string): Promise<SignalEvidence> {
+    const cookies = await cookiesApi.getAll(storeId === undefined ? { domain: webAppKey } : { domain: webAppKey, storeId });
     return classifyCookie(cookies.map(toCookieInput), now());
   }
 

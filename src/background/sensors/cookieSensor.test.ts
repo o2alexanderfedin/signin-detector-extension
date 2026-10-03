@@ -87,6 +87,7 @@ function createFakeCookiesApi(initial: readonly chrome.cookies.Cookie[] = []): F
   return {
     api: {
       getAll,
+      getAllCookieStores: vi.fn().mockResolvedValue([]),
       onChanged: {
         addListener: (callback) => listeners.push(callback),
         removeListener: (callback) => {
@@ -124,6 +125,14 @@ describe('createCookieSensor (background glue)', () => {
       await sensor.getEvidence(WEB_APP_KEY, () => NOW);
 
       expect(fake.api.getAll).toHaveBeenCalledWith({ domain: WEB_APP_KEY });
+    });
+
+    it("reads the named cookie store when given one (a private window's or a container's own cookies)", async () => {
+      const sensor = createCookieSensor(fake.api);
+
+      await sensor.getEvidence(WEB_APP_KEY, () => NOW, '1');
+
+      expect(fake.api.getAll).toHaveBeenCalledWith({ domain: WEB_APP_KEY, storeId: '1' });
     });
 
     it('returns observed:false when no cookies exist for the WebAppKey', async () => {
