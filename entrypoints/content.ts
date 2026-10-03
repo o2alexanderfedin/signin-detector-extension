@@ -35,18 +35,31 @@ export default defineContentScript({
     sendStorageEvidence();
     sendSensorSignal(domSensor.getEvidence()).catch(reportSensorError);
 
+    // `storageSensor.ts` has no push API of its own (SEN-04 is a one-shot
+    // read), and the browser tells no page about its own storage writes:
+    // the DOM `storage` event fires only for changes made in ANOTHER tab or
+    // window of the same site. So the sensor is re-run at three moments,
+    // none of them a poll:
+    // - on the `storage` event (another tab of the site signed in or out);
+    // - with every settled batch of DOM mutations below -- a page that
+    //   saves or deletes its own token at sign-in or sign-out re-renders;
+    // - when the user comes back to the tab (`visibilitychange` to
+    //   visible, window `focus`), in case the page changed storage without
+    //   re-rendering.
+    window.addEventListener('storage', sendStorageEvidence);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        sendStorageEvidence();
+      }
+    });
+    window.addEventListener('focus', sendStorageEvidence);
+
     // DOM sensor's own debounced MutationObserver re-scan (SEN-05) -- every
-    // settled batch of DOM mutations re-sends fresh evidence.
+    // settled batch of DOM mutations re-sends fresh DOM and storage evidence.
     domSensor.watch((evidence) => {
       sendSensorSignal(evidence).catch(reportSensorError);
+      sendStorageEvidence();
     });
-
-    // `storageSensor.ts` has no push API of its own (SEN-04 is a one-shot
-    // read) -- the native DOM `storage` event (RCT-01's "storage events"
-    // trigger) fires in this frame whenever localStorage/sessionStorage
-    // changes in another same-origin context, so re-run the existing
-    // one-shot sensor on that event rather than polling.
-    window.addEventListener('storage', sendStorageEvidence);
 
     // The border overlay is driven ENTIRELY by inbound verdicts -- never by
     // anything computed locally (BDR-01/BDR-04).
