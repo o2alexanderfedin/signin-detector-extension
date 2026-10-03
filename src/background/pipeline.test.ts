@@ -734,6 +734,90 @@ describe('createPipeline (RCT-01)', () => {
     });
   });
 
+  describe('handleTabReplaced (the browser swaps a tab for another, e.g. a prerendered page)', () => {
+    async function signedInOnExampleInTab30() {
+      const store = createVerdictStore();
+      const sendVerdictUpdate = vi.fn().mockResolvedValue(undefined);
+      const pipeline = createPipeline({ store, cookiesApi: createFakeCookiesApi().api, sendVerdictUpdate, clock: () => NOW });
+      await pipeline.handleNetworkCompleted(networkCompletedDetails({ tabId: 30, url: 'https://example.com/api/me' }));
+      await expect(store.get(30)).resolves.toMatchObject({ state: 'signed-in' });
+      sendVerdictUpdate.mockClear();
+      return { store, pipeline, sendVerdictUpdate };
+    }
+
+    const domNotObserved: SensorSignalMessage = { type: 'SENSOR_SIGNAL', signal: 'dom', evidence: { signal: 'dom', observed: false } };
+
+    it("the replaced tab's saved verdict is not left behind", async () => {
+      const { store, pipeline } = await signedInOnExampleInTab30();
+
+      await pipeline.handleTabReplaced(31, 30);
+
+      await expect(store.get(30)).resolves.toEqual(UNKNOWN_VERDICT_STATE);
+    });
+
+    it("the replaced tab's evidence is dropped from memory too: an event under its old id starts clean", async () => {
+      const { pipeline, sendVerdictUpdate } = await signedInOnExampleInTab30();
+
+      await pipeline.handleTabReplaced(31, 30);
+      await pipeline.handleSensorSignal(domNotObserved, { tab: { id: 30, url: 'https://example.com/' } });
+
+      expect(sendVerdictUpdate.mock.calls[0]).toEqual([{ state: 'unknown', confidence: 0 }, 30]);
+    });
+
+    it('a signed-in user whose tab is swapped for a page on the same site keeps the border', async () => {
+      const { pipeline, sendVerdictUpdate } = await signedInOnExampleInTab30();
+
+      await pipeline.handleTabReplaced(31, 30);
+      await pipeline.handleSensorSignal(domNotObserved, { tab: { id: 31, url: 'https://example.com/next' } });
+
+      expect(sendVerdictUpdate.mock.calls[0]).toEqual([expect.objectContaining({ state: 'signed-in' }), 31]);
+    });
+
+    it("a tab swapped for a page on another site does not get the old site's verdict", async () => {
+      const { pipeline, sendVerdictUpdate } = await signedInOnExampleInTab30();
+
+      await pipeline.handleTabReplaced(31, 30);
+      await pipeline.handleSensorSignal(domNotObserved, { tab: { id: 31, url: 'https://other.org/' } });
+
+      expect(sendVerdictUpdate.mock.calls[0]).toEqual([{ state: 'unknown', confidence: 0 }, 31]);
+    });
+
+    it('a new tab that already has evidence of its own keeps it', async () => {
+      const { store, pipeline, sendVerdictUpdate } = await signedInOnExampleInTab30();
+      const domPositive: SensorSignalMessage = {
+        type: 'SENSOR_SIGNAL',
+        signal: 'dom',
+        evidence: { signal: 'dom', observed: true, value: DOM_POSITIVE_VALUE, passwordFormVisible: false },
+      };
+      await pipeline.handleSensorSignal(domPositive, { tab: { id: 31, url: 'https://example.com/next' } });
+      const ownState = await store.get(31);
+
+      await pipeline.handleTabReplaced(31, 30);
+
+      await expect(store.get(31)).resolves.toEqual(ownState);
+      sendVerdictUpdate.mockClear();
+      await pipeline.handleSensorSignal(domPositive, { tab: { id: 31, url: 'https://example.com/next' } });
+      expect(sendVerdictUpdate.mock.calls[0]).toEqual([{ state: 'unknown', confidence: DOM_POSITIVE_VALUE }, 31]);
+    });
+
+    it('a new tab that already saved evidence of its own keeps it, even after the worker restarted', async () => {
+      const { store, pipeline } = await signedInOnExampleInTab30();
+      const domPositive: SensorSignalMessage = {
+        type: 'SENSOR_SIGNAL',
+        signal: 'dom',
+        evidence: { signal: 'dom', observed: true, value: DOM_POSITIVE_VALUE, passwordFormVisible: false },
+      };
+      await pipeline.handleSensorSignal(domPositive, { tab: { id: 31, url: 'https://example.com/next' } });
+      const ownState = await store.get(31);
+
+      // Simulated service-worker restart: nothing in memory, only the saved state.
+      const restarted = createPipeline({ store, cookiesApi: createFakeCookiesApi().api, sendVerdictUpdate: vi.fn().mockResolvedValue(undefined), clock: () => NOW });
+      await restarted.handleTabReplaced(31, 30);
+
+      await expect(store.get(31)).resolves.toEqual(ownState);
+    });
+  });
+
   describe('PLT-01 rehydration: engine snapshot restored from verdictStore', () => {
     async function signedInOnExampleThenRestart() {
       const store = createVerdictStore();

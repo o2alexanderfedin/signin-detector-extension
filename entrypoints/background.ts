@@ -6,7 +6,7 @@ import { onSensorSignal, sendVerdictUpdate } from '../src/content/messaging';
 
 /**
  * The live service worker (RCT-01 / PLT-01 / PLT-02 / PLT-03). This
- * entrypoint is deliberately THIN: it registers exactly the four listeners
+ * entrypoint is deliberately THIN: it registers exactly the five listeners
  * the detection pipeline is driven by, and every callback does nothing but
  * delegate into `src/background/pipeline.ts` -- the actual orchestration
  * (per-tab engine, WebAppKey resolution, store persistence, outbound
@@ -54,5 +54,9 @@ export default defineBackground(() => {
 
   chrome.tabs.onRemoved.addListener((tabId) => {
     pipeline.handleTabRemoved(tabId).catch(reportPipelineError);
+  });
+
+  chrome.tabs.onReplaced.addListener((addedTabId, removedTabId) => {
+    pipeline.handleTabReplaced(addedTabId, removedTabId).catch(reportPipelineError);
   });
 });

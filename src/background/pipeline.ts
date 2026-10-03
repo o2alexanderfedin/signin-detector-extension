@@ -6,7 +6,7 @@ import { sendVerdictUpdate as sendVerdictUpdateMessage } from '../content/messag
 import { classifyNetwork, type NetworkRequestInput } from '../sensors/network/classify';
 import type { ClockFn, SensorSignalMessage, SignalEvidence, SignalName, VerdictResult, WebAppKey } from '../shared/types';
 import { createCookieSensor, type CookiesApi } from './sensors/cookieSensor';
-import type { VerdictStore } from './state/verdictStore';
+import type { PersistedVerdictState, VerdictStore } from './state/verdictStore';
 
 /**
  * The narrow `chrome.tabs` subset {@link createPipeline} depends on --
@@ -68,6 +68,14 @@ export interface Pipeline {
   handleSensorSignal(message: SensorSignalMessage, sender: MessageSenderLike): Promise<void>;
   /** `chrome.tabs.onRemoved` -- drops in-memory engine state and clears the persisted snapshot. */
   handleTabRemoved(tabId: number): Promise<void>;
+  /**
+   * `chrome.tabs.onReplaced` -- the browser swapped `removedTabId` for `addedTabId` (a prerendered or
+   * restored page) without an `onRemoved` for the old one. The old tab is dropped like a closed tab,
+   * and its saved verdict moves to the new tab, exactly as a verdict saved before a worker restart
+   * comes back: the site it records decides, at the new page's first message, whether it is kept.
+   * A new tab that already has state of its own keeps it.
+   */
+  handleTabReplaced(addedTabId: number, removedTabId: number): Promise<void>;
 }
 
 /** Per-tab in-memory bookkeeping: the live engine instance and the accumulated per-signal evidence. */
@@ -279,5 +287,27 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
     await store.clear(tabId);
   }
 
-  return { handleCookieChanged, handleNetworkCompleted, handleSensorSignal, handleTabRemoved };
+  /** True when a saved snapshot holds anything beyond the empty default. */
+  function holdsVerdict(snapshot: PersistedVerdictState | undefined): boolean {
+    return snapshot !== undefined && (snapshot.state !== 'unknown' || snapshot.pendingSignedOutSince !== null || (snapshot.webAppKey ?? null) !== null);
+  }
+
+  async function handleTabReplaced(addedTabId: number, removedTabId: number): Promise<void> {
+    removedAt.set(removedTabId, ++removalCount);
+    tabStates.delete(removedTabId);
+    const carried = await store.get(removedTabId);
+    await store.clear(removedTabId);
+    // Every event the new tab handled saved its state, so a saved state means the new page already
+    // sent evidence of its own: that describes it better. An event still in flight saves over the
+    // carried verdict when it finishes, so the new page's own evidence wins there too.
+    const own = await store.get(addedTabId);
+    if (holdsVerdict(own)) {
+      return;
+    }
+    if (carried !== undefined) {
+      await store.set(addedTabId, carried);
+    }
+  }
+
+  return { handleCookieChanged, handleNetworkCompleted, handleSensorSignal, handleTabRemoved, handleTabReplaced };
 }
