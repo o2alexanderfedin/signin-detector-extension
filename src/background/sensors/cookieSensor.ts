@@ -14,7 +14,6 @@ export interface CookiesApi {
   getAll: typeof chrome.cookies.getAll;
   /** Which tabs use which cookie store: private windows and Firefox containers each keep their own cookies. */
   getAllCookieStores: typeof chrome.cookies.getAllCookieStores;
-  onChanged: Pick<typeof chrome.cookies.onChanged, 'addListener' | 'removeListener'>;
 }
 
 export interface CookieSensor {
@@ -30,13 +29,6 @@ export interface CookieSensor {
    * own cookies, so a tab must be judged by its own store. Without it, the regular store is read.
    */
   getEvidence(webAppKey: WebAppKey, now?: ClockFn, storeId?: string): Promise<SignalEvidence>;
-  /**
-   * Subscribes to `chrome.cookies.onChanged`, re-running `getEvidence`
-   * and invoking `onEvidence` whenever a cookie belonging to
-   * `webAppKey`'s domain (or a subdomain) changes. Returns an
-   * unsubscribe function.
-   */
-  watch(webAppKey: WebAppKey, onEvidence: (evidence: SignalEvidence) => void, now?: ClockFn): () => void;
 }
 
 /**
@@ -62,16 +54,6 @@ function toCookieInput(cookie: chrome.cookies.Cookie): CookieInput {
 }
 
 /**
- * True when `domain` (a raw `chrome.cookies` domain, possibly prefixed
- * with a leading `.` for domain-scoped cookies) is `webAppKey` itself or
- * a subdomain of it.
- */
-function belongsToWebAppKey(domain: string, webAppKey: WebAppKey): boolean {
-  const host = domain.replace(/^\./, '');
-  return host === webAppKey || host.endsWith(`.${webAppKey}`);
-}
-
-/**
  * Creates a {@link CookieSensor}. `cookiesApi` defaults to the real
  * `chrome.cookies` and is injectable for testing.
  */
@@ -81,21 +63,5 @@ export function createCookieSensor(cookiesApi: CookiesApi = chrome.cookies): Coo
     return classifyCookie(cookies.map(toCookieInput), now());
   }
 
-  function watch(
-    webAppKey: WebAppKey,
-    onEvidence: (evidence: SignalEvidence) => void,
-    now: ClockFn = Date.now,
-  ): () => void {
-    const listener = (changeInfo: chrome.cookies.CookieChangeInfo): void => {
-      if (!belongsToWebAppKey(changeInfo.cookie.domain, webAppKey)) {
-        return;
-      }
-      void getEvidence(webAppKey, now).then(onEvidence);
-    };
-
-    cookiesApi.onChanged.addListener(listener);
-    return () => cookiesApi.onChanged.removeListener(listener);
-  }
-
-  return { getEvidence, watch };
+  return { getEvidence };
 }
