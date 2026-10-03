@@ -86,7 +86,6 @@ function createFakeCookiesApi(
     api: {
       getAll,
       getAllCookieStores: cookieStores,
-      onChanged: { addListener: () => {}, removeListener: () => {} },
     },
     setCookies(next) {
       cookies = [...next];
