@@ -58,7 +58,8 @@ export interface Pipeline {
    * URL via `resolveWebAppKey`, and refreshes cookie evidence for exactly
    * the tabs whose `WebAppKey` matches the changed cookie's registrable
    * domain (also resolved via `resolveWebAppKey`, so subdomain cookies
-   * collapse onto the same key per IDN-01).
+   * collapse onto the same key per IDN-01). Only tabs that use the cookie
+   * store the change happened in are refreshed, from that store alone.
    */
   handleCookieChanged(changeInfo: chrome.cookies.CookieChangeInfo): Promise<void>;
   /** `chrome.webRequest.onCompleted` carries `tabId` directly -- no WebAppKey resolution needed. */
@@ -233,16 +234,21 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
     }
 
     const startedAt = removalCount;
+    // A private window or a Firefox container keeps its own cookies: only tabs that use the store
+    // the cookie changed in are affected, and they are judged by that store's cookies alone.
+    const storeId = changeInfo.cookie.storeId;
+    const stores = await cookiesApi.getAllCookieStores();
+    const tabsInStore = new Set(stores.find((store) => store.id === storeId)?.tabIds ?? []);
     const tabs = await tabsApi.query({});
     for (const tab of tabs) {
-      if (tab.id === undefined || tab.url === undefined) {
+      if (tab.id === undefined || tab.url === undefined || !tabsInStore.has(tab.id)) {
         continue;
       }
       const webAppKey = resolveWebAppKey(tab.url);
       if (webAppKey !== changedKey) {
         continue;
       }
-      const evidence = await cookieSensor.getEvidence(webAppKey, clock);
+      const evidence = await cookieSensor.getEvidence(webAppKey, clock, storeId);
       if (removedSince(tab.id, startedAt)) {
         continue; // Closed while this event waited: saving now would leave a snapshot for a tab that is gone.
       }

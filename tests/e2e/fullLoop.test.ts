@@ -72,7 +72,15 @@ function createFakeCookiesApi(initial: readonly chrome.cookies.Cookie[] = []): F
   }) as unknown as CookiesApi['getAll'];
 
   return {
-    api: { getAll, onChanged: { addListener: () => {}, removeListener: () => {} } },
+    api: {
+      getAll,
+      // One regular cookie store '0' holding every open tab -- no private windows or containers here.
+      getAllCookieStores: async () => {
+        const tabs = await fakeBrowser.tabs.query({});
+        return [{ id: '0', tabIds: tabs.flatMap((tab) => (tab.id === undefined ? [] : [tab.id])) }];
+      },
+      onChanged: { addListener: () => {}, removeListener: () => {} },
+    },
     setCookies(next) {
       cookies = [...next];
     },
