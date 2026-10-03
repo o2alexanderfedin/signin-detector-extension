@@ -1,7 +1,7 @@
 /// <reference types="chrome" />
 
 import { fakeBrowser } from '@webext-core/fake-browser';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi, type MockInstance } from 'vitest';
 
 /**
  * PLT-03 -- MV3 requires every event listener that must survive a
@@ -34,6 +34,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
  * `wxt build`/`wxt prepare` ("Multiple entrypoints with the same name").
  */
 describe('entrypoints/background.ts (PLT-03)', () => {
+  let tabsOnReplacedAddListener: MockInstance;
+
   beforeEach(() => {
     fakeBrowser.reset();
     // `content/messaging.ts` holds a module-level messenger singleton that
@@ -44,9 +46,11 @@ describe('entrypoints/background.ts (PLT-03)', () => {
     // `onSensorSignal` registration left over from a previous test in this
     // file.
     vi.resetModules();
+    // fakeBrowser does not implement `tabs.onReplaced` (it throws) -- give it a do-nothing stand-in.
+    tabsOnReplacedAddListener = vi.spyOn(chrome.tabs.onReplaced, 'addListener').mockImplementation(() => {});
   });
 
-  it('registers cookies.onChanged, webRequest.onCompleted, runtime.onMessage, and tabs.onRemoved synchronously -- no await before any addListener call', async () => {
+  it('registers cookies.onChanged, webRequest.onCompleted, runtime.onMessage, tabs.onRemoved and tabs.onReplaced synchronously -- no await before any addListener call', async () => {
     const cookiesOnChangedAddListener = vi.fn();
     const webRequestOnCompletedAddListener = vi.fn();
 
@@ -77,6 +81,7 @@ describe('entrypoints/background.ts (PLT-03)', () => {
     expect(webRequestOnCompletedAddListener).not.toHaveBeenCalled();
     expect(runtimeOnMessageAddListenerSpy).not.toHaveBeenCalled();
     expect(tabsOnRemovedAddListenerSpy).not.toHaveBeenCalled();
+    expect(tabsOnReplacedAddListener).not.toHaveBeenCalled();
 
     // Synchronous call, exactly mirroring WXT's real background-entrypoint
     // wrapper (`result = definition.main()`, no await). Every assertion
@@ -87,6 +92,7 @@ describe('entrypoints/background.ts (PLT-03)', () => {
     expect(webRequestOnCompletedAddListener).toHaveBeenCalledTimes(1);
     expect(runtimeOnMessageAddListenerSpy).toHaveBeenCalledTimes(1);
     expect(tabsOnRemovedAddListenerSpy).toHaveBeenCalledTimes(1);
+    expect(tabsOnReplacedAddListener).toHaveBeenCalledTimes(1);
   });
 
   it('the webRequest.onCompleted registration requests responseHeaders only -- never a body extraInfoSpec (PRV-01/SEN-03)', async () => {
