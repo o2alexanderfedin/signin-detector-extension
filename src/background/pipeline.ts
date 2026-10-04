@@ -187,6 +187,31 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
   }
 
   /**
+   * Reads the tab's own site's cookies once, the first time the tab is known to show that site. A
+   * user who signed in before opening the tab already has the session cookie, and no cookie change
+   * will ever be reported for it; without this read the cookie would count only when it changed
+   * while the tab happened to be open. The read is made once per site per tab (until the worker
+   * restarts), not on every message, and only from the cookie store the tab uses: a tab no store
+   * lists is not read, so a private window is never judged by the regular window's cookies.
+   */
+  async function readCookiesOnce(tabId: number, state: TabRuntimeState): Promise<void> {
+    const webAppKey = state.webAppKey;
+    if (webAppKey === null || state.vector.cookie !== undefined) {
+      return;
+    }
+    const stores = await cookiesApi.getAllCookieStores();
+    const storeId = stores.find((store) => store.tabIds.includes(tabId))?.id;
+    if (storeId === undefined) {
+      return;
+    }
+    const evidence = await cookieSensor.getEvidence(webAppKey, clock, storeId);
+    // A cookie change handled meanwhile is newer, and a move to another site makes this read stale.
+    if (state.webAppKey === webAppKey && state.vector.cookie === undefined) {
+      state.vector = { ...state.vector, cookie: evidence };
+    }
+  }
+
+  /**
    * The shared recompute step every handler below funnels into (RCT-01):
    * merge the fresh evidence into the tab's accumulated `SignalVector`,
    * feed the engine, persist its new snapshot (PLT-01), and notify that
@@ -221,6 +246,12 @@ export function createPipeline(deps: PipelineDeps): Pipeline {
         state.vector = {};
       }
       state.webAppKey = pageKey;
+    }
+    if (evidence.signal !== 'cookie') {
+      await readCookiesOnce(tabId, state);
+    }
+    if (tabStates.get(tabId) !== loading) {
+      return; // Closed while its cookies were read.
     }
     const firstParty = requestKey === undefined || (requestKey !== null && requestKey === state.webAppKey);
     // Cookie, storage and DOM evidence each describe the page as it is now, so "nothing seen" replaces
