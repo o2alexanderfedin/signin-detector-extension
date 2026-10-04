@@ -51,3 +51,35 @@ jobs:
 
       - name: Build (Firefox)
         run: npm run build:firefox
+
+  e2e:
+    # Loads the built Chrome extension into a real headless Chromium and
+    # drives a local test site. Unit tests passed for months on behaviour a
+    # real browser did not show; this job is what checks the real thing.
+    name: Real-browser e2e (Chromium + built extension)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: Real-browser e2e (builds the extension first)
+        run: npm run test:e2e
+
+      - name: Keep traces and screenshots of a failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-test-results
+          path: test-results/
+          retention-days: 7
