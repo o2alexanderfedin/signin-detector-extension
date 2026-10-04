@@ -140,6 +140,38 @@ describe('createPipeline (RCT-01)', () => {
   });
 
   describe('handleSensorSignal (content -> SW routing)', () => {
+    it('a tab opened after the user signed in is judged by the session cookie already in the browser, read once', async () => {
+      const tab = await fakeBrowser.tabs.create({ url: 'https://example.com/dashboard' });
+      const fakeCookies = createFakeCookiesApi([fullMatchCookie()]);
+      const sendVerdictUpdate = vi.fn().mockResolvedValue(undefined);
+      const pipeline = createPipeline({ store: createInMemoryStore(), cookiesApi: fakeCookies.api, sendVerdictUpdate, clock: () => NOW });
+      const sender: MessageSenderLike = { tab: { id: tab.id as number, url: 'https://example.com/dashboard' } };
+
+      await pipeline.handleSensorSignal({ type: 'SENSOR_SIGNAL', signal: 'storage', evidence: { signal: 'storage', observed: false } }, sender);
+      await pipeline.handleSensorSignal({ type: 'SENSOR_SIGNAL', signal: 'dom', evidence: { signal: 'dom', observed: false } }, sender);
+
+      const [result] = sendVerdictUpdate.mock.calls[0] as [VerdictResult, number];
+      expect(result.state).toBe('signed-in');
+      expect(fakeCookies.api.getAll).toHaveBeenCalledTimes(1);
+      expect(fakeCookies.api.getAll).toHaveBeenCalledWith({ domain: WEB_APP_KEY, storeId: '0' });
+    });
+
+    it('a tab no cookie store lists is not judged by the regular store\'s cookies', async () => {
+      const tab = await fakeBrowser.tabs.create({ url: 'https://example.com/dashboard' });
+      const fakeCookies = createFakeCookiesApi([fullMatchCookie()], () => Promise.resolve([{ id: '0', tabIds: [] }]));
+      const sendVerdictUpdate = vi.fn().mockResolvedValue(undefined);
+      const pipeline = createPipeline({ store: createInMemoryStore(), cookiesApi: fakeCookies.api, sendVerdictUpdate, clock: () => NOW });
+
+      await pipeline.handleSensorSignal(
+        { type: 'SENSOR_SIGNAL', signal: 'storage', evidence: { signal: 'storage', observed: false } },
+        { tab: { id: tab.id as number, url: 'https://example.com/dashboard' } },
+      );
+
+      const [result] = sendVerdictUpdate.mock.calls[0] as [VerdictResult, number];
+      expect(result.state).not.toBe('signed-in');
+      expect(fakeCookies.api.getAll).not.toHaveBeenCalled();
+    });
+
     it('routes evidence to the engine for sender.tab.id and sends a VERDICT_UPDATE for that tab', async () => {
       const sendVerdictUpdate = vi.fn().mockResolvedValue(undefined);
       const pipeline = createPipeline({
