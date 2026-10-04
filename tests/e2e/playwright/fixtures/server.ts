@@ -22,6 +22,8 @@ import type { AddressInfo } from 'node:net';
  *    `chrome.webRequest.onCompleted` event for `/api/me` (SEN-03's
  *    identity-endpoint-shaped path -- matches
  *    `IDENTITY_ENDPOINT_PATH_PATTERNS`' `/\/me\b/i`).
+ *  - `GET /plain`: a static page with no script at all, so it never
+ *    calls `/api/me` -- the session cookie is the only evidence.
  *  - `GET /api/me`: the mocked identity endpoint. Returns 200 or 401
  *    based on in-memory `signedIn` state, toggled directly by the test
  *    via `setSignedIn()` -- no HTTP round trip needed, since the server
@@ -61,6 +63,13 @@ export function startFixtureServer(): Promise<FixtureServer> {
 
   const server: Server = createServer((req, res) => {
     const requestUrl = req.url ?? '/';
+    if (requestUrl.startsWith('/plain')) {
+      // A server-rendered page that never calls an identity endpoint: the
+      // session cookie is the only sign-in evidence the extension can see.
+      res.writeHead(200, { 'content-type': 'text/html' });
+      res.end('<!doctype html><html><head><meta charset="utf-8"><title>Plain</title></head><body><h1>plain page</h1></body></html>');
+      return;
+    }
     if (requestUrl.startsWith('/api/me')) {
       res.writeHead(signedIn ? 200 : 401, { 'content-type': 'application/json' });
       res.end(JSON.stringify({ ok: signedIn }));
